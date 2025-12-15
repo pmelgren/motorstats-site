@@ -1,0 +1,15 @@
+baseURL = "http://localhost:1313/"
+languageCode = "en-us"
+title = "motortats"
+theme = ["github.com/Lednerb/bilberry-hugo-theme/v4"]
+
+pagination.pagerSize = 10
+
+[params]
+  subtitle = "Analytics for INDYCAR"
+  description = "Moenyball-style andvanced stats and analytics for motorsports - with an emphasis on INDYCAR and U.S. open-wheel racing."
+
+[taxonomies]
+  author = "Pete Melgren"
+  category = "categories"
+  tag = "tags"
