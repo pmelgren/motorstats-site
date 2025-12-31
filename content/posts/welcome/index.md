@@ -1,9 +1,9 @@
 ---
 title: Welcome to motorStats.io
 slug: welcome
-date: 2025-12-15T00:00:00-05:00
+date: 2025-12-31T00:00:00-05:00
 draft: false
-description: An introduction to MotorStats.io and the goal of bringing modern sports analytics to INDYCAR
+description: An introduction to motorStats.io and the goal of bringing modern sports analytics to IndyCar
 image: cover.jpg
 weight: 1
 ---
