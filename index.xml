@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>motorStats.io</title><link>http://localhost:1313/</link><description>Recent content on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 15 Dec 2025 00:00:00 -0500</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>Welcome to motorStats.io</title><link>http://localhost:1313/posts/welcome/</link><pubDate>Mon, 15 Dec 2025 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/welcome/</guid><description>&lt;img src="http://localhost:1313/posts/welcome/cover.jpg" alt="Featured image of post Welcome to motorStats.io" /&gt;&lt;blockquote&gt;
+&lt;p&gt;Photo by &lt;a class="link" href="https://unsplash.com/@credwood" target="_blank" rel="noopener"
+&gt;Colin redwood&lt;/a&gt; on &lt;a class="link" href="https://unsplash.com/photos/race-cars-speed-around-a-track-during-an-indy-500-Q9r_cmRqYEI" target="_blank" rel="noopener"
+&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;motorStats.io is a new site aiming to bring the analytics revolution we&amp;rsquo;ve seen in stick-and-ball sports to INDYCAR. Our goal is to provide in-depth analysis and create advanced metrics that help fans better understand what&amp;rsquo;s happening on race day.&lt;/p&gt;
+&lt;h3 id="who-is-behind-this"&gt;Who is behind this?
+&lt;/h3&gt;&lt;p&gt;Hi, I’m Pete Melgren. I spent my 20s obsessed with advanced baseball statistics (sabermetrics) and even worked in a Major League Baseball front office doing advanced research and applied analytics.&lt;/p&gt;
+&lt;p&gt;Fast forward a decade, and I now find myself tuning into multiple motorsports events every week, trying desperately to understand them in the same way I understand baseball. What I found is that this kind of analytical framework doesn’t really exist in the same way—at least not for INDYCAR.&lt;/p&gt;
+&lt;p&gt;Fortunately, INDYCAR makes a tremendous amount of data publicly available. So I decided to do my own research (a phrase associated with zero bad things) and see if I couldn’t gain a better understanding of INDYCAR—for myself and for fellow fans.&lt;/p&gt;
+&lt;h3 id="but-doesnt-motorsports-already-have-all-the-data"&gt;But doesn’t motorsports already have all the data?
+&lt;/h3&gt;&lt;p&gt;What? Why does that matter? Shut up.&lt;/p&gt;
+&lt;h3 id="but-seriously-what-is-this-site-adding"&gt;But seriously, what is this site adding?
+&lt;/h3&gt;&lt;p&gt;Most of the data work inside INDYCAR is focused on engineering: building a faster race car. For fans, however, the data doesn’t (yet) answer many of the sporting or competitive questions we also care about.&lt;/p&gt;
+&lt;p&gt;We don’t have great metrics for driver performance, car quality, or in-race context (like expected win probability on a given lap). Just go read a site like &lt;a class="link" href="https://www.fangraphs.com" target="_blank" rel="noopener"
+&gt;fangraphs&lt;/a&gt; and tell me—honestly—that this kind of analysis wouldn’t be fun to have during a race or to dig into afterward.&lt;/p&gt;
+&lt;h3 id="what-should-we-expect-from-motorstatsio"&gt;What should we expect from MotorStats.io?
+&lt;/h3&gt;&lt;p&gt;To start, my goal is simply to publish occasional posts that provide new and interesting context—things fans didn’t know or couldn’t easily see before.&lt;/p&gt;
+&lt;p&gt;Long-term, I’d love for this site to grow into something more regular, possibly hosting its own database of advanced statistics and analytical tools. But that’s not something I’ll be able to do alone.&lt;/p&gt;
+&lt;h3 id="this-is-cool-how-can-i-be-involved"&gt;This is cool. How can I be involved?
+&lt;/h3&gt;&lt;p&gt;If you’re interested in being involved, please reach out—especially if you’re an INDYCAR fan with a general interest in sports analytics. I&amp;rsquo;d love to collaborate.&lt;/p&gt;
+&lt;h3 id="i-think-analytics-are-terrible-and-i-wish-you-would-stop-ruining-my-sport"&gt;I think analytics are terrible and I wish you would stop ruining my sport
+&lt;/h3&gt;&lt;p&gt;If you feel that way, please go watch &lt;em&gt;Moneyball&lt;/em&gt;. Not because it’ll change your mind—it probably won’t, and frankly some of those scouts had good points.&lt;/p&gt;
+&lt;p&gt;No, go watch &lt;em&gt;Moneyball&lt;/em&gt; because Brad Pitt gives an unreal performance, and we sometimes don’t appreciate his acting ability because he’s so damn handsome. Then, hopefully by the end of the movie, you’ll have forgotten whatever on this website made you mad and will be able to move on.&lt;/p&gt;</description></item></channel></rss>
