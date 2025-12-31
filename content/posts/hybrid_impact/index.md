@@ -1,9 +1,9 @@
 ---
 title: How Bad (or Good) was the Racing in the Hybrid Era?
 slug: how-competitive-hybrid-era
-date: 2025-12-28T08:33:15-05:00
+date: 2025-12-31T00:00:00-05:00
 author: "Pete Melgren"
-draft: true
+draft: false
 description: What does the data actually tell us about the quality of racing since the hybrid engine was introduced?
 image: cover.jpg
 categories:
