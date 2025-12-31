@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "theme.css",
-	"sourceRoot": "C:/projects/indycar/repos/motorstats-site",
+	"sourceRoot": "C:/Projects/Indycar/repos/motorstats-site",
 	"sources": [
 		"C:/Users/pmelg/AppData/Local/hugo_cache/modules/filecache/modules/pkg/mod/github.com/!lednerb/bilberry-hugo-theme/v4@v4.13.0/assets/sass/theme.scss",
 		"../../../../Users/pmelg/AppData/Local/hugo_cache/modules/filecache/modules/pkg/mod/github.com/!lednerb/bilberry-hugo-theme/v4@v4.13.0/assets/sass/_vendor/normalize.scss",
