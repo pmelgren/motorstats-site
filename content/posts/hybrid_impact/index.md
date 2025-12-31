@@ -29,7 +29,7 @@ Except this is a data blog, and IndyCar has thousands of laps of racing every ye
 
 ### Margin of Victory.
 
-__Margin of Victory__ (MoV) - basically the time gap between P1 and P2 at the end of the race - seems to be the go-to metric whenver someone wants to cite how close the racing is. In fact, this post was inspired by an interview IndyCar's Managing Director of Engine Development Darren Sansom gave on the [Pit Pass Indy podcast](https://evergreenpodcasts.com/pit-pass-indy/the-67th-daytona-500-with-josef-newgarden-nascar-president-steve-phelps-and-IndyCar-spring-training-with-darren-sansum-IndyCar-managing-director-of-engine-development). In it, Mr. Sansom specifically cites a low average MoV in the Hybrid Era as evidence that the Hybrid hasn't ruined the racing. (Interview starts around 16:14 mark). 
+__Margin of Victory__ (MoV) - basically the time gap between P1 and P2 at the end of the race - seems to be the go-to metric whenever someone wants to cite how close the racing is. In fact, this post was inspired by an interview IndyCar's Managing Director of Engine Development Darren Sansom gave on the [Pit Pass Indy podcast](https://evergreenpodcasts.com/pit-pass-indy/the-67th-daytona-500-with-josef-newgarden-nascar-president-steve-phelps-and-IndyCar-spring-training-with-darren-sansum-IndyCar-managing-director-of-engine-development). In it, Mr. Sansom specifically cites a low average MoV in the Hybrid Era as evidence that the Hybrid hasn't ruined the racing. (Interview starts around 16:14 mark). 
 
 Obviously we already know he's wrong and that the hybrid *has* ruined the racing, but let's check those numbers just in case...
 
