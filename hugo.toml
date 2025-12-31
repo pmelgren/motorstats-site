@@ -1,15 +1,51 @@
 baseURL = "http://localhost:1313/"
 languageCode = "en-us"
-title = "motortats"
-theme = ["github.com/Lednerb/bilberry-hugo-theme/v4"]
+title = "motorStats.io"
+theme = ["github.com/CaiJimmy/hugo-theme-stack/v3"]
 
 pagination.pagerSize = 10
 
 [params]
-  subtitle = "Analytics for INDYCAR"
-  description = "Moenyball-style andvanced stats and analytics for motorsports - with an emphasis on INDYCAR and U.S. open-wheel racing."
+  mainSections = ["posts"]
+  featuredImageField = "image"
+
+  [params.sidebar]
+    compact = false
+
+    subtitle = "Analytics, data, and race insights for IndyCar"
+
+    [params.sidebar.avatar]
+      enabled = true
+      local = true
+      src = "img/logo.png"
+	
+
+  [params.article]
+    math = false
+    toc = true
+    readingTime = true
+	
+  [params.home]
+    showSummary = true
+
+  [params.footer]
+    since = 2025
+    customText = "Motorsports analytics for curious fans"
+
+[menu]
+
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 20
 
 [taxonomies]
-  author = "Pete Melgren"
   category = "categories"
   tag = "tags"
