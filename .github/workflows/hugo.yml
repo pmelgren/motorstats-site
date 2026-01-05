@@ -34,4 +34,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           publish_branch: gh-pages  # Explicitly set the branch
+          cname: motorstats.io
           full_commit_message: 'Deploy to GitHub Pages: ${{ github.sha }}'

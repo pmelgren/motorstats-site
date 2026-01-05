@@ -1,0 +1,22 @@
+# Configure main menu and social menu
+#[[main]]
+#identifier = "home"
+#name = "Home"
+#url = "/"
+#[main.params]
+#icon = "home"
+#newtab = true
+
+[[social]]
+identifier = "twitter"
+name = "@motorstatsio"
+url = "https://x.com/motorstatsio"
+
+[social.params]
+icon = "brand-twitter"
+
+[[main]]
+identifier = "contact"
+name = "Contact"
+url = "/contact/"
+weight = 40
