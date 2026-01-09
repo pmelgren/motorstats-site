@@ -7,16 +7,39 @@
 #icon = "home"
 #newtab = true
 
-[[social]]
-identifier = "twitter"
-name = "@motorstatsio"
-url = "https://x.com/motorstatsio"
+[[main]]
+identifier = "home"
+name = "Home"
+url = "/"
+weight = 10
 
-[social.params]
-icon = "brand-twitter"
+[main.params]
+icon = "home"
+
+[[main]]
+identifier = "posts"
+name = "Posts"
+url = "/posts/"
+weight = 20
+
+[main.params]
+icon = "article"
 
 [[main]]
 identifier = "contact"
 name = "Contact"
 url = "/contact/"
+weight = 30
+
+[main.params]
+icon = "mail"
+
+[[main]]
+identifier = "twitter"
+name = "@motorstatsio"
+url = "https://x.com/motorstatsio"
 weight = 40
+
+[main.params]
+icon = "brand-twitter"
+newtab = true

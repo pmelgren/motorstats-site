@@ -32,20 +32,6 @@ pagination.pagerSize = 10
     since = 2025
     customText = "Motorsports analytics for curious fans"
 
-[menu]
-
-  [[menu.main]]
-    identifier = "home"
-    name = "Home"
-    url = "/"
-    weight = 10
-
-  [[menu.main]]
-    identifier = "posts"
-    name = "Posts"
-    url = "/posts/"
-    weight = 20
-
 [taxonomies]
   category = "categories"
   tag = "tags"

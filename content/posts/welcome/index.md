@@ -6,7 +6,6 @@ draft: false
 description: An introduction to motorStats.io and the goal of bringing modern sports analytics to IndyCar
 image: cover.jpg
 ---
-> Photo by [Colin redwood](https://unsplash.com/@credwood) on [Unsplash](https://unsplash.com/photos/race-cars-speed-around-a-track-during-an-indy-500-Q9r_cmRqYEI)
 
 motorStats.io is a new site aiming to bring the analytics revolution we've seen in stick-and-ball sports to IndyCar. Our goal is to provide in-depth analysis and create advanced metrics that help fans better understand what's happening on race day. 
 
@@ -43,4 +42,6 @@ If you’re interested in being involved, please reach out—especially if you�
 If you feel that way, please go watch *Moneyball*. Not because it’ll change your mind—it probably won’t, and frankly some of those scouts had good points.
 
 No, go watch *Moneyball* because Brad Pitt gives an unreal performance, and we sometimes don’t appreciate his acting ability because he’s so damn handsome. Then, hopefully by the end of the movie, you’ll have forgotten whatever on this website made you mad and will be able to move on.
+
+> Cover photo by [Colin redwood](https://unsplash.com/@credwood) on [Unsplash](https://unsplash.com/photos/race-cars-speed-around-a-track-during-an-indy-500-Q9r_cmRqYEI)
       

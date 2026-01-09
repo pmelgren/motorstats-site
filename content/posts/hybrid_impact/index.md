@@ -17,8 +17,6 @@ tags:
     - Position at Stake
 ---
 
-> Photo by [sydney Rae](https://unsplash.com/@srz) on [Unsplash](https://unsplash.com/photos/two-race-cars-speed-around-a-curved-track-fuUDSlf3gOY)
-
 Since the hybrid was introduced last July at Mid-Ohio, the public perception has been all about weight. Drivers, fans, the media, your uncle Bill - everyone agrees the Dallara DW12 was never designed to carry that much weight, and the racing has suffered as a result.
 
 It's not all the hybrid's fault, of course - the aeroscreen added a bunch of weight long before the hybrid got here. But the combination of the two is just too much.
@@ -155,6 +153,8 @@ We've now looked at a variety of metrics that capture competitive racing and the
 This doesn't mean the hybrid is perfect. I've already highlighted the issues with attrition which should not be ignored. The old engine may have sounded better, and a lighter car might look faster on TV. Maybe you like watching a driver dominate a race and you want more breakawy victories. There are endless reasons why fans watch racing besides overtaking and wheel-to-wheel action. 
 
 But it does seem like IndyCar fans are really proud of having [the greatest racing on earth](https://x.com/wbuxtonofficial/status/1880000721833312297). The numbers are telling us that heavier cars - perhaps too heavy of cars - are a part of that. That may not make the hybrid an unqualified success, but it does feel like time we change the narrative a little and recognize that the hybrid is giving us some good racing.
+
+> Cover photo by [sydney Rae](https://unsplash.com/@srz) on [Unsplash](https://unsplash.com/photos/two-race-cars-speed-around-a-curved-track-fuUDSlf3gOY)
 
 [^1]: If you are up with your semi-recent technical history you're probably saying to me right now "Hey idiot, why don't you just start at the beginning of the DW12 era in 2012?" Good point. But sadly, the [data](https://IndyCar.com/results) I'm using here isn't complete until 2013, so I wouldn't be able to accurately summarize those first 3 seasons for an apples-to-apples comparison with the other eras.
 [^2]: Shout out to [Jon Bois](https://www.youtube.com/playlist?list=PLUXSZMIiUfFSCYW1o-4whWtepyVlsfuCC)
