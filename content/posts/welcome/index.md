@@ -27,7 +27,7 @@ Most of the data work inside IndyCar is focused on engineering: building a faste
 
 We don’t have great metrics for driver performance, car quality, or in-race context (like expected win probability on a given lap). Just go read a site like [fangraphs](https://www.fangraphs.com) and tell me—honestly—that this kind of analysis wouldn’t be fun to have during a race or to dig into afterward.
 
-### What should we expect from MotorStats.io?
+### What should we expect from motorStats.io?
 
 To start, my goal is simply to publish occasional posts that provide new and interesting context—things fans didn’t know or couldn’t easily see before.
 
