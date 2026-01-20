@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DNF on motorStats.io</title><link>http://localhost:1313/tags/dnf/</link><description>Recent content in DNF on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 18 Jan 2026 00:00:00 -0500</lastBuildDate><atom:link href="http://localhost:1313/tags/dnf/index.xml" rel="self" type="application/rss+xml"/><item><title>What's Up With All Those DNFs in the Hybrid Era?</title><link>http://localhost:1313/posts/hybrid-era-reliability/</link><pubDate>Sun, 18 Jan 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/hybrid-era-reliability/</guid><description>&lt;img src="http://localhost:1313/posts/hybrid-era-reliability/cover.jpg" alt="Featured image of post What's Up With All Those DNFs in the Hybrid Era?" /&gt;&lt;p&gt;In my &lt;a class="link" href="https://motorstats.io/posts/how-competitive-hybrid-era/" target="_blank" rel="noopener"
+&gt;previous post&lt;/a&gt;, we explored how competitive the racing was in different technical eras of the DW12 chassis. What we found is that the Hybrid Era brought the tightest and most competitive racing of the last decade. This led to some real guilt&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt; on my part. There are a lot of hybrid haters out there, and I didn&amp;rsquo;t want to ruin anyone&amp;rsquo;s off-season by suggesting that IndyCar in its current state might be good and fun to watch.&lt;/p&gt;
+&lt;p&gt;Luckily - at least for the hybrid haters - we did come across one metric that really made the hybrid look bad. Cars were finishing races at a much lower rate in the Hybrid Era than during any of the previous decade of the DW12 Chassis. After shamelessly suggesting the hybrid has given us good racing, the least I can do is take a deep dive into this low reliability number.&lt;/p&gt;
+&lt;h3 id="dnfs-across-eras"&gt;DNFs Across Eras
+&lt;/h3&gt;&lt;p&gt;First: a quick refresher on the 4 eras we looked at for the DW12 chassis:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OEM Aero&lt;/strong&gt;: &lt;em&gt;2015 to 2017&lt;/em&gt; - Each engine manufacturer provided their own Aero kit. No aeroscreen or hybrid power unit.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Spec Aero&lt;/strong&gt;: &lt;em&gt;2018 to 2019&lt;/em&gt; - All cars used the same aero kit. No aeroscreen and no hybrid.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Aeroscreen&lt;/strong&gt;: &lt;em&gt;2020 to June 2024&lt;/em&gt; - Aeroscreen is introduced. Spec aero still in place. No hybrid power unit.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hybrid&lt;/strong&gt;: &lt;em&gt;July 2024 to 2025&lt;/em&gt; - Hybrid power unit is introduced. Spec aero and aeroscreen still in place.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There is actually a 5th era of the DW12 chassis: from 2012-2014 when the chassis was new but before the OEM aerokit was implemented. But, the data for this era is incomplete – especially in 2012 – so it&amp;rsquo;s being excluded from this analysis.&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;Now that we&amp;rsquo;ve defined these 4 eras, let&amp;rsquo;s refresh on DNF&lt;sup id="fnref:3"&gt;&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref"&gt;3&lt;/a&gt;&lt;/sup&gt; rates for each year since the start of the OEM Aero Era:&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/posts/hybrid-era-reliability/DNFbyYearEra.png"
+width="655"
+height="500"
+srcset="http://localhost:1313/posts/hybrid-era-reliability/DNFbyYearEra_hu_4a6bfd1a6bae33dc.png 480w, http://localhost:1313/posts/hybrid-era-reliability/DNFbyYearEra_hu_b0bae82e30ca11cc.png 1024w"
+loading="lazy"
+alt="DNF Rate by Year and Era"
+class="gallery-image"
+data-flex-grow="131"
+data-flex-basis="314px"
+&gt;&lt;/p&gt;
+&lt;p&gt;The 2nd half of 2024, which was the first (partial) season of the Hybrid Era, had historically high DNF rates. Things got better in 2025, but DNFs in 2025 were still higher than any single season of the Aeroscreen or Spec Aero Eras.&lt;/p&gt;
+&lt;h3 id="tight-racing-vs-unreliable-cars"&gt;Tight Racing vs Unreliable Cars
+&lt;/h3&gt;&lt;p&gt;The most obvious question we can ask regarding these DNFs is &amp;ldquo;why?&amp;rdquo; Maybe the answer actually lies in our previous post. Tight racing means a bunched-up field, with more opportunities for drivers to make mistakes that lead to contact with another car. If that&amp;rsquo;s the case, I&amp;rsquo;d argue a higher DNF rate is not a bad thing (at least from the fan&amp;rsquo;s perspective).&lt;/p&gt;
+&lt;p&gt;If we&amp;rsquo;re seeing more mechanical failures, however, that doesn&amp;rsquo;t feel good for the sport. This would support the hybrid haters&amp;rsquo; narrative that the DW12 chassis can&amp;rsquo;t handle all this weight and that&amp;rsquo;s causing an unprecedented number of mechincal failures.&lt;/p&gt;
+&lt;p&gt;So which is it? To answer this question, we can go back to those trusty &lt;a class="link" href="http://www.imscdn.com/INDYCAR/Documents/6460/2025-05-26/indycar-race-results.pdf" target="_blank" rel="noopener"
+&gt;results pdfs&lt;/a&gt; that IndyCar publishes after each race. Race results will list a &lt;em&gt;Reason Out&lt;/em&gt; for any car that is not running at the end of the race. From 2015-2025, each of these reasons appeared at least once:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Contact&lt;/strong&gt;: A car collides with another car or the wall.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mechanical&lt;/strong&gt;: A mechanical failure.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Off Course&lt;/strong&gt;: The car leaves the track (as a result of racing/driver error, not a mechanical error) and is unable to return to the track.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Handling&lt;/strong&gt;: The car is still running but is retired due to becoming undriveable.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Retired&lt;/strong&gt;: A generic retirement.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DQ&lt;/strong&gt;: The car is disqualified.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Electrical&lt;/strong&gt;: An electrical problem—which I guess IndyCar didn&amp;rsquo;t want to lump into &amp;ldquo;mechanical&amp;rdquo; problems.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNS&lt;/strong&gt;: Did not start.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;In Pits&lt;/strong&gt;: The car is physically pitted when the race ends - most likely due to some kind of issue that didn&amp;rsquo;t lead to a full retirement.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fire&lt;/strong&gt;: Um&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/posts/hybrid-era-reliability/fire3.png"
+width="600"
+height="300"
+srcset="http://localhost:1313/posts/hybrid-era-reliability/fire3_hu_c40f4d620184afe9.png 480w, http://localhost:1313/posts/hybrid-era-reliability/fire3_hu_d591f5597070bede.png 1024w"
+loading="lazy"
+alt="An Example of a “Fire” DNF"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="480px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Some of these classifications are more common than others, and they do seem to change over time as well. Here is how often each classification was used in each era:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: right"&gt;Period&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Contact&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Mechanical&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Off Course&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Handling&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Retired&lt;/th&gt;
+&lt;th style="text-align: right"&gt;DQ&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Electrical&lt;/th&gt;
+&lt;th style="text-align: right"&gt;DNS&lt;/th&gt;
+&lt;th style="text-align: right"&gt;In Pits&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Fire&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: right"&gt;OEM Aero&lt;/td&gt;
+&lt;td style="text-align: right"&gt;123&lt;/td&gt;
+&lt;td style="text-align: right"&gt;58&lt;/td&gt;
+&lt;td style="text-align: right"&gt;7&lt;/td&gt;
+&lt;td style="text-align: right"&gt;2&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;3&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: right"&gt;Spec Aero&lt;/td&gt;
+&lt;td style="text-align: right"&gt;78&lt;/td&gt;
+&lt;td style="text-align: right"&gt;27&lt;/td&gt;
+&lt;td style="text-align: right"&gt;5&lt;/td&gt;
+&lt;td style="text-align: right"&gt;4&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: right"&gt;Aeroscreen&lt;/td&gt;
+&lt;td style="text-align: right"&gt;194&lt;/td&gt;
+&lt;td style="text-align: right"&gt;65&lt;/td&gt;
+&lt;td style="text-align: right"&gt;11&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;1&lt;/td&gt;
+&lt;td style="text-align: right"&gt;4&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;1&lt;/td&gt;
+&lt;td style="text-align: right"&gt;1&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: right"&gt;Hybrid&lt;/td&gt;
+&lt;td style="text-align: right"&gt;72&lt;/td&gt;
+&lt;td style="text-align: right"&gt;29&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;3&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;1&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;So the vast majority of DNFs are classified as either Contact or Mechanical. Off Course has come up a couple dozen times&lt;sup id="fnref:4"&gt;&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref"&gt;4&lt;/a&gt;&lt;/sup&gt;, but the remaining 7 classifications are rare, appearing at most a handful of times in one or two eras.&lt;/p&gt;
+&lt;p&gt;The rare categories aren&amp;rsquo;t going to be very useful towards determining whether the DNFs are due to tight racing or less reliable cars, but we can reasonably group them into broader categories: Contact and Off Course should go together, as these can reasonably be attributed to tight racing, overly aggressive driving, or things of that nature. We&amp;rsquo;ll call this group &amp;ldquo;crashes&amp;rdquo;. Mechanical, Electrical, and Fire can all be lumped together into a category called &amp;ldquo;car failures&amp;rdquo;. Handling, Retired, DQ, DNS, and In Pits are all pretty rare and are all difficult to cleanly attribute to either car failure or tight competition, so we&amp;rsquo;ll lump those into a cop-out &amp;ldquo;other&amp;rdquo; category.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll call the rate at which cars DNF due to a crash reason as &lt;em&gt;crash rate&lt;/em&gt; and the rate at which cars DNF due to a car failure as &lt;em&gt;car failure rate&lt;/em&gt;. We aren&amp;rsquo;t going to spend a lot of time on &lt;em&gt;other rate&lt;/em&gt; (sorry), but the sum of all 3 of these we will call &lt;em&gt;DNF rate&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So now that we&amp;rsquo;ve defined some metrics for a more digestible 3 categories, we can look at the trend by year and see what is contributing to DNFs. If we see a spike in crash rate, then we can blame the tight racing. If we see a spike in car failure rate, we&amp;rsquo;ll conclude the hybrid broke everything. If we see a spike in other rate, I&amp;rsquo;m taking my ball and going home.&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://localhost:1313/posts/hybrid-era-reliability/DNFTypebyYear.png"
+width="655"
+height="500"
+srcset="http://localhost:1313/posts/hybrid-era-reliability/DNFTypebyYear_hu_132bc135b0184985.png 480w, http://localhost:1313/posts/hybrid-era-reliability/DNFTypebyYear_hu_cfea602767809157.png 1024w"
+loading="lazy"
+alt="DNF Type by Year"
+class="gallery-image"
+data-flex-grow="131"
+data-flex-basis="314px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Crash DNFs are up by a lot in the hybrid half of 2024, but they go back down to average or slightly below average in 2025. Mechanical failures are above average for both seasons of the Hybrid Era, though they are in line with the aeroscreen half of 2024, as well as the entire OEM Aero Era.&lt;/p&gt;
+&lt;h3 id="statistical-significance"&gt;Statistical Significance
+&lt;/h3&gt;&lt;p&gt;So what&amp;rsquo;s our conclusion? If you have an annoying stats friend, or are yourself someone&amp;rsquo;s annoying stats friend, then the &amp;ldquo;small sample size&amp;rdquo; alarm bells might be going off in your head right now. The super high crash rate in the hybrid half of 2024 came in only 9 races. The Hybrid Era as a whole is only 26 races old. It&amp;rsquo;s actually quite common for numbers to look inflated in small sample sizes but to even out as the sample size gets larger.&lt;/p&gt;
+&lt;p&gt;So before we draw any conclusions, we should determine if our sample sizes are large enough for a given number to be meaningful, or if it&amp;rsquo;s just a product of statistical noise. This is what tests of statistical significance are for.&lt;sup id="fnref:5"&gt;&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref"&gt;5&lt;/a&gt;&lt;/sup&gt; We compare one set of outcomes (such as DNF rate in the Hybrid Era) vs a benchmark set of outcomes (such as DNFs for the entire rest of our sample set), and if the two populations are different enough (as determined by their means and standard deviations), we can deem the populations to be statistically significant&lt;sup id="fnref:6"&gt;&lt;a href="#fn:6" class="footnote-ref" role="doc-noteref"&gt;6&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;OK, time for the results. I&amp;rsquo;ve run a handful of different tests below. Each test asks whether a certain statistic (DNF rate, crash rate, etc.) is statistically significant over a certain period of time (either the entire Hybrid Era or the hybrid half of 2024). A p-value of .05 or lower is considered statistically significant. Here are the results:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Test&lt;/th&gt;
+&lt;th&gt;p-value&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Significant&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;DNF Rate in Hybrid Era&lt;/td&gt;
+&lt;td&gt;0.049&lt;/td&gt;
+&lt;td style="text-align: right"&gt;Barely&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Crash Rate in Hybrid Era&lt;/td&gt;
+&lt;td&gt;0.231&lt;/td&gt;
+&lt;td style="text-align: right"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Crash Rate in 2024 (Hybrid half)&lt;/td&gt;
+&lt;td&gt;0.020&lt;/td&gt;
+&lt;td style="text-align: right"&gt;Yes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Car Failure Rate in Hybrid Era&lt;/td&gt;
+&lt;td&gt;0.202&lt;/td&gt;
+&lt;td style="text-align: right"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Car Failure Rate in 2024 (Hybrid half)&lt;/td&gt;
+&lt;td&gt;0.210&lt;/td&gt;
+&lt;td style="text-align: right"&gt;No&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;So technically, the higher DNF rate in the Hybrid Era is statistically significant at the 5% level. But if we break it down, the only number that is comfortably statistically significant is the crash rate in the hybrid half of 2024. Basically, this means something was going on in the 2nd half of 2024 that was leading to more contact. Perhaps – and I&amp;rsquo;m just spitballing here – the field was getting used to a newer, heavier power unit that was introduced halfway into the season and, as a result, made more mistakes. After some time to get used to the new power unit, however, those contact DNFs went back to normal in the 2025 season.&lt;/p&gt;
+&lt;p&gt;So what does this say about the theory that tighter racing led to more DNFs? Probably bunk. What does this say about the hybrid haters&amp;rsquo; theory that the worse, heavier car led to more car failures? Also largely bunk.&lt;/p&gt;
+&lt;p&gt;Instead, it looks like it&amp;rsquo;s a third thing: namely a major mid-season rule change that led to an adjustment period for drivers and brought more contact. But once the field adjusted, it was racing as usual. And what about the future? Well, if the car failure rate isn&amp;rsquo;t statistically significant, and the crash rate went back to normal in 2025, then there&amp;rsquo;s no reason to think we&amp;rsquo;ll see a substantially higher rate of DNFs persist going forward.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cover photo by &lt;a class="link" href="https://unsplash.com/@srz" target="_blank" rel="noopener"
+&gt;sydney Rae&lt;/a&gt; on &lt;a class="link" href="https://unsplash.com/photos/a-black-and-white-photo-of-a-race-car-on-a-track-nLotmcNQ5G0" target="_blank" rel="noopener"
+&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="footnotes" role="doc-endnotes"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;The author may or may not be Catholic&amp;hellip;&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;For convenience&amp;rsquo;s sake, let&amp;rsquo;s just assume the data from this missing era supports whatever you personally think is true about the racing in IndyCar. That&amp;rsquo;s great news for the hybrid haters, who just found 3 years of data that confirms unequivocally that the Hybrid Era ruined our sport! (People who don&amp;rsquo;t mind the Hybrid Era please ignore the previous sentence.)&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:3"&gt;
+&lt;p&gt;IndyCar doesn&amp;rsquo;t seem to use the term &amp;ldquo;DNF&amp;rdquo; in any of their official publications. Instead they tend to say a car is &amp;ldquo;out&amp;rdquo; as in &amp;ldquo;out of the race&amp;rdquo;. This makes some sense given that IndyCar awards points to every car that runs the race, even if they are out after 1 lap. But also it&amp;rsquo;s kind of annoying, and as a former baseball writer, I don&amp;rsquo;t feel like writing about &amp;ldquo;outs&amp;rdquo; anymore. So I&amp;rsquo;m going to stick to using &amp;ldquo;DNF&amp;rdquo;.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:4"&gt;
+&lt;p&gt;Interestingly, there has not been a single Off Course DNF in the Hybrid Era. This actually makes sense as the Hybrid Era is the first time that a car can be restarted from the cockpit. In previous eras, if you went off the track and the car stalled/the engine died, you were done. But with the hybrid, you can turn the car back on and drive back onto the course. RIP Off Course.&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:5"&gt;
+&lt;p&gt;[&lt;em&gt;Warning: the following footnote contains a nerdy rant about frequentist statistics. Non-nerds should proceed with caution.&lt;/em&gt;] A lot of people tend to think that &amp;ldquo;statistical significance&amp;rdquo; is some kind of magic threshold that makes your data unquestionably correct. In reality, tests for statistical significance essentially just give us a probability that one number is not meaningfully different from a different number. Anything under 5% (i.e. a 95% probability that the numbers are meaningfully different) is typically thought of as being statistically significant, but that&amp;rsquo;s a completely arbitrary number. For instance, if we were talking about driver safety, 5% is WAY too high of a threshold. If, on the other hand, we&amp;rsquo;re asking a question about reliability in the Hybrid Era, and the answer is most likely going to be used only in the context of a bar argument, then 5% is probably fine.&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:6"&gt;
+&lt;p&gt;[&lt;em&gt;WARNING: An even nerdier discussion is coming in this footnote. Seriously, if you are the type of person who enjoys having friends or ever having another conversation with a member of the opposite sex, I highly advise you skip ahead.&lt;/em&gt;] It&amp;rsquo;s also worth mentioning that tests for statistical significance are based on a certain set of assumptions that rarely describe the real world, namely the assumption that each individual outcome is an &lt;a class="link" href="https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables" target="_blank" rel="noopener"
+&gt;independent and identically distributed random variable&lt;/a&gt;. Mechanical DNFs sort of meet this criteria, but contact DNFs really don&amp;rsquo;t, as &amp;ldquo;contact&amp;rdquo; is often with another car and therefore not independent. For that reason, we&amp;rsquo;re definitely going to treat any number at or near the 5% threshold with some skepticism.&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description></item></channel></rss>
