@@ -11,16 +11,12 @@
 &lt;/ul&gt;
 &lt;p&gt;There is actually a 5th era of the DW12 chassis: from 2012-2014 when the chassis was new but before the OEM aerokit was implemented. But, the data for this era is incomplete – especially in 2012 – so it&amp;rsquo;s being excluded from this analysis.&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;Now that we&amp;rsquo;ve defined these 4 eras, let&amp;rsquo;s refresh on DNF&lt;sup id="fnref:3"&gt;&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref"&gt;3&lt;/a&gt;&lt;/sup&gt; rates for each year since the start of the OEM Aero Era:&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/posts/hybrid-era-reliability/DNFbyYearEra.png"
-width="655"
-height="500"
-srcset="http://localhost:1313/posts/hybrid-era-reliability/DNFbyYearEra_hu_4a6bfd1a6bae33dc.png 480w, http://localhost:1313/posts/hybrid-era-reliability/DNFbyYearEra_hu_b0bae82e30ca11cc.png 1024w"
+&lt;iframe
+src="http://localhost:1313/plots/DnfByYearEra.html"
+title="DNF Rate by Year and Era"
 loading="lazy"
-alt="DNF Rate by Year and Era"
-class="gallery-image"
-data-flex-grow="131"
-data-flex-basis="314px"
-&gt;&lt;/p&gt;
+style="width:100%;height:525px;border:0;"
+&gt;&lt;/iframe&gt;
 &lt;p&gt;The 2nd half of 2024, which was the first (partial) season of the Hybrid Era, had historically high DNF rates. Things got better in 2025, but DNFs in 2025 were still higher than any single season of the Aeroscreen or Spec Aero Eras.&lt;/p&gt;
 &lt;h3 id="tight-racing-vs-unreliable-cars"&gt;Tight Racing vs Unreliable Cars
 &lt;/h3&gt;&lt;p&gt;The most obvious question we can ask regarding these DNFs is &amp;ldquo;why?&amp;rdquo; Maybe the answer actually lies in our previous post. Tight racing means a bunched-up field, with more opportunities for drivers to make mistakes that lead to contact with another car. If that&amp;rsquo;s the case, I&amp;rsquo;d argue a higher DNF rate is not a bad thing (at least from the fan&amp;rsquo;s perspective).&lt;/p&gt;
@@ -125,16 +121,12 @@ data-flex-basis="480px"
 &lt;p&gt;The rare categories aren&amp;rsquo;t going to be very useful towards determining whether the DNFs are due to tight racing or less reliable cars, but we can reasonably group them into broader categories: Contact and Off Course should go together, as these can reasonably be attributed to tight racing, overly aggressive driving, or things of that nature. We&amp;rsquo;ll call this group &amp;ldquo;crashes&amp;rdquo;. Mechanical, Electrical, and Fire can all be lumped together into a category called &amp;ldquo;car failures&amp;rdquo;. Handling, Retired, DQ, DNS, and In Pits are all pretty rare and are all difficult to cleanly attribute to either car failure or tight competition, so we&amp;rsquo;ll lump those into a cop-out &amp;ldquo;other&amp;rdquo; category.&lt;/p&gt;
 &lt;p&gt;We&amp;rsquo;ll call the rate at which cars DNF due to a crash reason as &lt;em&gt;crash rate&lt;/em&gt; and the rate at which cars DNF due to a car failure as &lt;em&gt;car failure rate&lt;/em&gt;. We aren&amp;rsquo;t going to spend a lot of time on &lt;em&gt;other rate&lt;/em&gt; (sorry), but the sum of all 3 of these we will call &lt;em&gt;DNF rate&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;So now that we&amp;rsquo;ve defined some metrics for a more digestible 3 categories, we can look at the trend by year and see what is contributing to DNFs. If we see a spike in crash rate, then we can blame the tight racing. If we see a spike in car failure rate, we&amp;rsquo;ll conclude the hybrid broke everything. If we see a spike in other rate, I&amp;rsquo;m taking my ball and going home.&lt;/p&gt;
-&lt;p&gt;&lt;img src="http://localhost:1313/posts/hybrid-era-reliability/DNFTypebyYear.png"
-width="655"
-height="500"
-srcset="http://localhost:1313/posts/hybrid-era-reliability/DNFTypebyYear_hu_132bc135b0184985.png 480w, http://localhost:1313/posts/hybrid-era-reliability/DNFTypebyYear_hu_cfea602767809157.png 1024w"
+&lt;iframe
+src="http://localhost:1313/plots/DnfRateByYearType.html"
+title="DNF Rate by Year and DNF Type"
 loading="lazy"
-alt="DNF Type by Year"
-class="gallery-image"
-data-flex-grow="131"
-data-flex-basis="314px"
-&gt;&lt;/p&gt;
+style="width:100%;height:525px;border:0;"
+&gt;&lt;/iframe&gt;
 &lt;p&gt;Crash DNFs are up by a lot in the hybrid half of 2024, but they go back down to average or slightly below average in 2025. Mechanical failures are above average for both seasons of the Hybrid Era, though they are in line with the aeroscreen half of 2024, as well as the entire OEM Aero Era.&lt;/p&gt;
 &lt;h3 id="statistical-significance"&gt;Statistical Significance
 &lt;/h3&gt;&lt;p&gt;So what&amp;rsquo;s our conclusion? If you have an annoying stats friend, or are yourself someone&amp;rsquo;s annoying stats friend, then the &amp;ldquo;small sample size&amp;rdquo; alarm bells might be going off in your head right now. The super high crash rate in the hybrid half of 2024 came in only 9 races. The Hybrid Era as a whole is only 26 races old. It&amp;rsquo;s actually quite common for numbers to look inflated in small sample sizes but to even out as the sample size gets larger.&lt;/p&gt;
