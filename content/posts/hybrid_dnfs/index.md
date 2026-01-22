@@ -31,7 +31,12 @@ There is actually a 5th era of the DW12 chassis: from 2012-2014 when the chassis
 
 Now that we've defined these 4 eras, let's refresh on DNF[^3]  rates for each year since the start of the OEM Aero Era:
 
-![DNF Rate by Year and Era](DNFbyYearEra.png)
+<iframe
+  src="/plots/DnfByYearEra.html"
+  title="DNF Rate by Year and Era"
+  loading="lazy"
+  style="width:100%;height:525px;border:0;"
+></iframe>
 
 The 2nd half of 2024, which was the first (partial) season of the Hybrid Era, had historically high DNF rates. Things got better in 2025, but DNFs in 2025 were still higher than any single season of the Aeroscreen or Spec Aero Eras.
 
@@ -73,7 +78,12 @@ We'll call the rate at which cars DNF due to a crash reason as _crash rate_ and 
 
 So now that we've defined some metrics for a more digestible 3 categories, we can look at the trend by year and see what is contributing to DNFs. If we see a spike in crash rate, then we can blame the tight racing. If we see a spike in car failure rate, we'll conclude the hybrid broke everything. If we see a spike in other rate, I'm taking my ball and going home.
 
-![DNF Type by Year](DNFTypebyYear.png)
+<iframe
+  src="/plots/DnfRateByYearType.html"
+  title="DNF Rate by Year and DNF Type"
+  loading="lazy"
+  style="width:100%;height:525px;border:0;"
+></iframe>
 
 Crash DNFs are up by a lot in the hybrid half of 2024, but they go back down to average or slightly below average in 2025. Mechanical failures are above average for both seasons of the Hybrid Era, though they are in line with the aeroscreen half of 2024, as well as the entire OEM Aero Era.
 
