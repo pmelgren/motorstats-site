@@ -1,11 +1,4 @@
 # Configure main menu and social menu
-#[[main]]
-#identifier = "home"
-#name = "Home"
-#url = "/"
-#[main.params]
-#icon = "home"
-#newtab = true
 
 [[main]]
 identifier = "home"
@@ -24,6 +17,15 @@ weight = 20
 
 [main.params]
 icon = "article"
+
+[[main]]
+identifier = "newsletter"
+name = "Newsletter"
+url = "/newsletter/"
+weight = 25
+
+[main.params]
+icon = "news"
 
 [[main]]
 identifier = "contact"
