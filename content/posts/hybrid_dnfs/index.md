@@ -38,7 +38,7 @@ Now that we've defined these 4 eras, let's refresh on DNF[^3]  rates for each ye
   style="width:100%;height:525px;border:0;"
 ></iframe>
 
-The 2nd half of 2024, which was the first (partial) season of the Hybrid Era, had historically high DNF rates. Things got better in 2025, but DNFs in 2025 were still higher than any single season of the Aeroscreen or Spec Aero Eras.
+The 2nd half of 2024, which was the first (partial) season of the Hybrid Era, had historically high DNF rates. Things got better in 2025, but DNFs in 2025 were still higher than 4 out of 5 seasons in the Aeroscreen Era as well as the entire Spec Aero Era.
 
 ### Tight Racing vs Unreliable Cars
 
@@ -65,10 +65,10 @@ Some of these classifications are more common than others, and they do seem to c
 
 | Period     | Contact | Mechanical | Off Course | Handling | Retired | DQ | Electrical | DNS | In Pits | Fire |
 |-----------:|--------:|-----------:|-----------:|---------:|--------:|---:|-----------:|----:|--------:|-----:|
-| OEM Aero   | 123     | 58        | 7          | 2        | 0       | 0  | 3          | 0   | 0       | 0    |
+| OEM Aero   | 123     | 58        | 9          | 2        | 0       | 0  | 4          | 0   | 0       | 0    |
 | Spec Aero  | 78      | 27        | 5          | 4        | 0       | 0  | 0          | 0   | 0       | 1    |
 | Aeroscreen | 194     | 65        | 11         | 0        | 1       | 4  | 0          | 1   | 1       | 0    |
-| Hybrid     | 72      | 29        | 0          | 0        | 3       | 0  | 0          | 1   | 0       | 0    |
+| Hybrid     | 87      | 32        | 0          | 0        | 7       | 0  | 0          | 2   | 0       | 0    |
 
 So the vast majority of DNFs are classified as either Contact or Mechanical. Off Course has come up a couple dozen times[^4], but the remaining 7 classifications are rare, appearing at most a handful of times in one or two eras. 
 
@@ -97,13 +97,14 @@ OK, time for the results. I've run a handful of different tests below. Each test
 
 | Test                                   | p-value   | Significant |
 |----------------------------------------|-----------|------------:|
-| DNF Rate in Hybrid Era                 | 0.049     | Barely      |
-| Crash Rate in Hybrid Era               | 0.231     | No          |
-| Crash Rate in 2024 (Hybrid half)       | 0.020     | Yes         |
-| Car Failure Rate in Hybrid Era         | 0.202     | No          |
-| Car Failure Rate in 2024 (Hybrid half) | 0.210     | No          |
+| DNF Rate in Hybrid Era                 | 0.071     | No          |
+| DNF Rate in 2024 (Hybrid half)         | 0.003     | Yes         |
+| Crash Rate in Hybrid Era               | 0.313     | No          |
+| Crash Rate in 2024 (Hybrid half)       | 0.014     | Yes         |
+| Car Failure Rate in Hybrid Era         | 0.568     | No          |
+| Car Failure Rate in 2024 (Hybrid half) | 0.192     | No          |
 
-So technically, the higher DNF rate in the Hybrid Era is statistically significant at the 5% level. But if we break it down, the only number that is comfortably statistically significant is the crash rate in the hybrid half of 2024. Basically, this means something was going on in the 2nd half of 2024 that was leading to more contact. Perhaps – and I'm just spitballing here – the field was getting used to a newer, heavier power unit that was introduced halfway into the season and, as a result, made more mistakes. After some time to get used to the new power unit, however, those contact DNFs went back to normal in the 2025 season.
+So the overall DNF rate in the Hybrid Era falls just shy of statistical significance, but the spike in the hybrid half of 2024 is statistically significant at the 5% level(both overall DNF rate and crash rate). In other words, there was a real phenomenon in the 2nd half of 2024 that was leading to more DNFs and more contact. Perhaps – and I'm just spitballing here – the field was getting used to a newer, heavier power unit that was introduced halfway into the season and, as a result, made more mistakes. After some time to get used to the new power unit, however, those contact DNFs went back to normal in the 2025 season.
 
 So what does this say about the theory that tighter racing led to more DNFs? Probably bunk. What does this say about the hybrid haters' theory that the worse, heavier car led to more car failures? Also largely bunk.
 
