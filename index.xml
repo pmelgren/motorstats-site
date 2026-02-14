@@ -1,4 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>motorStats.io</title><link>http://localhost:1313/</link><description>Recent content on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 22 Jan 2026 00:00:00 -0500</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>We Now Have a Newsletter</title><link>http://localhost:1313/posts/newsletter-announcement/</link><pubDate>Thu, 22 Jan 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/newsletter-announcement/</guid><description>&lt;img src="http://localhost:1313/posts/newsletter-announcement/cover.jpg" alt="Featured image of post We Now Have a Newsletter" /&gt;&lt;p&gt;Listen, the powers that be at motorStats.io want to bring you high quality and insightful content. Said powers are pretty much just one dude, however, and it takes time to parse, clean, analyze data and write posts. So right now the goal is to bring you new content every 2-4 weeks.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>motorStats.io</title><link>http://localhost:1313/</link><description>Recent content on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 05 Feb 2026 00:00:00 -0500</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>Glossary</title><link>http://localhost:1313/glossary/</link><pubDate>Thu, 05 Feb 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/glossary/</guid><description>&lt;h2 id="a"&gt;A
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Adjusted Position Movement (adjPMov)&lt;/strong&gt;: A version of Position Movement that adjusts the starting order by removing cars that DNF, so movement reflects on-track passes/strategy rather than places gained from attrition.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;At Stake (Position at Stake)&lt;/strong&gt;: A finishing-position battle where the gap between two adjacent finishers is within a “competitive” threshold (e.g., 3 seconds), indicating a plausible on-track fight.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;At Stake %&lt;/strong&gt;: The percentage of finishing positions that are “at stake” (i.e., adjacent finishers are within the competitive gap threshold) across a sample of races.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="c"&gt;C
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Car Failure Rate&lt;/strong&gt;: The rate at which cars fail to finish due to car-related issues (Mechanical, Electrical, or Fire reasons).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Crash Rate&lt;/strong&gt;: The rate at which cars fail to finish due to on-track incidents (Contact or Off Course reasons).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="d"&gt;D
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DNF Rate&lt;/strong&gt;: The rate at which cars do not finish a race for any reason; it can be broken down into Crash Rate, Car Failure Rate, and Other Rate.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="g"&gt;G
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Gap&lt;/strong&gt;: The time gap (in seconds) between a car and the car immediately ahead of it at the end of the race.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="m"&gt;M
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Margin of Victory (MoV)&lt;/strong&gt;: The time gap between P1 and P2 at the end of a race.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="o"&gt;O
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Other Rate&lt;/strong&gt;: The rate of DNFs that don’t clearly fit crash- or car-failure-related categories (e.g., Handling, Retired, DQ, DNS, In Pits).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="p"&gt;P
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Points at Stake&lt;/strong&gt;: For a given Position at Stake, the point value assigned to the higher finishing position in that battle (used to weight battles toward the front of the field).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points at Stake %&lt;/strong&gt;: Total Points at Stake divided by total points available across the sample; a weighted measure of how much of the race’s “valuable” finishing order was contested.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Position Movement (PMov)&lt;/strong&gt;: The absolute difference between a car’s starting position and finishing position; a simple measure of how much a car moved through the field.&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>We Now Have a Newsletter</title><link>http://localhost:1313/posts/newsletter-announcement/</link><pubDate>Thu, 22 Jan 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/newsletter-announcement/</guid><description>&lt;img src="http://localhost:1313/posts/newsletter-announcement/cover.jpg" alt="Featured image of post We Now Have a Newsletter" /&gt;&lt;p&gt;Listen, the powers that be at motorStats.io want to bring you high quality and insightful content. Said powers are pretty much just one dude, however, and it takes time to parse, clean, analyze data and write posts. So right now the goal is to bring you new content every 2-4 weeks.&lt;/p&gt;
 &lt;p&gt;You and I both know you&amp;rsquo;re not going to check this site every day for new content if we&amp;rsquo;re publishing at that rate. When I have something new I&amp;rsquo;ll &lt;a class="link" href="https://x.com/motorstatsio" target="_blank" rel="noopener"
 &gt;tweet&lt;/a&gt; about it, but assuming you&amp;rsquo;re not a robot, there&amp;rsquo;s a pretty good chance you aren&amp;rsquo;t on twitter.&lt;/p&gt;
 &lt;p&gt;So I&amp;rsquo;m now offering an email newsletter that will send all the site&amp;rsquo;s content to your inbox whenever it does publish.&lt;/p&gt;
