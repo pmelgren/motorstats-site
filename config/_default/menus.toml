@@ -10,6 +10,15 @@ weight = 10
 icon = "home"
 
 [[main]]
+identifier = "glossary"
+name = "Glossary"
+url = "/glossary/"
+weight = 22
+
+[main.params]
+icon = "book"
+
+[[main]]
 identifier = "posts"
 name = "Posts"
 url = "/posts/"
