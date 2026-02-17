@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ovals on motorStats.io</title><link>http://localhost:1313/tags/ovals/</link><description>Recent content in Ovals on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 13 Feb 2026 00:00:00 -0500</lastBuildDate><atom:link href="http://localhost:1313/tags/ovals/index.xml" rel="self" type="application/rss+xml"/><item><title>Track Types Matter!</title><link>http://localhost:1313/posts/track-types-matter/</link><pubDate>Fri, 13 Feb 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/track-types-matter/</guid><description>&lt;img src="http://localhost:1313/posts/track-types-matter/cover.jpg" alt="Featured image of post Track Types Matter!" /&gt;&lt;p&gt;In the &lt;a class="link" href="http://localhost:1313/posts/how-competitive-hybrid-era/" &gt;first&lt;/a&gt; &lt;a class="link" href="http://localhost:1313/posts/hybrid-dnfs/" &gt;two&lt;/a&gt; analytical posts of this site, we explored various metrics across technical periods of the DW12 chassis. At the end of each of these pieces, I boldly arrived at some conclusions based on statistically significant results we saw for the Hybrid Era. Specifically, I claimed that the hybrid power unit led to tighter racing than in any other era, and that the introduction of the new power unit halfway through the season led to a spike in DNFs in the 2nd half of 2024.&lt;/p&gt;
+&lt;p&gt;I posted the second of these articles on reddit - a place where only good things happen - and received a comment wondering if the unbalanced 2024 season could explain these DNFs. I was unsure of what this wise commenter meant, but I guessed it had something to do with track types (this is IndyCar, after all).&lt;/p&gt;
+&lt;p&gt;My instinct was that the % of races run on each track type was consistent from year to year, and therefore track type effects would just wash out. But this is a stats blog and I do need content, so I might as well look at the numbers just to make sure:&lt;/p&gt;
+&lt;iframe
+src="http://localhost:1313/plots/TrackTypeRatesByYear.html"
+title="Percentage of races run on each track type per year"
+loading="lazy"
+style="width:100%;height:525px;border:0;"
+&gt;&lt;/iframe&gt;
+&lt;p&gt;See, I was right. For the most part, the percentage of races run at each track type is pretty consistent from year to year. 2020 is an exception, but the Series had a pretty good reason not to run crowded street races in urban centers. Based on this chart we can expect similar consistency when we look at it for our four technical eras. Then we can wrap this post up early and go back to doom scrolling on Reddit, or however we occupy our time. Right?&lt;/p&gt;
+&lt;iframe
+src="http://localhost:1313/plots/TrackTypeRatesByEra.html"
+title="Percentage of races run on each track type per year"
+loading="lazy"
+style="width:100%;height:525px;border:0;"
+&gt;&lt;/iframe&gt;
+&lt;p&gt;Well, that&amp;rsquo;s not great. How does the Hybrid Era have a higher % of ovals than any given year in our dataset? How does that math even math? Let&amp;rsquo;s look at the numbers by year for just the hybrid era:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: left"&gt;Year&lt;/th&gt;
+&lt;th style="text-align: left"&gt;Period&lt;/th&gt;
+&lt;th style="text-align: right"&gt;NRaces&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Oval&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Road&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Street&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;2024&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Hybrid&lt;/td&gt;
+&lt;td style="text-align: right"&gt;9&lt;/td&gt;
+&lt;td style="text-align: right"&gt;6&lt;/td&gt;
+&lt;td style="text-align: right"&gt;2&lt;/td&gt;
+&lt;td style="text-align: right"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;2025&lt;/td&gt;
+&lt;td style="text-align: left"&gt;Hybrid&lt;/td&gt;
+&lt;td style="text-align: right"&gt;17&lt;/td&gt;
+&lt;td style="text-align: right"&gt;6&lt;/td&gt;
+&lt;td style="text-align: right"&gt;7&lt;/td&gt;
+&lt;td style="text-align: right"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Oh yeah, almost all of the ovals in 2024 (except the Indy 500) were run in the latter half of the season - after the introduction of the hybrid. So even though the number of ovals is consistent across years, it&amp;rsquo;s way higher for the Hybrid Era due to that imbalance in the 2024 season. Kind of embarrassing that I didn&amp;rsquo;t remember that to be honest.&lt;/p&gt;
+&lt;p&gt;Well if the Hybrid Era has had significantly more ovals than any other era, could that be to blame for all of the statistical disparity we&amp;rsquo;ve seen in the first 2 posts? You do kind of expect ovals to have a more bunched up field and to have more DNFs. Let&amp;rsquo;s revisit the numbers we talked about in the previous posts, but this time with respect to track types instead of technical eras and see whether track types have something to do with it.&lt;/p&gt;
+&lt;h3 id="racing-competitiveness-analysis"&gt;Racing Competitiveness Analysis
+&lt;/h3&gt;&lt;p&gt;We&amp;rsquo;ll start with the first post, where we explored how competitive the racing was.&lt;/p&gt;
+&lt;p&gt;I defined a handful of metrics that attempt to describe racing competitiveness. If you&amp;rsquo;d like a refresher, you can look for the bold text in that &lt;a class="link" href="http://localhost:1313/posts/how-competitive-hybrid-era/" &gt;post&lt;/a&gt; or just quickly skim through our NEW(!) stats &lt;a class="link" href="http://localhost:1313/glossary/" &gt;glossary&lt;/a&gt;.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: left"&gt;Type&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Gap&lt;/th&gt;
+&lt;th style="text-align: right"&gt;% of Cars on Lead Lap&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Gap (Lead Lap Only)&lt;/th&gt;
+&lt;th style="text-align: right"&gt;PMov&lt;/th&gt;
+&lt;th style="text-align: right"&gt;AdjPMov&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Pos At Stake %&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Pts At Stake&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;Oval&lt;/td&gt;
+&lt;td style="text-align: right"&gt;2.6&lt;/td&gt;
+&lt;td style="text-align: right"&gt;46%&lt;/td&gt;
+&lt;td style="text-align: right"&gt;1.8&lt;/td&gt;
+&lt;td style="text-align: right"&gt;6.9&lt;/td&gt;
+&lt;td style="text-align: right"&gt;4.8&lt;/td&gt;
+&lt;td style="text-align: right"&gt;45%&lt;/td&gt;
+&lt;td style="text-align: right"&gt;11.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;Road&lt;/td&gt;
+&lt;td style="text-align: right"&gt;4.9&lt;/td&gt;
+&lt;td style="text-align: right"&gt;73%&lt;/td&gt;
+&lt;td style="text-align: right"&gt;3.7&lt;/td&gt;
+&lt;td style="text-align: right"&gt;5.5&lt;/td&gt;
+&lt;td style="text-align: right"&gt;4.7&lt;/td&gt;
+&lt;td style="text-align: right"&gt;48%&lt;/td&gt;
+&lt;td style="text-align: right"&gt;11.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;Street&lt;/td&gt;
+&lt;td style="text-align: right"&gt;4.2&lt;/td&gt;
+&lt;td style="text-align: right"&gt;65%&lt;/td&gt;
+&lt;td style="text-align: right"&gt;3.1&lt;/td&gt;
+&lt;td style="text-align: right"&gt;5.8&lt;/td&gt;
+&lt;td style="text-align: right"&gt;4.5&lt;/td&gt;
+&lt;td style="text-align: right"&gt;48%&lt;/td&gt;
+&lt;td style="text-align: right"&gt;12.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Let&amp;rsquo;s run through a quick interpretation of these numbers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Average Gap&lt;/strong&gt;, &lt;strong&gt;Average Gap (Lead Lap Only)&lt;/strong&gt; and &lt;strong&gt;% of Cars on Lead Lap&lt;/strong&gt; are all explainable by lap times. Since ovals have much shorter lap times, there is less room to develop a large gap before the car behind simply goes down a lap. This also explains why so few cars finish on the lead lap compared to street and road courses.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Position Movement&lt;/strong&gt; is larger on ovals. It&amp;rsquo;s tempting to attribute this to more passing, but remember Position Movement can also be a function of DNFs. &lt;strong&gt;Adjusted Position Movement&lt;/strong&gt; (adjPMov) removes the effects of DNFs, and that is only marginally higher on ovals than on Road or Street courses, so most of the PMov we&amp;rsquo;re seeing seems to come from DNFs (more on that later).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally, &lt;strong&gt;Points at Stake&lt;/strong&gt; and &lt;strong&gt;Positions at Stake&lt;/strong&gt; try to capture how many tight position battles there are at the end of a race. Neither metric is significantly different for Oval races than for Road or Street races.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Based on this, there isn&amp;rsquo;t a lot of evidence that Ovals make the racing significantly more or less competitive. This is fairly consistent with the numbers we ran in the first post that showed a lot of similarity between the Aeroscreen Era and the Hybrid Era. It still seems like the common denominator there is weight, and track types do not play a big factor.&lt;/p&gt;
+&lt;h3 id="dnf-analysis"&gt;DNF Analysis
+&lt;/h3&gt;&lt;p&gt;The DNF analysis in my second post is where things get more hairy. The disparity we just saw between PMov and adjPMov suggests that DNFs are more frequent on ovals, so let&amp;rsquo;s see what the numbers actually say.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="text-align: left"&gt;Type&lt;/th&gt;
+&lt;th style="text-align: right"&gt;NRaces&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Total DNFs&lt;/th&gt;
+&lt;th style="text-align: right"&gt;DNF Rate&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;Oval&lt;/td&gt;
+&lt;td style="text-align: right"&gt;61.0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;371.0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;24.0%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;Road&lt;/td&gt;
+&lt;td style="text-align: right"&gt;71.0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;143.0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;8.0%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style="text-align: left"&gt;Street&lt;/td&gt;
+&lt;td style="text-align: right"&gt;49.0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;202.0&lt;/td&gt;
+&lt;td style="text-align: right"&gt;17.0%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Fairly intuitive results here. There are more DNFs when there are a bunch of walls to smash into (Ovals and Street courses) and when you are maintaining a high average speed for a longer time (ovals). To really drive the point home, look at this pretty chart:&lt;/p&gt;
+&lt;iframe
+src="http://localhost:1313/plots/PerRaceDNFDistributionByType.html"
+title="DNF Distribution per Race"
+loading="lazy"
+style="width:100%;height:525px;border:0;"
+&gt;&lt;/iframe&gt;
+&lt;p&gt;So no single road race since 2015 has more than 7 DNFs, meanwhile the median number of DNFs per race on an oval is 6.&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt; I guess the real miracle here is the one oval that had 0 DNFs. Shout out to Marcus Ericsson for running 10 laps down but still finishing in the 2nd race of the 2020 St Louis double header to preserve this distinction.&lt;/p&gt;
+&lt;p&gt;So now I have a problem. I&amp;rsquo;ve already attributed high DNFs in the hybrid half of 2024 to drivers and teams adjusting to the new hybrid power unit, but now we know that ovals have a lot more DNFs than road/street courses and that the hybrid half of 2024 had a hugely disproportionate number of ovals. Is it possible we misattributed those DNFs to the hybrid when it was just a result of track types?&lt;/p&gt;
+&lt;p&gt;Yes.&lt;/p&gt;
+&lt;p&gt;But wait a minute, I ran tests for statistical significance and all that. Doesn&amp;rsquo;t that mean that statistically the hybrid did cause the DNFs?&lt;/p&gt;
+&lt;p&gt;No. Statistical significance means that the high DNFs in the hybrid half of 2024 were a real phenomenon and not just random noise. What we did not answer (statistically at least) was what was causing those DNFs. Essentially there is &lt;em&gt;correlation&lt;/em&gt;, but not &lt;em&gt;causation.&lt;/em&gt; If you&amp;rsquo;ve ever heard a single person talk about statistics, you&amp;rsquo;ve probably heard that correlation does &lt;em&gt;not&lt;/em&gt; imply causation&amp;hellip;&lt;/p&gt;
+&lt;p&gt;Bad news: we&amp;rsquo;re not going to prove causation. That&amp;rsquo;s really hard and I&amp;rsquo;d like to get this post published before the 2026 season begins. The good news: we don&amp;rsquo;t need to prove causation, we really just need to prove whether the DNFs should be attributed to the effect of the oval tracks or the effect of the new power unit. A multiple linear regression will easily answer this question for us, essentially acting like running 2 tests for statistical significance at once.&lt;sup id="fnref:2"&gt;&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll regress whether a driver DNF&amp;rsquo;d in an individual race on 2 variables: whether the race was run on an oval and whether the race was run in the hybrid half of 2024. There will also be a constant term which essentially represents all other races. Each variable and the constant will be assigned a weight, and a P-value. We are looking for P-values under .05, and ideally as close to 0 as possible. The weights for all 3 should be positive, indicating that each variable contributes to a higher probability of a DNF. Here are the test results:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Variable&lt;/th&gt;
+&lt;th style="text-align: right"&gt;Coefficient&lt;/th&gt;
+&lt;th style="text-align: right"&gt;P-value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Constant&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0.1156&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0.000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Hybrid Half&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0.0325&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0.176&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Oval&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0.1165&lt;/td&gt;
+&lt;td style="text-align: right"&gt;0.000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;So the weights tell us that on a road or street circuit in any timeframe other than the hybrid half of 2024, we can expect an 11.6% DNF Rate. Racing on an Oval adds another 11.6% to the expected DNF Rate, and racing in the hybrid Half of 2024 adds another 3.3% to the expected DNF Rate.&lt;/p&gt;
+&lt;p&gt;Or rather it WOULD mean all of that, except the p-value for the Hybrid Half variable is .17, which is a lot bigger than .05. Essentially this means that when we take into account the higher rate of DNFs due to Ovals, the increase in DNFs during the hybrid half of 2024 is NOT statistically significant and can just be attributed to statistical noise.&lt;sup id="fnref:3"&gt;&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref"&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;So much for my theory that the DNFs were caused by drivers adjusting to the new power unit. Note to self: &lt;em&gt;Always&lt;/em&gt; check track types before jumping to any nice-sounding conclusions.&lt;/p&gt;
+&lt;h3 id="drivers"&gt;Drivers
+&lt;/h3&gt;&lt;p&gt;Ok enough of this deep stats BS. Let&amp;rsquo;s get to the good stuff! It&amp;rsquo;s time to judge drivers by their numbers.&lt;/p&gt;
+&lt;p&gt;The (arguably) single most important contribution of advanced analytics to sports is the ability to use more stats to win a bar argument. Want to prove that Racer X is better than Racer Y? Well, so far, this blog has given you 0 ammunition to do so.&lt;sup id="fnref:4"&gt;&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref"&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;But this article is the perfect excuse to break down driver performances by track types. Let&amp;rsquo;s look at some charts that compare average starting position, average finishing position, and DNF Rate by track type. In the interest of making easy-to-read 2D charts, we&amp;rsquo;re going to lump road and street circuits into one category.&lt;/p&gt;
+&lt;p&gt;In each of the below charts, the dotted line represents equal performance between ovals and road/street circuits. The further a driver is to the right of that line, the worse they do by that stat on ovals vs road/street courses. The further a driver is the left of that line, the better they do on ovals vs road/street courses. A driver right along that line is fairly equal in both track types.&lt;/p&gt;
+&lt;iframe
+src="http://localhost:1313/plots/SPOvalvsStreet.html"
+title="Driver Avg Starting Position: Oval vs Road/Street"
+loading="lazy"
+style="width:100%;height:675px;border:0;"
+&gt;&lt;/iframe&gt;
+&lt;iframe
+src="http://localhost:1313/plots/PosOvalvsStreet.html"
+title="Driver Avg Finishing Position: Oval vs Road/Street"
+loading="lazy"
+style="width:100%;height:675px;border:0;"
+&gt;&lt;/iframe&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Of all the active drivers, Lundgaard stands out as having the biggest discrepancy between ovals and non-ovals. I wonder if his early success last season - when people were even saying he was going to take Pato&amp;rsquo;s place as the top Arrow McLaren driver - was largely driven by track types.&lt;sup id="fnref:5"&gt;&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref"&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On a more positive front, remember in 2024 when Ed Carpenter stopped running ovals in the 20 car and let Rasmussen take over those duties? That&amp;rsquo;s looking like a really good decision right now.&lt;sup id="fnref:6"&gt;&lt;a href="#fn:6" class="footnote-ref" role="doc-noteref"&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We could come up with a million more takeaways from these charts, but let&amp;rsquo;s also look at DNFs:&lt;/p&gt;
+&lt;iframe
+src="http://localhost:1313/plots/DNFRateRoadStreetvsOval.html"
+title="Driver Avg Positions Gained: Oval vs Road/Street"
+loading="lazy"
+style="width:100%;height:675px;border:0;"
+&gt;&lt;/iframe&gt;
+&lt;p&gt;Again, feel free to choose your own takeaway, but here are mine:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What I like about this plot (vs the previous two) is that there&amp;rsquo;s a little more going on in the corners. Top drivers are generally bottom-left and the least successful drivers are generally top-right, but the exceptions to that is what really jumps out to me.&lt;/li&gt;
+&lt;li&gt;To that point: Santino Ferrucci has 1 DNF in 32 ovals run. How is that even possible? Especially for a guy who has the reputation of being a very aggressive driver.&lt;/li&gt;
+&lt;li&gt;Rasmussen (another aggressive driver) also stands out for his low DNF rate on ovals. Apparently if you want to finish a race on ovals it helps to race like an asshole. Though he&amp;rsquo;s only run 10 ovals lifetime so there is probably a small sample size effect here.&lt;/li&gt;
+&lt;li&gt;On the other end, what a brutal oval DNF rate for Siegel. Especially for a guy who has spent his whole career in top equipment.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="conclusion"&gt;Conclusion &lt;sup id="fnref:7"&gt;&lt;a href="#fn:7" class="footnote-ref" role="doc-noteref"&gt;7&lt;/a&gt;&lt;/sup&gt;
+&lt;/h3&gt;&lt;p&gt;So what have we learned here boys and girls? We&amp;rsquo;ve learned that track types are a lot more meaningful when we are talking about DNFs than when we are talking about racing competitiveness. We&amp;rsquo;ve learned that Danes named Christian have big track type effects. We&amp;rsquo;ve learned that it&amp;rsquo;s easier to finish a race when there aren&amp;rsquo;t walls on every edge of the track to smash into.&lt;/p&gt;
+&lt;p&gt;Most importantly, however, we&amp;rsquo;ve learned that if you make conclusions based on &lt;em&gt;anything&lt;/em&gt; in IndyCar without first asking yourself whether there are track type effects, you&amp;rsquo;re going to end up looking like a &lt;a class="link" href="http://localhost:1313/posts/welcome/#who-is-behind-this" &gt;huge moron&lt;/a&gt;. Let&amp;rsquo;s all remember that, especially as the 2026 season begins with one oval in the first six races.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cover Photo by &lt;a class="link" href="%22https://unsplash.com/@luxunderscore" &gt;Luca Hooijer&lt;/a&gt; on &lt;a class="link" href="%22https://unsplash.com/photos/a-curved-road-with-grass-growing-on-the-side-of-it-1jBZY43Jdb4%22" &gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="footnotes" role="doc-endnotes"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;The Indy 500 has more entrants than other races which means that total number of DNFs by track type isn&amp;rsquo;t a perfectly apples to apples comparison. But we&amp;rsquo;re not going to let that get in the way of our pretty chart now are we? Also if we plotted per-race DNF rate instead of total DNFs per race it would show essentially the same thing but the chart would be harder to interpret.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;This isn&amp;rsquo;t technically true but for our purposes it&amp;rsquo;s functionally true. Don&amp;rsquo;t @ me stats nerds.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:3"&gt;
+&lt;p&gt;For those curious, if we remove the hybrid half term and add a term for street races, the coefficients are constant (Road Races): 8.1%, Ovals: 15.4%, Street Races: 8.9%. In other terms, the baseline DNF rate for a road course is 8.1%, then street races add another 8.9% to that or ovals add another 15.4%.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:4"&gt;
+&lt;p&gt;The 2nd-most important aspect of sports analytics is having numbers to prove that you&amp;rsquo;re smarter than everyone. Actually being able to make smarter decisions as a race team ranks somewhere in the teens.&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:5"&gt;
+&lt;p&gt;Friendly reminder to ask &amp;ldquo;is it track types&amp;rdquo; before coming to any conclusion in IndyCar.&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:6"&gt;
+&lt;p&gt;Getting the team&amp;rsquo;s first win in 4 years on an oval certainly doesn&amp;rsquo;t hurt Rasmussen on this front.&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:7"&gt;
+&lt;p&gt;Clever section title right?&amp;#160;&lt;a href="#fnref:7" class="footnote-backref" role="doc-backlink"&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description></item></channel></rss>
