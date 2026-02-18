@@ -6,7 +6,7 @@
 src="http://localhost:1313/plots/TrackTypeRatesByYear.html"
 title="Percentage of races run on each track type per year"
 loading="lazy"
-style="width:100%;height:380px;border:0;min-width:320px;"
+style="width:100%;height:550px;border:0;min-width:320px;"
 &gt;&lt;/iframe&gt;
 &lt;/div&gt;
 &lt;p&gt;See, I was right. For the most part, the percentage of races run at each track type is pretty consistent from year to year. 2020 is an exception, but the Series had a pretty good reason not to run crowded street races in urban centers. Based on this chart we can expect similar consistency when we look at it for our four technical eras. Then we can wrap this post up early and go back to doom scrolling on Reddit, or however we occupy our time. Right?&lt;/p&gt;
@@ -15,7 +15,7 @@ style="width:100%;height:380px;border:0;min-width:320px;"
 src="http://localhost:1313/plots/TrackTypeRatesByEra.html"
 title="Percentage of races run on each track type per year"
 loading="lazy"
-style="width:100%;height:380px;border:0;min-width:320px;"
+style="width:100%;height:550px;border:0;min-width:320px;"
 &gt;&lt;/iframe&gt;
 &lt;/div&gt;
 &lt;p&gt;Well, that&amp;rsquo;s not great. How does the Hybrid Era have a higher % of ovals than any given year in our dataset? How does that math even math? Let&amp;rsquo;s look at the numbers by year for just the hybrid era:&lt;/p&gt;
@@ -151,7 +151,7 @@ style="width:100%;height:380px;border:0;min-width:320px;"
 src="http://localhost:1313/plots/PerRaceDNFDistributionByType.html"
 title="DNF Distribution per Race"
 loading="lazy"
-style="width:100%;height:380px;border:0;min-width:320px;"
+style="width:100%;height:550px;border:0;min-width:320px;"
 &gt;&lt;/iframe&gt;
 &lt;/div&gt;
 &lt;p&gt;So no single road race since 2015 has more than 7 DNFs, meanwhile the median number of DNFs per race on an oval is 6.&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt; I guess the real miracle here is the one oval that had 0 DNFs. Shout out to Marcus Ericsson for running 10 laps down but still finishing in the 2nd race of the 2020 St Louis double header to preserve this distinction.&lt;/p&gt;
@@ -200,7 +200,7 @@ style="width:100%;height:380px;border:0;min-width:320px;"
 src="http://localhost:1313/plots/SPOvalvsStreet.html"
 title="Driver Avg Starting Position: Oval vs Road/Street"
 loading="lazy"
-style="width:100%;height:460px;border:0;min-width:320px;"
+style="width:100%;height:675px;border:0;min-width:320px;"
 &gt;&lt;/iframe&gt;
 &lt;/div&gt;
 &lt;div style="position:relative;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;"&gt;
@@ -208,7 +208,7 @@ style="width:100%;height:460px;border:0;min-width:320px;"
 src="http://localhost:1313/plots/PosOvalvsStreet.html"
 title="Driver Avg Finishing Position: Oval vs Road/Street"
 loading="lazy"
-style="width:100%;height:460px;border:0;min-width:320px;"
+style="width:100%;height:675px;border:0;min-width:320px;"
 &gt;&lt;/iframe&gt;
 &lt;/div&gt;
 &lt;ul&gt;
@@ -225,7 +225,7 @@ style="width:100%;height:460px;border:0;min-width:320px;"
 src="http://localhost:1313/plots/DNFRateRoadStreetvsOval.html"
 title="Driver Avg Positions Gained: Oval vs Road/Street"
 loading="lazy"
-style="width:100%;height:460px;border:0;min-width:320px;"
+style="width:100%;height:675px;border:0;min-width:320px;"
 &gt;&lt;/iframe&gt;
 &lt;/div&gt;
 &lt;p&gt;Again, feel free to choose your own takeaway, but here are mine:&lt;/p&gt;
