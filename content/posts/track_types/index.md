@@ -23,7 +23,7 @@ My instinct was that the % of races run on each track type was consistent from y
     src="/plots/TrackTypeRatesByYear.html"
     title="Percentage of races run on each track type per year"
     loading="lazy"
-    style="width:100%;height:380px;border:0;min-width:320px;"
+    style="width:100%;height:550px;border:0;min-width:320px;"
   ></iframe>
 </div>
 
@@ -34,7 +34,7 @@ See, I was right. For the most part, the percentage of races run at each track t
     src="/plots/TrackTypeRatesByEra.html"
     title="Percentage of races run on each track type per year"
     loading="lazy"
-    style="width:100%;height:380px;border:0;min-width:320px;"
+    style="width:100%;height:550px;border:0;min-width:320px;"
   ></iframe>
 </div>
 
@@ -87,7 +87,7 @@ Fairly intuitive results here. There are more DNFs when there are a bunch of wal
     src="/plots/PerRaceDNFDistributionByType.html"
     title="DNF Distribution per Race"
     loading="lazy"
-    style="width:100%;height:380px;border:0;min-width:320px;"
+    style="width:100%;height:550px;border:0;min-width:320px;"
   ></iframe>
 </div>
 
@@ -132,7 +132,7 @@ In each of the below charts, the dotted line represents equal performance betwee
     src="/plots/SPOvalvsStreet.html"
     title="Driver Avg Starting Position: Oval vs Road/Street"
     loading="lazy"
-    style="width:100%;height:460px;border:0;min-width:320px;"
+    style="width:100%;height:675px;border:0;min-width:320px;"
   ></iframe>
 </div>
 
@@ -141,7 +141,7 @@ In each of the below charts, the dotted line represents equal performance betwee
     src="/plots/PosOvalvsStreet.html"
     title="Driver Avg Finishing Position: Oval vs Road/Street"
     loading="lazy"
-    style="width:100%;height:460px;border:0;min-width:320px;"
+    style="width:100%;height:675px;border:0;min-width:320px;"
   ></iframe>
 </div>
 
@@ -156,7 +156,7 @@ We could come up with a million more takeaways from these charts, but let's also
     src="/plots/DNFRateRoadStreetvsOval.html"
     title="Driver Avg Positions Gained: Oval vs Road/Street"
     loading="lazy"
-    style="width:100%;height:460px;border:0;min-width:320px;"
+    style="width:100%;height:675px;border:0;min-width:320px;"
   ></iframe>
 </div>
 
