@@ -18,21 +18,25 @@ I posted the second of these articles on reddit - a place where only good things
 
 My instinct was that the % of races run on each track type was consistent from year to year, and therefore track type effects would just wash out. But this is a stats blog and I do need content, so I might as well look at the numbers just to make sure:
 
-<iframe
-  src="/plots/TrackTypeRatesByYear.html"
-  title="Percentage of races run on each track type per year"
-  loading="lazy"
-  style="width:100%;height:525px;border:0;"
-></iframe>
+<div style="position:relative;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+  <iframe
+    src="/plots/TrackTypeRatesByYear.html"
+    title="Percentage of races run on each track type per year"
+    loading="lazy"
+    style="width:100%;height:380px;border:0;min-width:320px;"
+  ></iframe>
+</div>
 
 See, I was right. For the most part, the percentage of races run at each track type is pretty consistent from year to year. 2020 is an exception, but the Series had a pretty good reason not to run crowded street races in urban centers. Based on this chart we can expect similar consistency when we look at it for our four technical eras. Then we can wrap this post up early and go back to doom scrolling on Reddit, or however we occupy our time. Right?
 
-<iframe
-  src="/plots/TrackTypeRatesByEra.html"
-  title="Percentage of races run on each track type per year"
-  loading="lazy"
-  style="width:100%;height:525px;border:0;"
-></iframe>
+<div style="position:relative;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+  <iframe
+    src="/plots/TrackTypeRatesByEra.html"
+    title="Percentage of races run on each track type per year"
+    loading="lazy"
+    style="width:100%;height:380px;border:0;min-width:320px;"
+  ></iframe>
+</div>
 
 Well, that's not great. How does the Hybrid Era have a higher % of ovals than any given year in our dataset? How does that math even math? Let's look at the numbers by year for just the hybrid era:
 
@@ -78,12 +82,14 @@ The DNF analysis in my second post is where things get more hairy. The disparity
 
 Fairly intuitive results here. There are more DNFs when there are a bunch of walls to smash into (Ovals and Street courses) and when you are maintaining a high average speed for a longer time (ovals). To really drive the point home, look at this pretty chart:
 
-<iframe
-  src="/plots/PerRaceDNFDistributionByType.html"
-  title="DNF Distribution per Race"
-  loading="lazy"
-  style="width:100%;height:525px;border:0;"
-></iframe>
+<div style="position:relative;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+  <iframe
+    src="/plots/PerRaceDNFDistributionByType.html"
+    title="DNF Distribution per Race"
+    loading="lazy"
+    style="width:100%;height:380px;border:0;min-width:320px;"
+  ></iframe>
+</div>
 
 So no single road race since 2015 has more than 7 DNFs, meanwhile the median number of DNFs per race on an oval is 6.[^1] I guess the real miracle here is the one oval that had 0 DNFs. Shout out to Marcus Ericsson for running 10 laps down but still finishing in the 2nd race of the 2020 St Louis double header to preserve this distinction.
 
@@ -121,19 +127,23 @@ But this article is the perfect excuse to break down driver performances by trac
 
 In each of the below charts, the dotted line represents equal performance between ovals and road/street circuits. The further a driver is to the right of that line, the worse they do by that stat on ovals vs road/street courses. The further a driver is the left of that line, the better they do on ovals vs road/street courses. A driver right along that line is fairly equal in both track types.
 
-<iframe
-  src="/plots/SPOvalvsStreet.html"
-  title="Driver Avg Starting Position: Oval vs Road/Street"
-  loading="lazy"
-  style="width:100%;height:675px;border:0;"
-></iframe>
+<div style="position:relative;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+  <iframe
+    src="/plots/SPOvalvsStreet.html"
+    title="Driver Avg Starting Position: Oval vs Road/Street"
+    loading="lazy"
+    style="width:100%;height:460px;border:0;min-width:320px;"
+  ></iframe>
+</div>
 
-<iframe
-  src="/plots/PosOvalvsStreet.html"
-  title="Driver Avg Finishing Position: Oval vs Road/Street"
-  loading="lazy"
-  style="width:100%;height:675px;border:0;"
-></iframe>
+<div style="position:relative;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+  <iframe
+    src="/plots/PosOvalvsStreet.html"
+    title="Driver Avg Finishing Position: Oval vs Road/Street"
+    loading="lazy"
+    style="width:100%;height:460px;border:0;min-width:320px;"
+  ></iframe>
+</div>
 
 * Of all the active drivers, Lundgaard stands out as having the biggest discrepancy between ovals and non-ovals. I wonder if his early success last season - when people were even saying he was going to take Pato's place as the top Arrow McLaren driver - was largely driven by track types.[^5] 
 
@@ -141,12 +151,14 @@ In each of the below charts, the dotted line represents equal performance betwee
 
 We could come up with a million more takeaways from these charts, but let's also look at DNFs:
 
-<iframe
-  src="/plots/DNFRateRoadStreetvsOval.html"
-  title="Driver Avg Positions Gained: Oval vs Road/Street"
-  loading="lazy"
-  style="width:100%;height:675px;border:0;"
-></iframe>
+<div style="position:relative;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+  <iframe
+    src="/plots/DNFRateRoadStreetvsOval.html"
+    title="Driver Avg Positions Gained: Oval vs Road/Street"
+    loading="lazy"
+    style="width:100%;height:460px;border:0;min-width:320px;"
+  ></iframe>
+</div>
 
 Again, feel free to choose your own takeaway, but here are mine:
 * What I like about this plot (vs the previous two) is that there's a little more going on in the corners. Top drivers are generally bottom-left and the least successful drivers are generally top-right, but the exceptions to that is what really jumps out to me.
