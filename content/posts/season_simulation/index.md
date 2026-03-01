@@ -51,35 +51,35 @@ So at a high level - here is what my model predicted would happen in the 2026 se
 
 | **Driver**|Average Season Points|Race Finish Rate|Average Starting Position|Average Finishing Position|Wins per Season|Poles per Season | 
 |:---------------------|----------:|-------------:|--------:|--------:|----------:|-----------:|
-| **Palou, Alex**          |     643.8 |         85.3 |     5.2 |     6.9 |       4.4 |        3.6 |
-| **O'Ward, Pato**         |     587.5 |         85.2 |     5.5 |     7.6 |       2.5 |        4   |
-| **Lundgaard, Christian** |     502.7 |         85.1 |     8.1 |     9.3 |       1.2 |        1.7 |
-| **McLaughlin, Scott**    |     499.9 |         85.3 |     9.3 |    10.1 |       1.9 |        1.4 |
-| **Dixon, Scott**         |     466.1 |         85.4 |    12.4 |    10.2 |       0.7 |        0.2 |
-| **Malukas, David**       |     450.4 |         85.1 |     8.5 |    11.4 |       1.1 |        1.6 |
-| **Kirkwood, Kyle**       |     441.1 |         85.2 |    10.6 |    11.1 |       0.9 |        0.7 |
-| **Newgarden, Josef**     |     437.2 |         84.9 |    10.5 |    11.6 |       1   |        0.9 |
-| **Armstrong, Marcus**    |     419   |         85.3 |     9.6 |    11.7 |       0.5 |        0.6 |
-| **Rossi, Alexander**     |     400.3 |         85   |    12.8 |    12.3 |       0.5 |        0.2 |
-| **Rosenqvist, Felix**    |     392.4 |         85.2 |     9.2 |    12.4 |       0.3 |        1   |
-| **Simpson, Kyffin**      |     390   |         85.1 |    14.3 |    12.6 |       0.4 |        0.1 |
-| **Ferrucci, Santino**    |     379.2 |         85   |    15.4 |    13   |       0.5 |        0.5 |
-| **Rasmussen, Christian** |     376.7 |         85   |    15.7 |    13   |       0.4 |        0   |
-| **Siegel, Nolan**        |     360.5 |         84.7 |    11.2 |    13.4 |       0.2 |        0.5 |
-| **Ericsson, Marcus**     |     345.5 |         84.9 |    12.4 |    14   |       0.2 |        0.2 |
-| **Veekay, Rinus**        |     343.5 |         85.1 |    16.4 |    14.4 |       0.4 |        0.1 |
-| **Grosjean, Romain**     |     336.9 |         84.2 |    13.8 |    14.3 |       0.2 |        0.1 |
-| **Power, Will**          |     329.4 |         85   |    13.3 |    14.5 |       0.1 |        0.1 |
-| **Robb, Sting Ray**      |     322.9 |         84.8 |    19.3 |    14.8 |       0.2 |        0   |
-| **Rahal, Graham**        |     294.5 |         85.2 |    14.5 |    15.7 |       0   |        0.2 |
-| **Foster, Louis**        |     270   |         84.1 |    17.9 |    16.5 |       0   |        0   |
-| **Schumacher, Mick**     |     233.8 |         83   |    18.7 |    18.4 |       0   |        0   |
-| **Collet, Caio**         |     226.3 |         81.5 |    19.8 |    18.9 |       0   |        0   |
-| **Hauger, Denis**        |     219.8 |         81.2 |    23.1 |    19.1 |       0   |        0   |
-| **Carpenter, Ed***       |      19.2 |         76.5 |    10.8 |    15.2 |       0   |        0   |
-| **Hunter-Reay, Ryan***   |      18.4 |         75.7 |    13.5 |    15.4 |       0   |        0   |
-| **Castroneves, Helio***  |      17.7 |         76.7 |    15.4 |    15.9 |       0   |        0   |
-| **Harvey, Jack***        |      12.1 |         77.3 |    26   |    20   |       0   |        0   |
+| **Palou, Alex**          |     643.8 |        85.3% |     5.2 |     6.9 |       4.4 |        3.6 |
+| **O'Ward, Pato**         |     587.5 |        85.2% |     5.5 |     7.6 |       2.5 |        4   |
+| **Lundgaard, Christian** |     502.7 |        85.1% |     8.1 |     9.3 |       1.2 |        1.7 |
+| **McLaughlin, Scott**    |     499.9 |        85.3% |     9.3 |    10.1 |       1.9 |        1.4 |
+| **Dixon, Scott**         |     466.1 |        85.4% |    12.4 |    10.2 |       0.7 |        0.2 |
+| **Malukas, David**       |     450.4 |        85.1% |     8.5 |    11.4 |       1.1 |        1.6 |
+| **Kirkwood, Kyle**       |     441.1 |        85.2% |    10.6 |    11.1 |       0.9 |        0.7 |
+| **Newgarden, Josef**     |     437.2 |        84.9% |    10.5 |    11.6 |       1   |        0.9 |
+| **Armstrong, Marcus**    |     419   |        85.3% |     9.6 |    11.7 |       0.5 |        0.6 |
+| **Rossi, Alexander**     |     400.3 |        85.0% |    12.8 |    12.3 |       0.5 |        0.2 |
+| **Rosenqvist, Felix**    |     392.4 |        85.2% |     9.2 |    12.4 |       0.3 |        1   |
+| **Simpson, Kyffin**      |     390   |        85.1% |    14.3 |    12.6 |       0.4 |        0.1 |
+| **Ferrucci, Santino**    |     379.2 |        85.0% |    15.4 |    13   |       0.5 |        0.5 |
+| **Rasmussen, Christian** |     376.7 |        85.0% |    15.7 |    13   |       0.4 |        0   |
+| **Siegel, Nolan**        |     360.5 |        84.7% |    11.2 |    13.4 |       0.2 |        0.5 |
+| **Ericsson, Marcus**     |     345.5 |        84.9% |    12.4 |    14   |       0.2 |        0.2 |
+| **Veekay, Rinus**        |     343.5 |        85.1% |    16.4 |    14.4 |       0.4 |        0.1 |
+| **Grosjean, Romain**     |     336.9 |        84.2% |    13.8 |    14.3 |       0.2 |        0.1 |
+| **Power, Will**          |     329.4 |        85.0% |    13.3 |    14.5 |       0.1 |        0.1 |
+| **Robb, Sting Ray**      |     322.9 |        84.8% |    19.3 |    14.8 |       0.2 |        0   |
+| **Rahal, Graham**        |     294.5 |        85.2% |    14.5 |    15.7 |       0   |        0.2 |
+| **Foster, Louis**        |     270   |        84.1% |    17.9 |    16.5 |       0   |        0   |
+| **Schumacher, Mick**     |     233.8 |        83.0% |    18.7 |    18.4 |       0   |        0   |
+| **Collet, Caio**         |     226.3 |        81.5% |    19.8 |    18.9 |       0   |        0   |
+| **Hauger, Denis**        |     219.8 |        81.2% |    23.1 |    19.1 |       0   |        0   |
+| **Carpenter, Ed***       |      19.2 |        76.5% |    10.8 |    15.2 |       0   |        0   |
+| **Hunter-Reay, Ryan***   |      18.4 |        75.7% |    13.5 |    15.4 |       0   |        0   |
+| **Castroneves, Helio***  |      17.7 |        76.7% |    15.4 |    15.9 |       0   |        0   |
+| **Harvey, Jack***        |      12.1 |        77.3% |    26   |    20   |       0   |        0   |
 
 | **Driver**|Average Championship Standing |   Total Championships |  Total Indy 500 Wins |   Best Standings Finish |   Worst Standings Finish |
 |:---------------------|---------------:|----------------:|--------------:|-------:|--------:|
