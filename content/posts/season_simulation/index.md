@@ -13,7 +13,7 @@ tags:
     - Alex Palou
     - Will Power
     - Josef Newgarden
-    - Denis Hauger
+    - Dennis Hauger
     - Not AI
 ---
 
@@ -75,7 +75,7 @@ So at a high level - here is what my model predicted would happen in the 2026 se
 | **Foster, Louis**        |     270   |        84.1% |    17.9 |    16.5 |       0   |        0   |
 | **Schumacher, Mick**     |     233.8 |        83.0% |    18.7 |    18.4 |       0   |        0   |
 | **Collet, Caio**         |     226.3 |        81.5% |    19.8 |    18.9 |       0   |        0   |
-| **Hauger, Denis**        |     219.8 |        81.2% |    23.1 |    19.1 |       0   |        0   |
+| **Hauger, Dennis**        |     219.8 |        81.2% |    23.1 |    19.1 |       0   |        0   |
 | **Carpenter, Ed***       |      19.2 |        76.5% |    10.8 |    15.2 |       0   |        0   |
 | **Hunter-Reay, Ryan***   |      18.4 |        75.7% |    13.5 |    15.4 |       0   |        0   |
 | **Castroneves, Helio***  |      17.7 |        76.7% |    15.4 |    15.9 |       0   |        0   |
@@ -107,7 +107,7 @@ So at a high level - here is what my model predicted would happen in the 2026 se
 | **Foster, Louis**        |           21.6 |               0 |             0 |     13 |      25 |
 | **Schumacher, Mick**     |           23.4 |               0 |             3 |     16 |      25 |
 | **Collet, Caio**         |           23.7 |               0 |            11 |     12 |      25 |
-| **Hauger, Denis**        |           24.1 |               0 |             1 |     15 |      25 |
+| **Hauger, Dennis**        |           24.1 |               0 |             1 |     15 |      25 |
 | **Carpenter, Ed***       |           27.2 |               0 |           157 |     26 |      29 |
 | **Hunter-Reay, Ryan***   |           27.3 |               0 |           115 |     26 |      29 |
 | **Castroneves, Helio***  |           27.4 |               0 |            67 |     26 |      29 |
@@ -127,7 +127,7 @@ Whether you agree with the model is an entirely different matter. For my part, I
 
 Another shocker is __Josef Newgarden__ getting no love at the Indy 500. Yes, a single-race prediction is very noisy, but come on. The guy won 2 of the last 3 Indy 500's and yet the model only sees him winning it 99 times in 10,000 iterations. Even Nolan Siegel is given credit for winning it 148 times in 10,000 iterations. This is most likely a similar story to Power when it comes to guys who have spent most or all of their career in a Penske car getting very little individual credit.
 
-Rookies like __Denis Hauger__, __Caio Collet__, and __Mick Schumacher__ are inherently hard to predict because they have never appeared in the series before. To account for our lack of data on these 3, I use a technique from other sports known as "player comps". The idea is to select a player that you expect to be similar to the rookie, then predict the rookie as if he is that player (all other data related to the rookie besides identity is kept the same). Unfortunately, the player pool in IndyCar is very shallow, so perfect comps don't exist. For Hauger and Collet, I used recent IndyCar drivers who had similar results to those 2 in Indy NXT. Hauger's dominant 2025 looked a lot like Louis Foster's dominant 2024. Collet's runner-up campaign in 2025 was most reminiscent of Jacob Abel's Indy NXT career. For Schumacher, I went with the former F1 route and used Ericsson as his best comp. All three of these comps have the added benefit of reaching these career milestones at similar ages.
+Rookies like __Dennis Hauger__, __Caio Collet__, and __Mick Schumacher__ are inherently hard to predict because they have never appeared in the series before. To account for our lack of data on these 3, I use a technique from other sports known as "player comps". The idea is to select a player that you expect to be similar to the rookie, then predict the rookie as if he is that player (all other data related to the rookie besides identity is kept the same). Unfortunately, the player pool in IndyCar is very shallow, so perfect comps don't exist. For Hauger and Collet, I used recent IndyCar drivers who had similar results to those 2 in Indy NXT. Hauger's dominant 2025 looked a lot like Louis Foster's dominant 2024. Collet's runner-up campaign in 2025 was most reminiscent of Jacob Abel's Indy NXT career. For Schumacher, I went with the former F1 route and used Ericsson as his best comp. All three of these comps have the added benefit of reaching these career milestones at similar ages.
 I didn't want to overweight these subjective comps, however, so half of the predictions used comps and half just used an unspecified driver. The result of this technique was a slight improvement in the standings for these three drivers vs just using the unspecified driver. Overall, however, the model is very unlikely to reward rookie drivers. So in many of the simulations, Hauger, Collet, and Schumacher finish bottom 3 (before the Indy 500 one-offs) in some order[^4]. 
 
 ## Conclusion:
