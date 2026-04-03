@@ -17,17 +17,13 @@ tags:
     - Not AI
 ---
 
-At the start of the season, I published the [results](/posts/sim-results-2026/) of a simulation model that represented our best analytical prediction of how the 2026 season would go. We're now roughly a quarter way through the season, so it feels like a good time for an update to our model.
+At the start of the season, I published the [results](/posts/sim-results-2026/) of a simulation model that represented my best analytical prediction of how the 2026 season would go. We're now roughly a quarter way through the season, so it feels like a good time for an update those predictions.
 
-A lot has happened since I published my original set of predictions on March 1. The Indy 500 field has filled out - about as predictably as possible. We have a track layout for the Freedom 250. My Twitter has gained several followers[^1]. And most importantly, four actual races have actually happened.
-
-These four new races are the most important, as that data is used in several ways. For starters, the nature of in-season predictions means that everything in the past (i.e. those four races) are using actual data, while everything in the future is using predicted data. 
-
-Secondly, I retrained the model using data from these four races, so the model now has a little more to go on than it did a month ago. This is key as we can compare last month's predictions to this round of predictions to see what the model has "learned" compared to what we have learned (or think we have learned).
+A lot has happened since I published my original set of predictions on March 1: The Indy 500 field has filled out - about as predictably as possible. We have a track layout for the Freedom 250. My Twitter has gained several followers[^1]. And most importantly, four races have actually happened.
 
 ## Updated Predictions
 
-With that out of the way, here are our updated predictions as of April 1:
+All of those things affect the model, (except the twitter followers) so let's see what the updated predictions look like with those changes incorporated:
 
 | **Driver**|Average Season Points|Race Finish Rate|Average Starting Position|Average Finishing Position|Wins per Season|Poles per Season | 
 |:---------------------|----------:|-------------:|--------:|--------:|----------:|-----------:|
@@ -103,7 +99,7 @@ With that out of the way, here are our updated predictions as of April 1:
 
 Woah, Alex Palou, who'd have thought?
 
-But seriously, **Alex Palou** is now being given an 81% chance to win the championship. I know that to us humans, his chances feel closer to 100%, but 81% is still really high for a statistical model. With 5 road courses still on the season, his prediction of 5.5 wins per season (so only 3-4 more this season) does feel a little low, especially when you take into account the model is giving him about a 25% chance of winning the Indy 500. 
+But seriously, **Alex Palou** is now being given an 81% chance to win the championship. I know that to us humans, his chances feel closer to 100%, but 81% is still really high for a statistical model. The model is also predicting him to win 3.5 more races this season, which with 5 road courses still on the schedule, actually feels pretty low. It's not just road courses, either, as he is predicted to win the the Indy 500 about 25% of the time. I know this is shocking, but apparently my model thinks we should expect a good rest of the season from Palou.  
 
 Further down the (predicted) championship standings, we find **Kyle Kirkwood**. Giving Kirkwood the 4th-best championship odds behind both (competitive) McLarens feels a little harsh for the only guy to lead Alex Palou in the championship standings in almost 2 years. My computer, if it were petty enough to argue back, might point out that "we were all saying this last year" and "remember how that turned out?"[^2] This year certainly feels different from last year, but it's hard to ignore that we've already raced on 2 street tracks — which is Kirkwood and Andretti's strongest track type — but only one of everything else. We have a lot of ovals and road courses to get through where Kirkwood has historically not shined, and while top 5 finishes in both Phoenix and Barber are promising, the model will need more than two data points to change its mind on Kirkwood's ability on non-street courses. 
 
@@ -111,7 +107,7 @@ Blaming track types is more difficult for **Pato O'Ward**, who my model still pr
 
 ## Change Since Start of Season
 
-If you remember my [first post](/posts/sim-results-2026/) (or just clicked on the link), you'll realize that Pato's championship odds are way down compared to where they were a month ago. This brings up a good point: we can learn a lot by seeing how the model has changed since before the first race. The below table gives the difference between today's predictions and those from before St. Pete:
+If you remember my [first post](/posts/sim-results-2026/) (or just clicked on the link), however, you'll realize that Pato's championship odds are way down compared to where they were a month ago. This brings up a good point: we can learn a lot by seeing how the model has changed since before the first race. The below table gives the difference between today's predictions and those from before St. Pete:
 
 | **Driver**               |   Average Season Points |   Average Finishing Position |   Wins per Season |   Average Championship Standing |     Total Championships |    Total Indy 500 Wins |
 |:-------------------------|------------------------:|-----------------------------:|------------------:|--------------------------------:|------------------------:|-----------------------:|
@@ -141,11 +137,13 @@ If you remember my [first post](/posts/sim-results-2026/) (or just clicked on th
 | **Simpson, Kyffin**      |                   -47   |                          1.2 |              -0.2 |                             2.6 |                       0 |                    -55 |
 | **Siegel, Nolan**        |                   -58.5 |                          2.2 |              -0.1 |                             3.6 |                       0 |                    -69 |
 
-We see that Kirkwood is getting a lot more "respect" from the model, and Pato's stock has fallen a lot. In fact, Arrow McLaren's stock as a whole seems to have fallen, with O'Ward and Nolan Siegel[^3] towards the bottom of the list, and Christian Lundgaard showing marginal gains at best despite his incredibly strong start to the season. 
+Now its clear that Kirkwood actually is getting a lot more "respect" from the model, and Pato's stock has fallen a lot. In fact, Arrow McLaren's stock as a whole seems to have fallen, with O'Ward and Nolan Siegel[^3] towards the bottom of the list, and Christian Lundgaard losing an expected 90 championships despite his solid start to the season. 
 
-This brings us back to the discussion of what the model has "learned." Four new races represents just 100 data points for the statistical prediction models to learn off of. And some of our data points are set aside as test data, meaning we are close to 80 new data points. That's not a lot of new data to really sway the model vs the entire DW12 chassis era. However, the simulation piece of this model is taking into account the 100% real data from those first 4 races in each of the 10,000 iterations, so what has happened in those 4 races is going to move the predictions a lot compared to what the model _expected_ would happen in those first 4 races.
+This brings us back to the discussion of what the model has "learned." Four new races represents just 100 data points for the statistical prediction models to learn off of. Some of our data points are set aside as test data, meaning we are actually closer to 80 new data points since the start of the season. In reality, that's not a lot of new data to really sway the model vs the entire DW12 chassis era. 
 
-So why has Pato lost basically 1300 simulated championships (out of 10,000) to Palou in the last month? The model might be knocking Pato and especially the McLarens down slightly, but Pato has underperformed his expectations in those first four races while Palou has slightly overperformed[^4]. Clearly, the 25% of championships that the original model had Pato winning required a lot of good luck in Pato's favor and bad luck in Palou's favor. So far that hasn't happened, and now Pato needs even more luck to not just score more points than Palou, but to make up 50 points in the standings — all in four fewer races than we had to work with at the start of the preseason.
+The simulation piece of this model is more sensitive to this new data, however, as it is taking into account the results from those first 4 races in each of its 10,000 iterations. This means that whatever actually happened in those 4 races is going to move the predictions a lot compared to what the model _expected_ would happen in those first 4 races.
+
+So why has Pato O'Ward lost basically 1300 simulated championships (out of 10,000) to Palou in the last month? The model might be knocking Pato and especially the McLarens down slightly, but Pato has underperformed his expectations in those first four races while Palou has slightly overperformed[^4]. Clearly, the 25% of championships that the original model had Pato winning required a lot of good luck in Pato's favor and bad luck in Palou's favor. So far that hasn't happened, and now Pato needs even more luck to not just score more points than Palou, but to make up 50 points in the standings — all in four fewer races than we had to work with at the start of the season.
 
 To put things another way, the model hasn't changed its mind about O'Ward's talent or Palou's talent, or even the quality of their respective cars. But Pato O'Ward now needs a lot more luck in his favor on a per-race basis to win the championship, and so the odds of that happening are now much lower. 
 
