@@ -105,9 +105,29 @@
 <script>
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
 
+const COLUMN_TOOLTIPS = {
+  Driver: 'Driver name for this aggregated row.',
+  Team: 'Team name, or a summary when multiple teams are represented.',
+  Eng: 'Engine manufacturer (OEM), or a summary when multiple OEMs are represented.',
+  R: 'Total races included in this aggregation.',
+  Laps: 'Total laps completed across included races.',
+  SP: 'Average starting position.',
+  FP: 'Average finishing position.',
+  PG: 'Average positions gained relative to starting position.',
+  DNF: 'Total did-not-finish count.',
+  W: 'Total wins.',
+  POD: 'Total podium finishes (top 3).',
+  T10: 'Total top-10 finishes.',
+  Pts: 'Total championship points.'
+};
+
 let statsData = [];
 let sortColumn = null;
 let sortDirection = 'desc';
+
+function getColumnTooltip(column) {
+  return COLUMN_TOOLTIPS[column] || `${column}: placeholder description.`;
+}
 
 function getParams() {
   const p = new URLSearchParams(window.location.search);
@@ -159,6 +179,7 @@ function renderTable() {
   columns.forEach((col) => {
     const th = document.createElement('th');
     th.textContent = col;
+    th.title = getColumnTooltip(col);
     th.onclick = () => sortBy(col);
     if (sortColumn === col) th.classList.add(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
     header.appendChild(th);
