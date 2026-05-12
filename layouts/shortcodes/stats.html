@@ -106,19 +106,17 @@
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
 
 const COLUMN_TOOLTIPS = {
-  Driver: 'Driver name for this aggregated row.',
-  Team: 'Team name, or a summary when multiple teams are represented.',
-  Eng: 'Engine manufacturer (OEM), or a summary when multiple OEMs are represented.',
-  R: 'Total races included in this aggregation.',
-  Laps: 'Total laps completed across included races.',
-  SP: 'Average starting position.',
-  FP: 'Average finishing position.',
-  PG: 'Average positions gained relative to starting position.',
-  DNF: 'Total did-not-finish count.',
-  W: 'Total wins.',
-  POD: 'Total podium finishes (top 3).',
-  T10: 'Total top-10 finishes.',
-  Pts: 'Total championship points.'
+
+  R: 'R: Total Races',
+  Laps: 'Laps: Total Laps Completed ',
+  SP: 'SP: Average Starting Position',
+  FP: 'FP: Average Finishing Position',
+  PG: 'PG: Average Positions Gained',
+  DNF: 'DNF: Did Not Finish Count',
+  W: 'W: Race Wins',
+  POD: 'POD: Podiums (Top 3 Finishes)',
+  T10: 'T10: Top-10 Finishes',
+  Pts: 'Pts: Championship Points'
 };
 
 let statsData = [];
@@ -126,7 +124,7 @@ let sortColumn = null;
 let sortDirection = 'desc';
 
 function getColumnTooltip(column) {
-  return COLUMN_TOOLTIPS[column] || `${column}: placeholder description.`;
+  return COLUMN_TOOLTIPS[column] || '';
 }
 
 function getParams() {
