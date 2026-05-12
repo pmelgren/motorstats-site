@@ -19,6 +19,15 @@ weight = 22
 icon = "book"
 
 [[main]]
+identifier = "stats"
+name = "Stats"
+url = "/stats/"
+weight = 23
+
+[main.params]
+icon = "chart-bar"
+
+[[main]]
 identifier = "posts"
 name = "Posts"
 url = "/posts/"
