@@ -1,4 +1,192 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>motorStats.io</title><link>http://localhost:1313/</link><description>Recent content on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 01 Apr 2026 00:00:00 -0500</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>Updating our 2026 Season Predictions</title><link>http://localhost:1313/posts/sim-results-2026-update/</link><pubDate>Wed, 01 Apr 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/sim-results-2026-update/</guid><description>&lt;img src="http://localhost:1313/posts/sim-results-2026-update/cover.jpg" alt="Featured image of post Updating our 2026 Season Predictions" /&gt;&lt;p&gt;At the start of the season, I published the &lt;a class="link" href="http://localhost:1313/posts/sim-results-2026/" &gt;results&lt;/a&gt; of a simulation model that represented my best analytical prediction of how the 2026 season would go. We&amp;rsquo;re now roughly a quarter way through the season, so it feels like a good time for an update those predictions.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>motorStats.io</title><link>http://localhost:1313/</link><description>Recent content on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 12 May 2026 09:35:00 -0400</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>We Just Launched a Stats Page</title><link>http://localhost:1313/posts/stats-announcement/</link><pubDate>Tue, 12 May 2026 09:35:00 -0400</pubDate><guid>http://localhost:1313/posts/stats-announcement/</guid><description>&lt;img src="http://localhost:1313/cover.jpg" alt="Featured image of post We Just Launched a Stats Page" /&gt;&lt;p&gt;If you&amp;rsquo;re tired of our opinions and want to form your equally bad opinions we have some great news! We just launched the &lt;a class="link" href="http://localhost:1313/stats/" &gt;&lt;strong&gt;Stats Page&lt;/strong&gt;&lt;/a&gt; on motorStats.io.&lt;/p&gt;
+&lt;p&gt;We have stats for the DW12 era, broken down by team, driver, or engine manufacturer.&lt;/p&gt;
+&lt;p&gt;Stats and filters are simple for now, but more metrics and more filters will be steadily added as the site progresses.&lt;/p&gt;
+&lt;p&gt;Check it out here: &lt;a class="link" href="http://localhost:1313/stats/" &gt;Stats&lt;/a&gt; or get to anytime through the sidebar.&lt;/p&gt;
+&lt;p&gt;If there are specific features you want added next (or if you find a bug), send me a note via the &lt;a class="link" href="http://localhost:1313/contact/" &gt;Contact&lt;/a&gt; page.&lt;/p&gt;</description></item><item><title>Stats</title><link>http://localhost:1313/stats/</link><pubDate>Mon, 11 May 2026 14:47:00 -0500</pubDate><guid>http://localhost:1313/stats/</guid><description>&lt;div class="stats-view"&gt;
+&lt;form id="statsForm" class="stats-form stats-panel"&gt;
+&lt;label&gt;
+Aggregation Level
+&lt;select id="agg_level" name="agg_level"&gt;
+&lt;option value="Driver" selected&gt;Driver&lt;/option&gt;
+&lt;option value="Team"&gt;Team&lt;/option&gt;
+&lt;option value="Engine"&gt;Engine&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
+Season
+&lt;select id="season" name="season"&gt;
+&lt;option value="2026" selected&gt;2026&lt;/option&gt;
+&lt;option value="2025"&gt;2025&lt;/option&gt;
+&lt;option value="2024"&gt;2024&lt;/option&gt;
+&lt;option value="2023"&gt;2023&lt;/option&gt;
+&lt;option value="2022"&gt;2022&lt;/option&gt;
+&lt;option value="2021"&gt;2021&lt;/option&gt;
+&lt;option value="2020"&gt;2020&lt;/option&gt;
+&lt;option value="2019"&gt;2019&lt;/option&gt;
+&lt;option value="2018"&gt;2018&lt;/option&gt;
+&lt;option value="2017"&gt;2017&lt;/option&gt;
+&lt;option value="2016"&gt;2016&lt;/option&gt;
+&lt;option value="2015"&gt;2015&lt;/option&gt;
+&lt;option value="2014"&gt;2014&lt;/option&gt;
+&lt;option value="2013"&gt;2013&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
+&lt;button type="submit"&gt;Load&lt;/button&gt;
+&lt;/form&gt;
+&lt;div id="statsLoading" class="stats-loading"&gt;Loading...&lt;/div&gt;
+&lt;div id="statsError" class="stats-error"&gt;&lt;/div&gt;
+&lt;div id="statsTableWrap" class="stats-table-wrap stats-panel"&gt;
+&lt;table id="statsTable"&gt;
+&lt;thead&gt;
+&lt;tr id="statsHeader"&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody id="statsBody"&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+.stats-view { margin-top: 1rem; }
+.stats-panel {
+border: 1px solid var(--card-separator-color);
+border-radius: var(--card-border-radius);
+background: var(--card-background);
+box-shadow: var(--shadow-l1);
+}
+.stats-form { display: flex; gap: 1rem; flex-wrap: wrap; align-items: end; padding: 1rem; }
+.stats-form label { display: flex; flex-direction: column; gap: .45rem; font-size: .92rem; color: var(--card-text-color-secondary); }
+.stats-form select, .stats-form button {
+padding: .55rem .8rem;
+border-radius: .55rem;
+border: 1px solid var(--card-separator-color);
+background: var(--body-background);
+color: var(--card-text-color-main);
+}
+.stats-form button {
+background: var(--accent-color);
+color: white;
+border-color: var(--accent-color);
+font-weight: 600;
+cursor: pointer;
+}
+.stats-form button:hover { filter: brightness(0.95); }
+.stats-loading, .stats-error { display: none; margin-top: .9rem; padding: .7rem .85rem; border-radius: .55rem; }
+.stats-loading { background: var(--body-background); color: var(--card-text-color-secondary); border: 1px dashed var(--card-separator-color); }
+.stats-error { background: rgba(176, 0, 32, .08); color: #b00020; border: 1px solid rgba(176, 0, 32, .28); }
+.stats-table-wrap { display: none; overflow-x: auto; margin-top: 1rem; }
+#statsTable { width: 100%; border-collapse: collapse; font-size: 60%; line-height: 1.35; }
+#statsTable th, #statsTable td {
+padding: .62rem .78rem;
+border-bottom: 1px solid var(--card-separator-color);
+text-align: left;
+white-space: nowrap;
+}
+#statsTable th {
+cursor: pointer;
+background: var(--body-background);
+font-weight: 600;
+position: sticky;
+top: 0;
+z-index: 1;
+}
+#statsTable th.sort-asc::after,
+#statsTable th.sort-desc::after {
+margin-left: .35rem;
+color: var(--card-text-color-secondary);
+}
+#statsTable th.sort-asc::after { content: "▲"; }
+#statsTable th.sort-desc::after { content: "▼"; }
+#statsTable tr:nth-child(even) { background: rgba(127, 127, 127, .05); }
+&lt;/style&gt;
+&lt;script&gt;
+const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
+let statsData = [];
+let sortColumn = null;
+let sortDirection = 'desc';
+function getParams() {
+const p = new URLSearchParams(window.location.search);
+return { agg_level: p.get('agg_level') || 'Driver', season: p.get('season') || '2026' };
+}
+function setParams(agg_level, season) {
+const u = new URL(window.location);
+u.searchParams.set('agg_level', agg_level);
+u.searchParams.set('season', season);
+window.history.replaceState({}, '', u);
+}
+async function loadStats(agg_level, season) {
+const loading = document.getElementById('statsLoading');
+const error = document.getElementById('statsError');
+const wrap = document.getElementById('statsTableWrap');
+loading.style.display = 'block';
+error.style.display = 'none';
+wrap.style.display = 'none';
+try {
+const r = await fetch(`${STATS_ENDPOINT_URL}?agg_level=${agg_level}&amp;season=${season}`);
+const payload = await r.json();
+if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
+statsData = payload.data;
+renderTable();
+wrap.style.display = 'block';
+} catch (e) {
+error.textContent = `Error loading stats: ${e.message}`;
+error.style.display = 'block';
+} finally {
+loading.style.display = 'none';
+}
+}
+function renderTable() {
+const header = document.getElementById('statsHeader');
+const body = document.getElementById('statsBody');
+header.innerHTML = '';
+body.innerHTML = '';
+if (statsData.length === 0) {
+body.innerHTML = '&lt;tr&gt;&lt;td&gt;No data available&lt;/td&gt;&lt;/tr&gt;';
+return;
+}
+const columns = Object.keys(statsData[0]);
+columns.forEach((col) =&gt; {
+const th = document.createElement('th');
+th.textContent = col;
+th.onclick = () =&gt; sortBy(col);
+if (sortColumn === col) th.classList.add(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+header.appendChild(th);
+});
+statsData.forEach((row) =&gt; {
+const tr = document.createElement('tr');
+columns.forEach((col) =&gt; {
+const td = document.createElement('td');
+td.textContent = row[col] ?? '-';
+tr.appendChild(td);
+});
+body.appendChild(tr);
+});
+}
+function sortBy(column) {
+if (sortColumn === column) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+else { sortColumn = column; sortDirection = 'desc'; }
+statsData.sort((a, b) =&gt; {
+const av = a[column] ?? 0;
+const bv = b[column] ?? 0;
+const an = Number(av);
+const bn = Number(bv);
+if (!Number.isNaN(an) &amp;&amp; !Number.isNaN(bn)) return sortDirection === 'asc' ? an - bn : bn - an;
+return sortDirection === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+});
+renderTable();
+}
+document.getElementById('statsForm').addEventListener('submit', (e) =&gt; {
+e.preventDefault();
+const agg_level = document.getElementById('agg_level').value;
+const season = document.getElementById('season').value;
+setParams(agg_level, season);
+loadStats(agg_level, season);
+});
+document.addEventListener('DOMContentLoaded', () =&gt; {
+const { agg_level, season } = getParams();
+document.getElementById('agg_level').value = agg_level;
+document.getElementById('season').value = season;
+loadStats(agg_level, season);
+});
+&lt;/script&gt;</description></item><item><title>Updating our 2026 Season Predictions</title><link>http://localhost:1313/posts/sim-results-2026-update/</link><pubDate>Wed, 01 Apr 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/sim-results-2026-update/</guid><description>&lt;img src="http://localhost:1313/posts/sim-results-2026-update/cover.jpg" alt="Featured image of post Updating our 2026 Season Predictions" /&gt;&lt;p&gt;At the start of the season, I published the &lt;a class="link" href="http://localhost:1313/posts/sim-results-2026/" &gt;results&lt;/a&gt; of a simulation model that represented my best analytical prediction of how the 2026 season would go. We&amp;rsquo;re now roughly a quarter way through the season, so it feels like a good time for an update those predictions.&lt;/p&gt;
 &lt;p&gt;A lot has happened since I published my original set of predictions on March 1: The Indy 500 field has filled out - about as predictably as possible. We have a track layout for the Freedom 250. My Twitter has gained several followers&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;. And most importantly, four races have actually happened.&lt;/p&gt;
 &lt;h2 id="updated-predictions"&gt;Updated Predictions
 &lt;/h2&gt;&lt;p&gt;All of those things affect the model, (except the twitter followers) so let&amp;rsquo;s see what the updated predictions look like with those changes incorporated:&lt;/p&gt;
