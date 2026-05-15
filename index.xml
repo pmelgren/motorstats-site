@@ -8,6 +8,7 @@
 Aggregation Level
 &lt;select id="agg_level" name="agg_level"&gt;
 &lt;option value="Driver" selected&gt;Driver&lt;/option&gt;
+&lt;option value="Car"&gt;Car&lt;/option&gt;
 &lt;option value="Team"&gt;Team&lt;/option&gt;
 &lt;option value="Engine"&gt;Engine&lt;/option&gt;
 &lt;/select&gt;
@@ -15,6 +16,7 @@ Aggregation Level
 &lt;label&gt;
 Season
 &lt;select id="season" name="season"&gt;
+&lt;option value="All"&gt;All&lt;/option&gt;
 &lt;option value="2026" selected&gt;2026&lt;/option&gt;
 &lt;option value="2025"&gt;2025&lt;/option&gt;
 &lt;option value="2024"&gt;2024&lt;/option&gt;
@@ -29,6 +31,39 @@ Season
 &lt;option value="2015"&gt;2015&lt;/option&gt;
 &lt;option value="2014"&gt;2014&lt;/option&gt;
 &lt;option value="2013"&gt;2013&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
+Team
+&lt;select id="team" name="team"&gt;
+&lt;option value="All" selected&gt;All&lt;/option&gt;
+&lt;option value="ABE"&gt;Abel&lt;/option&gt;
+&lt;option value="AJF"&gt;A. J. Foyt&lt;/option&gt;
+&lt;option value="AND"&gt;Andretti&lt;/option&gt;
+&lt;option value="AMC"&gt;Arrow McLaren&lt;/option&gt;
+&lt;option value="BHA"&gt;Bryan Herta&lt;/option&gt;
+&lt;option value="BUR"&gt;Burns&lt;/option&gt;
+&lt;option value="CFH"&gt;CFH&lt;/option&gt;
+&lt;option value="CGR"&gt;Chip Ganassi&lt;/option&gt;
+&lt;option value="CAR"&gt;CURB-Agajanian&lt;/option&gt;
+&lt;option value="CUS"&gt;Cusick&lt;/option&gt;
+&lt;option value="DCR"&gt;Dale Coyne&lt;/option&gt;
+&lt;option value="DRR"&gt;Dreyer &amp; Reinbold&lt;/option&gt;
+&lt;option value="DRA"&gt;Dragon&lt;/option&gt;
+&lt;option value="ECR"&gt;Ed Carpenter&lt;/option&gt;
+&lt;option value="HAR"&gt;Harding&lt;/option&gt;
+&lt;option value="JHR"&gt;Juncos Hollinger&lt;/option&gt;
+&lt;option value="KVR"&gt;KV Racing&lt;/option&gt;
+&lt;option value="LAZ"&gt;Lazier&lt;/option&gt;
+&lt;option value="MSR"&gt;Meyer Shank Racing&lt;/option&gt;
+&lt;option value="MUR"&gt;Murray&lt;/option&gt;
+&lt;option value="PAN"&gt;Panther&lt;/option&gt;
+&lt;option value="PAR"&gt;Paretta&lt;/option&gt;
+&lt;option value="PEN"&gt;Penske&lt;/option&gt;
+&lt;option value="PRM"&gt;Prema&lt;/option&gt;
+&lt;option value="RLL"&gt;RLL&lt;/option&gt;
+&lt;option value="SFH"&gt;Sarah Fisher Hartman&lt;/option&gt;
+&lt;option value="TGR"&gt;Top Gun&lt;/option&gt;
 &lt;/select&gt;
 &lt;/label&gt;
 &lt;button type="submit"&gt;Load&lt;/button&gt;
@@ -119,15 +154,16 @@ return COLUMN_TOOLTIPS[column] || '';
 }
 function getParams() {
 const p = new URLSearchParams(window.location.search);
-return { agg_level: p.get('agg_level') || 'Driver', season: p.get('season') || '2026' };
+return { agg_level: p.get('agg_level') || 'Driver', season: p.get('season') || '2026', team: p.get('team') || 'All' };
 }
-function setParams(agg_level, season) {
+function setParams(agg_level, season, team) {
 const u = new URL(window.location);
 u.searchParams.set('agg_level', agg_level);
 u.searchParams.set('season', season);
+u.searchParams.set('team', team);
 window.history.replaceState({}, '', u);
 }
-async function loadStats(agg_level, season) {
+async function loadStats(agg_level, season, team) {
 const loading = document.getElementById('statsLoading');
 const error = document.getElementById('statsError');
 const wrap = document.getElementById('statsTableWrap');
@@ -135,7 +171,7 @@ loading.style.display = 'block';
 error.style.display = 'none';
 wrap.style.display = 'none';
 try {
-const r = await fetch(`${STATS_ENDPOINT_URL}?agg_level=${agg_level}&amp;season=${season}`);
+const r = await fetch(`${STATS_ENDPOINT_URL}?agg_level=${agg_level}&amp;season=${season}&amp;team=${team}`);
 const payload = await r.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
 statsData = payload.data;
@@ -193,14 +229,16 @@ document.getElementById('statsForm').addEventListener('submit', (e) =&gt; {
 e.preventDefault();
 const agg_level = document.getElementById('agg_level').value;
 const season = document.getElementById('season').value;
-setParams(agg_level, season);
-loadStats(agg_level, season);
+const team = document.getElementById('team').value;
+setParams(agg_level, season, team);
+loadStats(agg_level, season, team);
 });
 document.addEventListener('DOMContentLoaded', () =&gt; {
-const { agg_level, season } = getParams();
+const { agg_level, season, team } = getParams();
 document.getElementById('agg_level').value = agg_level;
 document.getElementById('season').value = season;
-loadStats(agg_level, season);
+document.getElementById('team').value = team;
+loadStats(agg_level, season, team);
 });
 &lt;/script&gt;</description></item><item><title>Updating our 2026 Season Predictions</title><link>http://localhost:1313/posts/sim-results-2026-update/</link><pubDate>Wed, 01 Apr 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/sim-results-2026-update/</guid><description>&lt;img src="http://localhost:1313/posts/sim-results-2026-update/cover.jpg" alt="Featured image of post Updating our 2026 Season Predictions" /&gt;&lt;p&gt;At the start of the season, I published the &lt;a class="link" href="http://localhost:1313/posts/sim-results-2026/" &gt;results&lt;/a&gt; of a simulation model that represented my best analytical prediction of how the 2026 season would go. We&amp;rsquo;re now roughly a quarter way through the season, so it feels like a good time for an update those predictions.&lt;/p&gt;
 &lt;p&gt;A lot has happened since I published my original set of predictions on March 1: The Indy 500 field has filled out - about as predictably as possible. We have a track layout for the Freedom 250. My Twitter has gained several followers&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;. And most importantly, four races have actually happened.&lt;/p&gt;
