@@ -4,6 +4,7 @@
       Aggregation Level
       <select id="agg_level" name="agg_level">
         <option value="Driver" selected>Driver</option>
+        <option value="Car">Car</option>
         <option value="Team">Team</option>
         <option value="Engine">Engine</option>
       </select>
@@ -12,6 +13,7 @@
     <label>
       Season
       <select id="season" name="season">
+        <option value="All">All</option>
         <option value="2026" selected>2026</option>
         <option value="2025">2025</option>
         <option value="2024">2024</option>
@@ -26,6 +28,40 @@
         <option value="2015">2015</option>
         <option value="2014">2014</option>
         <option value="2013">2013</option>
+      </select>
+    </label>
+
+    <label>
+      Team
+      <select id="team" name="team">
+        <option value="All" selected>All</option>
+        <option value="ABE">Abel</option>
+        <option value="AJF">A. J. Foyt</option>
+        <option value="AND">Andretti</option>
+        <option value="AMC">Arrow McLaren</option>
+        <option value="BHA">Bryan Herta</option>
+        <option value="BUR">Burns</option>
+        <option value="CFH">CFH</option>
+        <option value="CGR">Chip Ganassi</option>
+        <option value="CAR">CURB-Agajanian</option>
+        <option value="CUS">Cusick</option>
+        <option value="DCR">Dale Coyne</option>
+        <option value="DRR">Dreyer & Reinbold</option>
+        <option value="DRA">Dragon</option>
+        <option value="ECR">Ed Carpenter</option>
+        <option value="HAR">Harding</option>
+        <option value="JHR">Juncos Hollinger</option>
+        <option value="KVR">KV Racing</option>
+        <option value="LAZ">Lazier</option>
+        <option value="MSR">Meyer Shank Racing</option>
+        <option value="MUR">Murray</option>
+        <option value="PAN">Panther</option>
+        <option value="PAR">Paretta</option>
+        <option value="PEN">Penske</option>
+        <option value="PRM">Prema</option>
+        <option value="RLL">RLL</option>
+        <option value="SFH">Sarah Fisher Hartman</option>
+        <option value="TGR">Top Gun</option>
       </select>
     </label>
 
@@ -106,7 +142,6 @@
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
 
 const COLUMN_TOOLTIPS = {
-
   R: 'R: Total Races',
   Laps: 'Laps: Total Laps Completed ',
   SP: 'SP: Average Starting Position',
@@ -129,17 +164,18 @@ function getColumnTooltip(column) {
 
 function getParams() {
   const p = new URLSearchParams(window.location.search);
-  return { agg_level: p.get('agg_level') || 'Driver', season: p.get('season') || '2026' };
+  return { agg_level: p.get('agg_level') || 'Driver', season: p.get('season') || '2026', team: p.get('team') || 'All' };
 }
 
-function setParams(agg_level, season) {
+function setParams(agg_level, season, team) {
   const u = new URL(window.location);
   u.searchParams.set('agg_level', agg_level);
   u.searchParams.set('season', season);
+  u.searchParams.set('team', team);
   window.history.replaceState({}, '', u);
 }
 
-async function loadStats(agg_level, season) {
+async function loadStats(agg_level, season, team) {
   const loading = document.getElementById('statsLoading');
   const error = document.getElementById('statsError');
   const wrap = document.getElementById('statsTableWrap');
@@ -148,7 +184,7 @@ async function loadStats(agg_level, season) {
   wrap.style.display = 'none';
 
   try {
-    const r = await fetch(`${STATS_ENDPOINT_URL}?agg_level=${agg_level}&season=${season}`);
+    const r = await fetch(`${STATS_ENDPOINT_URL}?agg_level=${agg_level}&season=${season}&team=${team}`);
     const payload = await r.json();
     if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
     statsData = payload.data;
@@ -214,14 +250,16 @@ document.getElementById('statsForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const agg_level = document.getElementById('agg_level').value;
   const season = document.getElementById('season').value;
-  setParams(agg_level, season);
-  loadStats(agg_level, season);
+  const team = document.getElementById('team').value;
+  setParams(agg_level, season, team);
+  loadStats(agg_level, season, team);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const { agg_level, season } = getParams();
+  const { agg_level, season, team } = getParams();
   document.getElementById('agg_level').value = agg_level;
   document.getElementById('season').value = season;
-  loadStats(agg_level, season);
+  document.getElementById('team').value = team;
+  loadStats(agg_level, season, team);
 });
 </script>
