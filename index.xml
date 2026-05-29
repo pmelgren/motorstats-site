@@ -3,6 +3,9 @@
 &lt;p&gt;Stats and filters are simple for now, but more metrics and more filters will be steadily added as the site progresses.&lt;/p&gt;
 &lt;p&gt;Check it out here: &lt;a class="link" href="http://localhost:1313/stats/" &gt;Stats&lt;/a&gt; or get to anytime through the sidebar.&lt;/p&gt;
 &lt;p&gt;If there are specific features you want added next (or if you find a bug), send me a note via the &lt;a class="link" href="http://localhost:1313/contact/" &gt;Contact&lt;/a&gt; page.&lt;/p&gt;</description></item><item><title>Stats</title><link>http://localhost:1313/stats/</link><pubDate>Mon, 11 May 2026 14:47:00 -0500</pubDate><guid>http://localhost:1313/stats/</guid><description>&lt;div class="stats-view"&gt;
+&lt;div class="stats-layout-controls"&gt;
+&lt;button type="button" id="statsSidebarToggle" class="stats-sidebar-toggle"&gt;Hide Sidebar&lt;/button&gt;
+&lt;/div&gt;
 &lt;form id="statsForm" class="stats-form stats-panel"&gt;
 &lt;label&gt;
 Aggregation Level
@@ -31,6 +34,23 @@ Season
 &lt;option value="2015"&gt;2015&lt;/option&gt;
 &lt;option value="2014"&gt;2014&lt;/option&gt;
 &lt;option value="2013"&gt;2013&lt;/option&gt;
+&lt;option value="2012"&gt;2012&lt;/option&gt;
+&lt;option value="2011"&gt;2011&lt;/option&gt;
+&lt;option value="2010"&gt;2010&lt;/option&gt;
+&lt;option value="2009"&gt;2009&lt;/option&gt;
+&lt;option value="2008"&gt;2008&lt;/option&gt;
+&lt;option value="2007"&gt;2007&lt;/option&gt;
+&lt;option value="2006"&gt;2006&lt;/option&gt;
+&lt;option value="2005"&gt;2005&lt;/option&gt;
+&lt;option value="2004"&gt;2004&lt;/option&gt;
+&lt;option value="2003"&gt;2003&lt;/option&gt;
+&lt;option value="2002"&gt;2002&lt;/option&gt;
+&lt;option value="2001"&gt;2001&lt;/option&gt;
+&lt;option value="2000"&gt;2000&lt;/option&gt;
+&lt;option value="1999"&gt;1999&lt;/option&gt;
+&lt;option value="1998"&gt;1998&lt;/option&gt;
+&lt;option value="96-97"&gt;96-97&lt;/option&gt;
+&lt;option value="1996"&gt;1996&lt;/option&gt;
 &lt;/select&gt;
 &lt;/label&gt;
 &lt;label&gt;
@@ -81,6 +101,18 @@ Team
 &lt;/div&gt;
 &lt;style&gt;
 .stats-view { margin-top: 1rem; }
+.stats-layout-controls { margin-bottom: .9rem; display: none; }
+.stats-sidebar-toggle {
+padding: .45rem .7rem;
+border-radius: .55rem;
+border: 1px solid var(--card-separator-color);
+background: var(--card-background);
+color: var(--card-text-color-main);
+cursor: pointer;
+font-size: .86rem;
+font-weight: 600;
+}
+.stats-sidebar-toggle:hover { background: var(--body-background); }
 .stats-panel {
 border: 1px solid var(--card-separator-color);
 border-radius: var(--card-border-radius);
@@ -131,6 +163,17 @@ color: var(--card-text-color-secondary);
 #statsTable th.sort-asc::after { content: "▲"; }
 #statsTable th.sort-desc::after { content: "▼"; }
 #statsTable tr:nth-child(even) { background: rgba(127, 127, 127, .05); }
+@media (min-width: 1024px) {
+.stats-layout-controls { display: block; }
+body.stats-sidebar-collapsed .main-container .left-sidebar {
+display: none;
+}
+body.stats-sidebar-collapsed .main-container .main {
+width: 100%;
+max-width: 100%;
+flex: 1 1 100%;
+}
+}
 &lt;/style&gt;
 &lt;script&gt;
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
@@ -144,11 +187,45 @@ DNF: 'DNF: Did Not Finish Count',
 W: 'W: Race Wins',
 POD: 'POD: Podiums (Top 3 Finishes)',
 T10: 'T10: Top-10 Finishes',
-Pts: 'Pts: Championship Points'
+Pts: 'Pts: Championship Points',
+nLaps: 'nLaps: Normalized Laps Completed',
+nLL: 'nLL: Normalized Laps Lead',
+faPG: 'faPG: Finisher-adjusted Positions Gained',
+DNFm: 'DNFm: Mechanical DNFs',
+DNFc: 'DNFc: Contact DNFs'
 };
 let statsData = [];
 let sortColumn = null;
 let sortDirection = 'desc';
+const SIDEBAR_STATE_KEY = 'statsSidebarCollapsed';
+function isDesktopLayout() {
+return window.matchMedia('(min-width: 1024px)').matches;
+}
+function setSidebarButtonLabel() {
+const button = document.getElementById('statsSidebarToggle');
+if (!button) return;
+button.textContent = document.body.classList.contains('stats-sidebar-collapsed') ? 'Show Sidebar' : 'Hide Sidebar';
+}
+function applySidebarState(collapsed) {
+if (collapsed) document.body.classList.add('stats-sidebar-collapsed');
+else document.body.classList.remove('stats-sidebar-collapsed');
+setSidebarButtonLabel();
+}
+function initializeSidebarToggle() {
+const button = document.getElementById('statsSidebarToggle');
+if (!button) return;
+const savedCollapsed = localStorage.getItem(SIDEBAR_STATE_KEY) === '1';
+applySidebarState(isDesktopLayout() &amp;&amp; savedCollapsed);
+button.addEventListener('click', () =&gt; {
+const collapsed = !document.body.classList.contains('stats-sidebar-collapsed');
+applySidebarState(collapsed);
+localStorage.setItem(SIDEBAR_STATE_KEY, collapsed ? '1' : '0');
+});
+window.addEventListener('resize', () =&gt; {
+const collapsed = localStorage.getItem(SIDEBAR_STATE_KEY) === '1';
+applySidebarState(isDesktopLayout() &amp;&amp; collapsed);
+});
+}
 function getColumnTooltip(column) {
 return COLUMN_TOOLTIPS[column] || '';
 }
@@ -171,7 +248,9 @@ loading.style.display = 'block';
 error.style.display = 'none';
 wrap.style.display = 'none';
 try {
-const r = await fetch(`${STATS_ENDPOINT_URL}?agg_level=${agg_level}&amp;season=${season}&amp;team=${team}`);
+const url = `${STATS_ENDPOINT_URL}?agg_level=${agg_level}&amp;season=${season}&amp;team=${team}`;
+console.log('Fetching stats:', url);
+const r = await fetch(url, { cache: 'no-store' });
 const payload = await r.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
 statsData = payload.data;
@@ -234,6 +313,7 @@ setParams(agg_level, season, team);
 loadStats(agg_level, season, team);
 });
 document.addEventListener('DOMContentLoaded', () =&gt; {
+initializeSidebarToggle();
 const { agg_level, season, team } = getParams();
 document.getElementById('agg_level').value = agg_level;
 document.getElementById('season').value = season;
