@@ -86,6 +86,17 @@
       </select>
     </label>
 
+    <label>
+      Track Type
+      <select id="trackType" name="trackType">
+        <option value="All" selected>All</option>
+        <option value="O">Oval</option>
+        <option value="R">Road</option>
+        <option value="S">Street</option>
+        <option value="Indy500">Indy 500 Only</option>
+      </select>
+    </label>
+
     <button type="submit">Load</button>
   </form>
 
@@ -191,6 +202,7 @@ const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.
 const COLUMN_TOOLTIPS = {
   R: 'R: Total Races',
   Laps: 'Laps: Total Laps Completed ',
+  LL: 'LL: Total Laps Led',
   SP: 'SP: Average Starting Position',
   FP: 'FP: Average Finishing Position',
   PG: 'PG: Average Positions Gained',
@@ -252,18 +264,27 @@ function getColumnTooltip(column) {
 
 function getParams() {
   const p = new URLSearchParams(window.location.search);
-  return { agg_level: p.get('agg_level') || 'Driver', season: p.get('season') || '2026', team: p.get('team') || 'All' };
+  const trackType = p.get('trackType') || 'All';
+  const selectedTrackType = ['All', 'O', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
+  return {
+    agg_level: p.get('agg_level') || 'Driver',
+    season: p.get('season') || '2026',
+    team: p.get('team') || 'All',
+    trackType: selectedTrackType
+  };
 }
 
-function setParams(agg_level, season, team) {
+function setParams(agg_level, season, team, trackType) {
   const u = new URL(window.location);
   u.searchParams.set('agg_level', agg_level);
   u.searchParams.set('season', season);
   u.searchParams.set('team', team);
+  u.searchParams.set('trackType', trackType);
+  u.searchParams.delete('indy500');
   window.history.replaceState({}, '', u);
 }
 
-async function loadStats(agg_level, season, team) {
+async function loadStats(agg_level, season, team, trackType) {
   const loading = document.getElementById('statsLoading');
   const error = document.getElementById('statsError');
   const wrap = document.getElementById('statsTableWrap');
@@ -272,9 +293,13 @@ async function loadStats(agg_level, season, team) {
   wrap.style.display = 'none';
 
   try {
-    const url = `${STATS_ENDPOINT_URL}?agg_level=${agg_level}&season=${season}&team=${team}`;
-    console.log('Fetching stats:', url);
-    const r = await fetch(url, { cache: 'no-store' });
+    const url = new URL(STATS_ENDPOINT_URL);
+    url.searchParams.set('agg_level', agg_level);
+    url.searchParams.set('season', season);
+    url.searchParams.set('team', team);
+    url.searchParams.set('trackType', trackType);
+    console.log('Fetching stats:', url.toString());
+    const r = await fetch(url.toString(), { cache: 'no-store' });
     const payload = await r.json();
     if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
     statsData = payload.data;
@@ -341,16 +366,18 @@ document.getElementById('statsForm').addEventListener('submit', (e) => {
   const agg_level = document.getElementById('agg_level').value;
   const season = document.getElementById('season').value;
   const team = document.getElementById('team').value;
-  setParams(agg_level, season, team);
-  loadStats(agg_level, season, team);
+  const trackType = document.getElementById('trackType').value;
+  setParams(agg_level, season, team, trackType);
+  loadStats(agg_level, season, team, trackType);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
   initializeSidebarToggle();
-  const { agg_level, season, team } = getParams();
+  const { agg_level, season, team, trackType } = getParams();
   document.getElementById('agg_level').value = agg_level;
   document.getElementById('season').value = season;
   document.getElementById('team').value = team;
-  loadStats(agg_level, season, team);
+  document.getElementById('trackType').value = trackType;
+  loadStats(agg_level, season, team, trackType);
 });
 </script>
