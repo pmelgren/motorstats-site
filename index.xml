@@ -86,6 +86,16 @@ Team
 &lt;option value="TGR"&gt;Top Gun&lt;/option&gt;
 &lt;/select&gt;
 &lt;/label&gt;
+&lt;label&gt;
+Track Type
+&lt;select id="trackType" name="trackType"&gt;
+&lt;option value="All" selected&gt;All&lt;/option&gt;
+&lt;option value="O"&gt;Oval&lt;/option&gt;
+&lt;option value="R"&gt;Road&lt;/option&gt;
+&lt;option value="S"&gt;Street&lt;/option&gt;
+&lt;option value="Indy500"&gt;Indy 500 Only&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
 &lt;button type="submit"&gt;Load&lt;/button&gt;
 &lt;/form&gt;
 &lt;div id="statsLoading" class="stats-loading"&gt;Loading...&lt;/div&gt;
@@ -180,6 +190,7 @@ const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.
 const COLUMN_TOOLTIPS = {
 R: 'R: Total Races',
 Laps: 'Laps: Total Laps Completed ',
+LL: 'LL: Total Laps Led',
 SP: 'SP: Average Starting Position',
 FP: 'FP: Average Finishing Position',
 PG: 'PG: Average Positions Gained',
@@ -231,16 +242,25 @@ return COLUMN_TOOLTIPS[column] || '';
 }
 function getParams() {
 const p = new URLSearchParams(window.location.search);
-return { agg_level: p.get('agg_level') || 'Driver', season: p.get('season') || '2026', team: p.get('team') || 'All' };
+const trackType = p.get('trackType') || 'All';
+const selectedTrackType = ['All', 'O', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
+return {
+agg_level: p.get('agg_level') || 'Driver',
+season: p.get('season') || '2026',
+team: p.get('team') || 'All',
+trackType: selectedTrackType
+};
 }
-function setParams(agg_level, season, team) {
+function setParams(agg_level, season, team, trackType) {
 const u = new URL(window.location);
 u.searchParams.set('agg_level', agg_level);
 u.searchParams.set('season', season);
 u.searchParams.set('team', team);
+u.searchParams.set('trackType', trackType);
+u.searchParams.delete('indy500');
 window.history.replaceState({}, '', u);
 }
-async function loadStats(agg_level, season, team) {
+async function loadStats(agg_level, season, team, trackType) {
 const loading = document.getElementById('statsLoading');
 const error = document.getElementById('statsError');
 const wrap = document.getElementById('statsTableWrap');
@@ -248,9 +268,13 @@ loading.style.display = 'block';
 error.style.display = 'none';
 wrap.style.display = 'none';
 try {
-const url = `${STATS_ENDPOINT_URL}?agg_level=${agg_level}&amp;season=${season}&amp;team=${team}`;
-console.log('Fetching stats:', url);
-const r = await fetch(url, { cache: 'no-store' });
+const url = new URL(STATS_ENDPOINT_URL);
+url.searchParams.set('agg_level', agg_level);
+url.searchParams.set('season', season);
+url.searchParams.set('team', team);
+url.searchParams.set('trackType', trackType);
+console.log('Fetching stats:', url.toString());
+const r = await fetch(url.toString(), { cache: 'no-store' });
 const payload = await r.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
 statsData = payload.data;
@@ -309,16 +333,18 @@ e.preventDefault();
 const agg_level = document.getElementById('agg_level').value;
 const season = document.getElementById('season').value;
 const team = document.getElementById('team').value;
-setParams(agg_level, season, team);
-loadStats(agg_level, season, team);
+const trackType = document.getElementById('trackType').value;
+setParams(agg_level, season, team, trackType);
+loadStats(agg_level, season, team, trackType);
 });
 document.addEventListener('DOMContentLoaded', () =&gt; {
 initializeSidebarToggle();
-const { agg_level, season, team } = getParams();
+const { agg_level, season, team, trackType } = getParams();
 document.getElementById('agg_level').value = agg_level;
 document.getElementById('season').value = season;
 document.getElementById('team').value = team;
-loadStats(agg_level, season, team);
+document.getElementById('trackType').value = trackType;
+loadStats(agg_level, season, team, trackType);
 });
 &lt;/script&gt;</description></item><item><title>Updating our 2026 Season Predictions</title><link>http://localhost:1313/posts/sim-results-2026-update/</link><pubDate>Wed, 01 Apr 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/sim-results-2026-update/</guid><description>&lt;img src="http://localhost:1313/posts/sim-results-2026-update/cover.jpg" alt="Featured image of post Updating our 2026 Season Predictions" /&gt;&lt;p&gt;At the start of the season, I published the &lt;a class="link" href="http://localhost:1313/posts/sim-results-2026/" &gt;results&lt;/a&gt; of a simulation model that represented my best analytical prediction of how the 2026 season would go. We&amp;rsquo;re now roughly a quarter way through the season, so it feels like a good time for an update those predictions.&lt;/p&gt;
 &lt;p&gt;A lot has happened since I published my original set of predictions on March 1: The Indy 500 field has filled out - about as predictably as possible. We have a track layout for the Freedom 250. My Twitter has gained several followers&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;. And most importantly, four races have actually happened.&lt;/p&gt;
