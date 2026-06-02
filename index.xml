@@ -2004,35 +2004,78 @@ style="width:100%;height:675px;border:0;min-width:320px;"
 &lt;/div&gt;</description></item><item><title>Glossary</title><link>http://localhost:1313/glossary/</link><pubDate>Thu, 05 Feb 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/glossary/</guid><description>&lt;h2 id="a"&gt;A
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Adjusted Position Movement (adjPMov)&lt;/strong&gt;: A version of Position Movement that adjusts the starting order by removing cars that DNF, so movement reflects on-track passes/strategy rather than places gained from attrition.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;At Stake (Position at Stake)&lt;/strong&gt;: A finishing-position battle where the gap between two adjacent finishers is within a “competitive” threshold (e.g., 3 seconds), indicating a plausible on-track fight.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;At Stake&lt;/strong&gt;: A finishing-position battle where the gap between two adjacent finishers is within a “competitive” threshold (e.g., 3 seconds), indicating a plausible on-track fight.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;At Stake %&lt;/strong&gt;: The percentage of finishing positions that are “at stake” (i.e., adjacent finishers are within the competitive gap threshold) across a sample of races.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="c"&gt;C
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Car Failure Rate&lt;/strong&gt;: The rate at which cars fail to finish due to car-related issues (Mechanical, Electrical, or Fire reasons).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Crash Rate&lt;/strong&gt;: The rate at which cars fail to finish due to on-track incidents (Contact or Off Course reasons).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="d"&gt;D
 &lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;DNF Rate&lt;/strong&gt;: The rate at which cars do not finish a race for any reason; it can be broken down into Crash Rate, Car Failure Rate, and Other Rate.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNF&lt;/strong&gt;: Count of when a car fails to finish a race for any reason; it can be broken down into DNFc, DNFm and DNFo.
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DNFc&lt;/strong&gt;: Count of when a car fails to finish due to contact or any other on-track incident.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNFm&lt;/strong&gt;: Count of when a car fails to finish due to mechanical or other car-related issues (Electrical, Fire, etc).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNFo&lt;/strong&gt;: Count of when a car fails to finish for reasons other than contact or mechanical failures.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="e"&gt;E
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;eq (Prefix)&lt;/strong&gt;: Track-Equalized metrics attempt to normalize all tracks to make metrics more comparable from track to track by normalizing all tracks to 100 laps with 1-minute average green flag lap times.
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;eqLaps&lt;/strong&gt;: Number of Laps Completed normalized to 100 laps per race. So if a car completes 100 out of 200 laps in the Indy 500 their eqLaps would be 50 for that race.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;eqLL&lt;/strong&gt;: Laps Led normalized to 100 laps per race. eqLL of 100 would indicate the driver led every lap in a race.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="f"&gt;F
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;fa (Prefix)&lt;/strong&gt;: Finisher-adjusted metrics adjusts the starting order by removing cars that DNF. These metrics are intended to remove the effects of attrition and simply capture the effect on-track passes/strategy.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;faPG&lt;/strong&gt;: Finisher-adjusted Positions Gained.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;faPtsG&lt;/strong&gt;: Finisher-adjusted Points Gained.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;FP&lt;/strong&gt;: Finishing Position.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="g"&gt;G
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Gap&lt;/strong&gt;: The time gap (in seconds) between a car and the car immediately ahead of it at the end of the race.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id="l"&gt;L
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Laps&lt;/strong&gt;: Laps Comleted.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LL&lt;/strong&gt;: Laps Led.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="m"&gt;M
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Margin of Victory (MoV)&lt;/strong&gt;: The time gap between P1 and P2 at the end of a race.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="o"&gt;O
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Other Rate&lt;/strong&gt;: The rate of DNFs that don’t clearly fit crash- or car-failure-related categories (e.g., Handling, Retired, DQ, DNS, In Pits).&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h2 id="p"&gt;P
 &lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PG&lt;/strong&gt;: Positions Gained - The absolute difference between a car’s finishing position and starting position; a simple measure of how much a car improved over the course of a race.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;POD&lt;/strong&gt;: Podium - A top-3 finish in a race.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Points at Stake&lt;/strong&gt;: For a given Position at Stake, the point value assigned to the higher finishing position in that battle (used to weight battles toward the front of the field).&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Points at Stake %&lt;/strong&gt;: Total Points at Stake divided by total points available across the sample; a weighted measure of how much of the race’s “valuable” finishing order was contested.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Position Movement (PMov)&lt;/strong&gt;: The absolute difference between a car’s starting position and finishing position; a simple measure of how much a car moved through the field.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Position at Stake&lt;/strong&gt;: See &lt;a class="link" href="#a" &gt;At Stake&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PtsG&lt;/strong&gt;: Points Gained - Points gained by a car moving up in the order from its starting position to its finishing position. Similar to PG but weighted to reflect the non-linear way in which championship points are awarded.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="r"&gt;R
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;R&lt;/strong&gt;: Races Started.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="s"&gt;S
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SP&lt;/strong&gt;: Starting Posiiton.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="t"&gt;T
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;T10&lt;/strong&gt;: A Top-10 finish in a race.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="w"&gt;W
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;W&lt;/strong&gt;: Race Wins.&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>We Now Have a Newsletter</title><link>http://localhost:1313/posts/newsletter-announcement/</link><pubDate>Thu, 22 Jan 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/newsletter-announcement/</guid><description>&lt;img src="http://localhost:1313/posts/newsletter-announcement/cover.jpg" alt="Featured image of post We Now Have a Newsletter" /&gt;&lt;p&gt;Listen, the powers that be at motorStats.io want to bring you high quality and insightful content. Said powers are pretty much just one dude, however, and it takes time to parse, clean, analyze data and write posts. So right now the goal is to bring you new content every 2-4 weeks.&lt;/p&gt;
 &lt;p&gt;You and I both know you&amp;rsquo;re not going to check this site every day for new content if we&amp;rsquo;re publishing at that rate. When I have something new I&amp;rsquo;ll &lt;a class="link" href="https://x.com/motorstatsio" target="_blank" rel="noopener"
 &gt;tweet&lt;/a&gt; about it, but assuming you&amp;rsquo;re not a robot, there&amp;rsquo;s a pretty good chance you aren&amp;rsquo;t on twitter.&lt;/p&gt;
