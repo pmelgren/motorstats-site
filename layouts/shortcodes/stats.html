@@ -52,7 +52,7 @@
       </select>
     </label>
 
-    <label>
+<!--     <label>
       Team
       <select id="team" name="team">
         <option value="All" selected>All</option>
@@ -84,7 +84,7 @@
         <option value="SFH">Sarah Fisher Hartman</option>
         <option value="TGR">Top Gun</option>
       </select>
-    </label>
+    </label> -->
 
     <label>
       Track Type
@@ -211,8 +211,8 @@ const COLUMN_TOOLTIPS = {
   POD: 'POD: Podiums (Top 3 Finishes)',
   T10: 'T10: Top-10 Finishes',
   Pts: 'Pts: Championship Points',
-  nLaps: 'nLaps: Normalized Laps Completed',
-  nLL: 'nLL: Normalized Laps Lead',
+  eqLaps: 'eqLaps: Track-equalized Laps Completed',
+  eqLL: 'eqLL: Track-equalized Laps Led',
   faPG: 'faPG: Finisher-adjusted Positions Gained',
   DNFm: 'DNFm: Mechanical DNFs',
   DNFc: 'DNFc: Contact DNFs'
@@ -365,7 +365,8 @@ document.getElementById('statsForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const agg_level = document.getElementById('agg_level').value;
   const season = document.getElementById('season').value;
-  const team = document.getElementById('team').value;
+  const teamInput = document.getElementById('team');
+  const team = teamInput ? teamInput.value : 'All';
   const trackType = document.getElementById('trackType').value;
   setParams(agg_level, season, team, trackType);
   loadStats(agg_level, season, team, trackType);
@@ -376,7 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const { agg_level, season, team, trackType } = getParams();
   document.getElementById('agg_level').value = agg_level;
   document.getElementById('season').value = season;
-  document.getElementById('team').value = team;
+  const teamInput = document.getElementById('team');
+  if (teamInput) teamInput.value = team;
   document.getElementById('trackType').value = trackType;
   loadStats(agg_level, season, team, trackType);
 });
