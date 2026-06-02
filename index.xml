@@ -54,39 +54,6 @@ Season
 &lt;/select&gt;
 &lt;/label&gt;
 &lt;label&gt;
-Team
-&lt;select id="team" name="team"&gt;
-&lt;option value="All" selected&gt;All&lt;/option&gt;
-&lt;option value="ABE"&gt;Abel&lt;/option&gt;
-&lt;option value="AJF"&gt;A. J. Foyt&lt;/option&gt;
-&lt;option value="AND"&gt;Andretti&lt;/option&gt;
-&lt;option value="AMC"&gt;Arrow McLaren&lt;/option&gt;
-&lt;option value="BHA"&gt;Bryan Herta&lt;/option&gt;
-&lt;option value="BUR"&gt;Burns&lt;/option&gt;
-&lt;option value="CFH"&gt;CFH&lt;/option&gt;
-&lt;option value="CGR"&gt;Chip Ganassi&lt;/option&gt;
-&lt;option value="CAR"&gt;CURB-Agajanian&lt;/option&gt;
-&lt;option value="CUS"&gt;Cusick&lt;/option&gt;
-&lt;option value="DCR"&gt;Dale Coyne&lt;/option&gt;
-&lt;option value="DRR"&gt;Dreyer &amp; Reinbold&lt;/option&gt;
-&lt;option value="DRA"&gt;Dragon&lt;/option&gt;
-&lt;option value="ECR"&gt;Ed Carpenter&lt;/option&gt;
-&lt;option value="HAR"&gt;Harding&lt;/option&gt;
-&lt;option value="JHR"&gt;Juncos Hollinger&lt;/option&gt;
-&lt;option value="KVR"&gt;KV Racing&lt;/option&gt;
-&lt;option value="LAZ"&gt;Lazier&lt;/option&gt;
-&lt;option value="MSR"&gt;Meyer Shank Racing&lt;/option&gt;
-&lt;option value="MUR"&gt;Murray&lt;/option&gt;
-&lt;option value="PAN"&gt;Panther&lt;/option&gt;
-&lt;option value="PAR"&gt;Paretta&lt;/option&gt;
-&lt;option value="PEN"&gt;Penske&lt;/option&gt;
-&lt;option value="PRM"&gt;Prema&lt;/option&gt;
-&lt;option value="RLL"&gt;RLL&lt;/option&gt;
-&lt;option value="SFH"&gt;Sarah Fisher Hartman&lt;/option&gt;
-&lt;option value="TGR"&gt;Top Gun&lt;/option&gt;
-&lt;/select&gt;
-&lt;/label&gt;
-&lt;label&gt;
 Track Type
 &lt;select id="trackType" name="trackType"&gt;
 &lt;option value="All" selected&gt;All&lt;/option&gt;
@@ -199,8 +166,8 @@ W: 'W: Race Wins',
 POD: 'POD: Podiums (Top 3 Finishes)',
 T10: 'T10: Top-10 Finishes',
 Pts: 'Pts: Championship Points',
-nLaps: 'nLaps: Normalized Laps Completed',
-nLL: 'nLL: Normalized Laps Lead',
+eqLaps: 'eqLaps: Track-equalized Laps Completed',
+eqLL: 'eqLL: Track-equalized Laps Led',
 faPG: 'faPG: Finisher-adjusted Positions Gained',
 DNFm: 'DNFm: Mechanical DNFs',
 DNFc: 'DNFc: Contact DNFs'
@@ -332,7 +299,8 @@ document.getElementById('statsForm').addEventListener('submit', (e) =&gt; {
 e.preventDefault();
 const agg_level = document.getElementById('agg_level').value;
 const season = document.getElementById('season').value;
-const team = document.getElementById('team').value;
+const teamInput = document.getElementById('team');
+const team = teamInput ? teamInput.value : 'All';
 const trackType = document.getElementById('trackType').value;
 setParams(agg_level, season, team, trackType);
 loadStats(agg_level, season, team, trackType);
@@ -342,7 +310,8 @@ initializeSidebarToggle();
 const { agg_level, season, team, trackType } = getParams();
 document.getElementById('agg_level').value = agg_level;
 document.getElementById('season').value = season;
-document.getElementById('team').value = team;
+const teamInput = document.getElementById('team');
+if (teamInput) teamInput.value = team;
 document.getElementById('trackType').value = trackType;
 loadStats(agg_level, season, team, trackType);
 });
