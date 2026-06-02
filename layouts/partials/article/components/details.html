@@ -25,8 +25,10 @@
         {{ end }}
     </div>
 
-    {{ $showReadingTime := .Params.readingTime | default (.Site.Params.article.readingTime) }}
-    {{ $showDate := not .Date.IsZero }}
+    {{ $mainSections := default (slice "posts") .Site.Params.mainSections }}
+    {{ $isPost := in $mainSections .Section }}
+    {{ $showReadingTime := and $isPost (.Params.readingTime | default (.Site.Params.article.readingTime)) }}
+    {{ $showDate := and $isPost (not .Date.IsZero) }}
     {{ $showAuthor := $author }}
     {{ $showFooter := or (or $showDate $showReadingTime) $showAuthor }}
     {{ if $showFooter }}
