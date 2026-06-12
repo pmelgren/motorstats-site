@@ -9,9 +9,9 @@ categories:
 image: cover.jpg
 ---
 
-If you're tired of our opinions and want to form your equally bad opinions we have some great news! We just launched the [**Stats Page**](/stats/) on motorStats.io.
+If you're tired of our opinions and want to form your own equally bad opinions we have some great news: We just launched the [**Stats Page**](/stats/) on motorStats.io!
 
-We have stats for the DW12 era, broken down by team, driver, or engine manufacturer. 
+We have stats for every IRL/modern IndyCar race dating back to 1996 (CART/Champ Car era and older Indy 500's are not available yet). These stats can be broken down by team, driver, or engine manufacturer. 
 
 Stats and filters are simple for now, but more metrics and more filters will be steadily added as the site progresses. 
 

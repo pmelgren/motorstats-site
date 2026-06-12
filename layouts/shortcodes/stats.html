@@ -211,7 +211,18 @@
 }
 #statsTable th.sort-asc::after { content: "▲"; }
 #statsTable th.sort-desc::after { content: "▼"; }
-#statsTable tr:nth-child(even) { background: rgba(127, 127, 127, .05); }
+
+#statsTable th:first-child,
+#statsTable td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  box-shadow: 1px 0 0 var(--card-separator-color);
+}
+#statsTable th:first-child { z-index: 3; }
+
+#statsTable tbody td { background: var(--card-background); }
+#statsTable tbody tr:nth-child(even) td { background: var(--body-background); }
 
 @media (min-width: 1024px) {
   .stats-layout-controls { display: block; }
