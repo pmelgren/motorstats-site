@@ -3,54 +3,55 @@
     <button type="button" id="statsSidebarToggle" class="stats-sidebar-toggle">Hide Sidebar</button>
   </div>
 
-  <form id="statsForm" class="stats-form stats-panel">
-    <label>
-      Aggregation Level
-      <select id="agg_level" name="agg_level">
-        <option value="Driver" selected>Driver</option>
-        <option value="Car">Car</option>
-        <option value="Team">Team</option>
-        <option value="Engine">Engine</option>
-      </select>
-    </label>
+  <div class="stats-controls stats-panel">
+    <form id="statsForm" class="stats-form">
+      <label>
+        Aggregation Level
+        <select id="agg_level" name="agg_level">
+          <option value="Driver" selected>Driver</option>
+          <option value="Car">Car</option>
+          <option value="Team">Team</option>
+          <option value="Engine">Engine</option>
+        </select>
+      </label>
 
-    <label>
-      Season
-      <select id="season" name="season">
-        <option value="All">All</option>
-        <option value="2026" selected>2026</option>
-        <option value="2025">2025</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-        <option value="2020">2020</option>
-        <option value="2019">2019</option>
-        <option value="2018">2018</option>
-        <option value="2017">2017</option>
-        <option value="2016">2016</option>
-        <option value="2015">2015</option>
-        <option value="2014">2014</option>
-        <option value="2013">2013</option>
-        <option value="2012">2012</option>
-        <option value="2011">2011</option>
-        <option value="2010">2010</option>
-        <option value="2009">2009</option>
-        <option value="2008">2008</option>
-        <option value="2007">2007</option>
-        <option value="2006">2006</option>
-        <option value="2005">2005</option>
-        <option value="2004">2004</option>
-        <option value="2003">2003</option>
-        <option value="2002">2002</option>
-        <option value="2001">2001</option>
-        <option value="2000">2000</option>
-        <option value="1999">1999</option>
-        <option value="1998">1998</option>
-        <option value="96-97">96-97</option>
-        <option value="1996">1996</option>
-      </select>
-    </label>
+      <label>
+        Season
+        <select id="season" name="season">
+          <option value="All">All</option>
+          <option value="2026" selected>2026</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+          <option value="2019">2019</option>
+          <option value="2018">2018</option>
+          <option value="2017">2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+          <option value="2011">2011</option>
+          <option value="2010">2010</option>
+          <option value="2009">2009</option>
+          <option value="2008">2008</option>
+          <option value="2007">2007</option>
+          <option value="2006">2006</option>
+          <option value="2005">2005</option>
+          <option value="2004">2004</option>
+          <option value="2003">2003</option>
+          <option value="2002">2002</option>
+          <option value="2001">2001</option>
+          <option value="2000">2000</option>
+          <option value="1999">1999</option>
+          <option value="1998">1998</option>
+          <option value="96-97">96-97</option>
+          <option value="1996">1996</option>
+        </select>
+      </label>
 
 <!--     <label>
       Team
@@ -86,19 +87,22 @@
       </select>
     </label> -->
 
-    <label>
-      Track Type
-      <select id="trackType" name="trackType">
-        <option value="All" selected>All</option>
-        <option value="O">Oval</option>
-        <option value="R">Road</option>
-        <option value="S">Street</option>
-        <option value="Indy500">Indy 500 Only</option>
-      </select>
-    </label>
+      <label>
+        Track Type
+        <select id="trackType" name="trackType">
+          <option value="All" selected>All</option>
+          <option value="O">Oval</option>
+          <option value="R">Road</option>
+          <option value="S">Street</option>
+          <option value="Indy500">Indy 500 Only</option>
+        </select>
+      </label>
 
-    <button type="submit">Load</button>
-  </form>
+      <button type="submit">Load</button>
+    </form>
+
+    <a class="stats-glossary-link" href="/glossary/">View Stats Glossary</a>
+  </div>
 
   <div id="statsLoading" class="stats-loading">Loading...</div>
   <div id="statsError" class="stats-error"></div>
@@ -111,6 +115,8 @@
       <tbody id="statsBody"></tbody>
     </table>
   </div>
+
+  <div class="stats-disclaimer stats-panel">Due to problems with the data source, data is not complete for 2008, 2000, 2011 and 2013</div>
 </div>
 
 <style>
@@ -134,7 +140,8 @@
   box-shadow: var(--shadow-l1);
 }
 
-.stats-form { display: flex; gap: 1rem; flex-wrap: wrap; align-items: end; padding: 1rem; }
+.stats-controls { margin-bottom: .9rem; padding: 1rem; display: flex; gap: .8rem 1rem; flex-wrap: wrap; align-items: end; }
+.stats-form { display: flex; gap: 1rem; flex-wrap: wrap; align-items: end; flex: 1 1 680px; }
 .stats-form label { display: flex; flex-direction: column; gap: .45rem; font-size: .92rem; color: var(--card-text-color-secondary); }
 .stats-form select, .stats-form button {
   padding: .55rem .8rem;
@@ -151,6 +158,31 @@
   cursor: pointer;
 }
 .stats-form button:hover { filter: brightness(0.95); }
+
+.stats-glossary-link {
+  margin-left: auto;
+  font-size: 1.1rem;
+  font-weight: 600;
+  align-self: center;
+}
+
+.stats-disclaimer {
+  margin-top: .9rem;
+  padding: .75rem .95rem;
+  font-size: .9rem;
+  color: var(--card-text-color-secondary);
+}
+
+@media (max-width: 1023px) {
+  .stats-controls {
+    align-items: stretch;
+  }
+
+  .stats-glossary-link {
+    margin-left: 0;
+    align-self: flex-start;
+  }
+}
 
 .stats-loading, .stats-error { display: none; margin-top: .9rem; padding: .7rem .85rem; border-radius: .55rem; }
 .stats-loading { background: var(--body-background); color: var(--card-text-color-secondary); border: 1px dashed var(--card-separator-color); }
