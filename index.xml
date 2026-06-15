@@ -9,12 +9,49 @@
 &lt;div class="stats-controls stats-panel"&gt;
 &lt;form id="statsForm" class="stats-form"&gt;
 &lt;label&gt;
-Aggregation Level
+Agg Level
 &lt;select id="agg_level" name="agg_level"&gt;
 &lt;option value="Driver" selected&gt;Driver&lt;/option&gt;
 &lt;option value="Car"&gt;Car&lt;/option&gt;
 &lt;option value="Team"&gt;Team&lt;/option&gt;
 &lt;option value="Engine"&gt;Engine&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
+Track Type
+&lt;select id="trackType" name="trackType"&gt;
+&lt;option value="All" selected&gt;All&lt;/option&gt;
+&lt;option value="O"&gt;Oval&lt;/option&gt;
+&lt;option value="R"&gt;Road&lt;/option&gt;
+&lt;option value="S"&gt;Street&lt;/option&gt;
+&lt;option value="Indy500"&gt;Indy 500 Only&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
+Min Races
+&lt;select id="minRaces" name="minRaces"&gt;
+&lt;option value="1" selected&gt;1&lt;/option&gt;
+&lt;option value="2"&gt;2&lt;/option&gt;
+&lt;option value="3"&gt;3&lt;/option&gt;
+&lt;option value="4"&gt;4&lt;/option&gt;
+&lt;option value="5"&gt;5&lt;/option&gt;
+&lt;option value="10"&gt;10&lt;/option&gt;
+&lt;option value="15"&gt;15&lt;/option&gt;
+&lt;option value="20"&gt;20&lt;/option&gt;
+&lt;option value="25"&gt;25&lt;/option&gt;
+&lt;option value="30"&gt;30&lt;/option&gt;
+&lt;option value="40"&gt;40&lt;/option&gt;
+&lt;option value="50"&gt;50&lt;/option&gt;
+&lt;option value="60"&gt;60&lt;/option&gt;
+&lt;option value="70"&gt;70&lt;/option&gt;
+&lt;option value="80"&gt;80&lt;/option&gt;
+&lt;option value="90"&gt;90&lt;/option&gt;
+&lt;option value="100"&gt;100&lt;/option&gt;
+&lt;option value="110"&gt;110&lt;/option&gt;
+&lt;option value="120"&gt;120&lt;/option&gt;
+&lt;option value="130"&gt;130&lt;/option&gt;
+&lt;option value="140"&gt;140&lt;/option&gt;
+&lt;option value="150"&gt;150&lt;/option&gt;
 &lt;/select&gt;
 &lt;/label&gt;
 &lt;label&gt;
@@ -54,15 +91,11 @@ Season
 &lt;option value="1996"&gt;1996&lt;/option&gt;
 &lt;/select&gt;
 &lt;/label&gt;
-&lt;label&gt;
-Track Type
-&lt;select id="trackType" name="trackType"&gt;
-&lt;option value="All" selected&gt;All&lt;/option&gt;
-&lt;option value="O"&gt;Oval&lt;/option&gt;
-&lt;option value="R"&gt;Road&lt;/option&gt;
-&lt;option value="S"&gt;Street&lt;/option&gt;
-&lt;option value="Indy500"&gt;Indy 500 Only&lt;/option&gt;
-&lt;/select&gt;
+&lt;label class="stats-date-range"&gt;
+Date Range
+&lt;span class="stats-date-range-inputs"&gt;
+&lt;input id="dateRange" name="dateRange" type="text" placeholder="Select date range" autocomplete="off" /&gt;
+&lt;/span&gt;
 &lt;/label&gt;
 &lt;button type="submit"&gt;Load&lt;/button&gt;
 &lt;/form&gt;
@@ -103,13 +136,19 @@ box-shadow: var(--shadow-l1);
 .stats-controls { margin-bottom: .9rem; padding: 1rem; display: flex; gap: .8rem 1rem; flex-wrap: wrap; align-items: end; }
 .stats-form { display: flex; gap: 1rem; flex-wrap: wrap; align-items: end; flex: 1 1 680px; }
 .stats-form label { display: flex; flex-direction: column; gap: .45rem; font-size: .92rem; color: var(--card-text-color-secondary); }
-.stats-form select, .stats-form button {
+.stats-form select, .stats-form input, .stats-form button {
 padding: .55rem .8rem;
 border-radius: .55rem;
 border: 1px solid var(--card-separator-color);
 background: var(--body-background);
 color: var(--card-text-color-main);
 }
+.stats-date-range-inputs {
+display: inline-flex;
+align-items: center;
+gap: .4rem;
+}
+#dateRange { min-width: 220px; }
 .stats-form button {
 background: var(--accent-color);
 color: white;
@@ -187,6 +226,8 @@ flex: 1 1 100%;
 }
 }
 &lt;/style&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/flatpickr"&gt;&lt;/script&gt;
 &lt;script&gt;
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
 const COLUMN_TOOLTIPS = {
@@ -211,6 +252,7 @@ let statsData = [];
 let sortColumn = null;
 let sortDirection = 'desc';
 const SIDEBAR_STATE_KEY = 'statsSidebarCollapsed';
+let dateRangePicker = null;
 function isDesktopLayout() {
 return window.matchMedia('(min-width: 1024px)').matches;
 }
@@ -250,19 +292,30 @@ return {
 agg_level: p.get('agg_level') || 'Driver',
 season: p.get('season') || '2026',
 team: p.get('team') || 'All',
-trackType: selectedTrackType
+trackType: selectedTrackType,
+minRaces: p.get('minRaces') || '1',
+startDate: p.get('startDate') || '',
+endDate: p.get('endDate') || ''
 };
 }
-function setParams(agg_level, season, team, trackType) {
+function setParams(agg_level, season, team, trackType, minRaces, startDate, endDate) {
 const u = new URL(window.location);
 u.searchParams.set('agg_level', agg_level);
 u.searchParams.set('season', season);
 u.searchParams.set('team', team);
 u.searchParams.set('trackType', trackType);
+u.searchParams.set('minRaces', minRaces);
+if (startDate &amp;&amp; endDate) {
+u.searchParams.set('startDate', startDate);
+u.searchParams.set('endDate', endDate);
+} else {
+u.searchParams.delete('startDate');
+u.searchParams.delete('endDate');
+}
 u.searchParams.delete('indy500');
 window.history.replaceState({}, '', u);
 }
-async function loadStats(agg_level, season, team, trackType) {
+async function loadStats(agg_level, season, team, trackType, minRaces, startDate, endDate) {
 const loading = document.getElementById('statsLoading');
 const error = document.getElementById('statsError');
 const wrap = document.getElementById('statsTableWrap');
@@ -275,6 +328,11 @@ url.searchParams.set('agg_level', agg_level);
 url.searchParams.set('season', season);
 url.searchParams.set('team', team);
 url.searchParams.set('trackType', trackType);
+url.searchParams.set('minRaces', minRaces);
+if (startDate &amp;&amp; endDate) {
+url.searchParams.set('startDate', startDate);
+url.searchParams.set('endDate', endDate);
+}
 console.log('Fetching stats:', url.toString());
 const r = await fetch(url.toString(), { cache: 'no-store' });
 const payload = await r.json();
@@ -330,25 +388,56 @@ return sortDirection === 'asc' ? String(av).localeCompare(String(bv)) : String(b
 });
 renderTable();
 }
+function syncDateRangeState() {
+const hasDateRange = !!(dateRangePicker &amp;&amp; dateRangePicker.selectedDates.length === 2);
+const seasonInput = document.getElementById('season');
+seasonInput.disabled = hasDateRange;
+seasonInput.title = hasDateRange ? 'Clear the date filter to select a single season' : '';
+}
+function initializeDateRangePicker(startDate, endDate) {
+const defaultDate = startDate &amp;&amp; endDate ? [startDate, endDate] : null;
+dateRangePicker = flatpickr('#dateRange', {
+mode: 'range',
+dateFormat: 'Y-m-d',
+defaultDate,
+onChange: syncDateRangeState
+});
+}
 document.getElementById('statsForm').addEventListener('submit', (e) =&gt; {
 e.preventDefault();
+const error = document.getElementById('statsError');
 const agg_level = document.getElementById('agg_level').value;
 const season = document.getElementById('season').value;
 const teamInput = document.getElementById('team');
 const team = teamInput ? teamInput.value : 'All';
 const trackType = document.getElementById('trackType').value;
-setParams(agg_level, season, team, trackType);
-loadStats(agg_level, season, team, trackType);
+const minRaces = document.getElementById('minRaces').value;
+const selectedDates = dateRangePicker ? dateRangePicker.selectedDates : [];
+const hasDateRange = selectedDates.length === 2;
+if (selectedDates.length === 1) {
+error.textContent = 'Select a complete date range.';
+error.style.display = 'block';
+return;
+}
+const startDate = hasDateRange ? dateRangePicker.formatDate(selectedDates[0], 'Y-m-d') : '';
+const endDate = hasDateRange ? dateRangePicker.formatDate(selectedDates[1], 'Y-m-d') : '';
+const seasonForQuery = hasDateRange ? 'All' : season;
+setParams(agg_level, seasonForQuery, team, trackType, minRaces, startDate, endDate);
+loadStats(agg_level, seasonForQuery, team, trackType, minRaces, startDate, endDate);
 });
 document.addEventListener('DOMContentLoaded', () =&gt; {
 initializeSidebarToggle();
-const { agg_level, season, team, trackType } = getParams();
+const { agg_level, season, team, trackType, minRaces, startDate, endDate } = getParams();
+const seasonForLoad = startDate &amp;&amp; endDate ? 'All' : season;
 document.getElementById('agg_level').value = agg_level;
-document.getElementById('season').value = season;
+document.getElementById('season').value = seasonForLoad;
 const teamInput = document.getElementById('team');
 if (teamInput) teamInput.value = team;
 document.getElementById('trackType').value = trackType;
-loadStats(agg_level, season, team, trackType);
+document.getElementById('minRaces').value = minRaces;
+initializeDateRangePicker(startDate, endDate);
+syncDateRangeState();
+loadStats(agg_level, seasonForLoad, team, trackType, minRaces, startDate, endDate);
 });
 &lt;/script&gt;</description></item><item><title>Updating our 2026 Season Predictions</title><link>http://localhost:1313/posts/sim-results-2026-update/</link><pubDate>Wed, 01 Apr 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/sim-results-2026-update/</guid><description>&lt;img src="http://localhost:1313/posts/sim-results-2026-update/cover.jpg" alt="Featured image of post Updating our 2026 Season Predictions" /&gt;&lt;p&gt;At the start of the season, I published the &lt;a class="link" href="http://localhost:1313/posts/sim-results-2026/" &gt;results&lt;/a&gt; of a simulation model that represented my best analytical prediction of how the 2026 season would go. We&amp;rsquo;re now roughly a quarter way through the season, so it feels like a good time for an update those predictions.&lt;/p&gt;
 &lt;p&gt;A lot has happened since I published my original set of predictions on March 1: The Indy 500 field has filled out - about as predictably as possible. We have a track layout for the Freedom 250. My Twitter has gained several followers&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;. And most importantly, four races have actually happened.&lt;/p&gt;
