@@ -9,6 +9,13 @@
 &lt;div class="stats-controls stats-panel"&gt;
 &lt;form id="statsForm" class="stats-form"&gt;
 &lt;label&gt;
+Series
+&lt;select id="series" name="series"&gt;
+&lt;option value="IndyCar" selected&gt;IndyCar&lt;/option&gt;
+&lt;option value="IndyNXT"&gt;IndyNXT&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
 Agg Level
 &lt;select id="agg_level" name="agg_level"&gt;
 &lt;option value="Driver" selected&gt;Driver&lt;/option&gt;
@@ -286,9 +293,12 @@ return COLUMN_TOOLTIPS[column] || '';
 }
 function getParams() {
 const p = new URLSearchParams(window.location.search);
+const series = p.get('series') || 'IndyCar';
+const selectedSeries = ['IndyCar', 'IndyNXT', 'All'].includes(series) ? series : 'IndyCar';
 const trackType = p.get('trackType') || 'All';
 const selectedTrackType = ['All', 'O', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
 return {
+series: selectedSeries,
 agg_level: p.get('agg_level') || 'Driver',
 season: p.get('season') || '2026',
 team: p.get('team') || 'All',
@@ -298,8 +308,9 @@ startDate: p.get('startDate') || '',
 endDate: p.get('endDate') || ''
 };
 }
-function setParams(agg_level, season, team, trackType, minRaces, startDate, endDate) {
+function setParams(series, agg_level, season, team, trackType, minRaces, startDate, endDate) {
 const u = new URL(window.location);
+u.searchParams.set('series', series);
 u.searchParams.set('agg_level', agg_level);
 u.searchParams.set('season', season);
 u.searchParams.set('team', team);
@@ -315,7 +326,7 @@ u.searchParams.delete('endDate');
 u.searchParams.delete('indy500');
 window.history.replaceState({}, '', u);
 }
-async function loadStats(agg_level, season, team, trackType, minRaces, startDate, endDate) {
+async function loadStats(series, agg_level, season, team, trackType, minRaces, startDate, endDate) {
 const loading = document.getElementById('statsLoading');
 const error = document.getElementById('statsError');
 const wrap = document.getElementById('statsTableWrap');
@@ -324,6 +335,7 @@ error.style.display = 'none';
 wrap.style.display = 'none';
 try {
 const url = new URL(STATS_ENDPOINT_URL);
+url.searchParams.set('series', series);
 url.searchParams.set('agg_level', agg_level);
 url.searchParams.set('season', season);
 url.searchParams.set('team', team);
@@ -406,6 +418,7 @@ onChange: syncDateRangeState
 document.getElementById('statsForm').addEventListener('submit', (e) =&gt; {
 e.preventDefault();
 const error = document.getElementById('statsError');
+const series = document.getElementById('series').value;
 const agg_level = document.getElementById('agg_level').value;
 const season = document.getElementById('season').value;
 const teamInput = document.getElementById('team');
@@ -422,13 +435,14 @@ return;
 const startDate = hasDateRange ? dateRangePicker.formatDate(selectedDates[0], 'Y-m-d') : '';
 const endDate = hasDateRange ? dateRangePicker.formatDate(selectedDates[1], 'Y-m-d') : '';
 const seasonForQuery = hasDateRange ? 'All' : season;
-setParams(agg_level, seasonForQuery, team, trackType, minRaces, startDate, endDate);
-loadStats(agg_level, seasonForQuery, team, trackType, minRaces, startDate, endDate);
+setParams(series, agg_level, seasonForQuery, team, trackType, minRaces, startDate, endDate);
+loadStats(series, agg_level, seasonForQuery, team, trackType, minRaces, startDate, endDate);
 });
 document.addEventListener('DOMContentLoaded', () =&gt; {
 initializeSidebarToggle();
-const { agg_level, season, team, trackType, minRaces, startDate, endDate } = getParams();
+const { series, agg_level, season, team, trackType, minRaces, startDate, endDate } = getParams();
 const seasonForLoad = startDate &amp;&amp; endDate ? 'All' : season;
+document.getElementById('series').value = series;
 document.getElementById('agg_level').value = agg_level;
 document.getElementById('season').value = seasonForLoad;
 const teamInput = document.getElementById('team');
@@ -437,7 +451,7 @@ document.getElementById('trackType').value = trackType;
 document.getElementById('minRaces').value = minRaces;
 initializeDateRangePicker(startDate, endDate);
 syncDateRangeState();
-loadStats(agg_level, seasonForLoad, team, trackType, minRaces, startDate, endDate);
+loadStats(series, agg_level, seasonForLoad, team, trackType, minRaces, startDate, endDate);
 });
 &lt;/script&gt;</description></item><item><title>Updating our 2026 Season Predictions</title><link>http://localhost:1313/posts/sim-results-2026-update/</link><pubDate>Wed, 01 Apr 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/posts/sim-results-2026-update/</guid><description>&lt;img src="http://localhost:1313/posts/sim-results-2026-update/cover.jpg" alt="Featured image of post Updating our 2026 Season Predictions" /&gt;&lt;p&gt;At the start of the season, I published the &lt;a class="link" href="http://localhost:1313/posts/sim-results-2026/" &gt;results&lt;/a&gt; of a simulation model that represented my best analytical prediction of how the 2026 season would go. We&amp;rsquo;re now roughly a quarter way through the season, so it feels like a good time for an update those predictions.&lt;/p&gt;
 &lt;p&gt;A lot has happened since I published my original set of predictions on March 1: The Indy 500 field has filled out - about as predictably as possible. We have a track layout for the Freedom 250. My Twitter has gained several followers&lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;. And most importantly, four races have actually happened.&lt;/p&gt;
