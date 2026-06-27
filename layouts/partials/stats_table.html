@@ -1,0 +1,179 @@
+<div id="statsLoading" class="stats-loading">Loading...</div>
+<div id="statsError" class="stats-error"></div>
+
+<div id="statsTableWrap" class="stats-table-wrap stats-panel">
+  <table id="statsTable">
+    <thead>
+      <tr id="statsHeader"></tr>
+    </thead>
+    <tbody id="statsBody"></tbody>
+  </table>
+</div>
+
+<style>
+.stats-loading, .stats-error { display: none; margin-top: .9rem; padding: .7rem .85rem; border-radius: .55rem; }
+.stats-loading { background: var(--body-background); color: var(--card-text-color-secondary); border: 1px dashed var(--card-separator-color); }
+.stats-error { background: rgba(176, 0, 32, .08); color: #b00020; border: 1px solid rgba(176, 0, 32, .28); }
+
+.stats-table-wrap { display: none; overflow-x: auto; margin-top: 1rem; }
+#statsTable { width: 100%; border-collapse: collapse; font-size: 60%; line-height: 1.35; }
+#statsTable th, #statsTable td {
+  padding: .62rem .78rem;
+  border-bottom: 1px solid var(--card-separator-color);
+  text-align: left;
+  white-space: nowrap;
+}
+#statsTable th {
+  cursor: pointer;
+  background: var(--body-background);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+#statsTable th.sort-asc::after,
+#statsTable th.sort-desc::after {
+  margin-left: .35rem;
+  color: var(--card-text-color-secondary);
+}
+#statsTable th.sort-asc::after { content: "▲"; }
+#statsTable th.sort-desc::after { content: "▼"; }
+
+#statsTable th:first-child,
+#statsTable td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  box-shadow: 1px 0 0 var(--card-separator-color);
+}
+#statsTable th:first-child { z-index: 3; }
+
+#statsTable tbody td { background: var(--card-background); }
+#statsTable tbody tr:nth-child(even) td { background: var(--body-background); }
+</style>
+
+<script>
+const COLUMN_TOOLTIPS = {
+  R: 'R: Total Races',
+  Laps: 'Laps: Total Laps Completed ',
+  LL: 'LL: Total Laps Led',
+  SP: 'SP: Average Starting Position',
+  FP: 'FP: Average Finishing Position',
+  PG: 'PG: Average Positions Gained',
+  DNF: 'DNF: Did Not Finish Count',
+  W: 'W: Race Wins',
+  POD: 'POD: Podiums (Top 3 Finishes)',
+  T10: 'T10: Top-10 Finishes',
+  Pts: 'Pts: Championship Points',
+  eqLaps: 'eqLaps: Track-equalized Laps Completed',
+  eqLL: 'eqLL: Track-equalized Laps Led',
+  faPG: 'faPG: Finisher-adjusted Positions Gained',
+  DNFm: 'DNFm: Mechanical DNFs',
+  DNFc: 'DNFc: Contact DNFs'
+};
+
+let statsData = [];
+let sortColumn = null;
+let sortDirection = 'desc';
+let statsTableOptions = {};
+
+function getColumnTooltip(column) {
+  return COLUMN_TOOLTIPS[column] || '';
+}
+
+function setStatsLoadingVisible(visible) {
+  const loading = document.getElementById('statsLoading');
+  if (loading) loading.style.display = visible ? 'block' : 'none';
+}
+
+function showStatsError(message) {
+  const error = document.getElementById('statsError');
+  if (!error) return;
+  error.textContent = message;
+  error.style.display = 'block';
+}
+
+function clearStatsError() {
+  const error = document.getElementById('statsError');
+  if (error) error.style.display = 'none';
+}
+
+function hideStatsTable() {
+  const wrap = document.getElementById('statsTableWrap');
+  if (wrap) wrap.style.display = 'none';
+}
+
+function buildDriverUrl(driverName) {
+  return '/driver/?driver=' + encodeURIComponent(driverName);
+}
+
+function renderCellValue(column, value) {
+  if (statsTableOptions.linkDriverColumn && column === 'Driver' && value) {
+    const link = document.createElement('a');
+    link.href = buildDriverUrl(String(value));
+    link.textContent = value;
+    return link;
+  }
+  return document.createTextNode(value ?? '-');
+}
+
+function renderTable() {
+  const header = document.getElementById('statsHeader');
+  const body = document.getElementById('statsBody');
+  if (!header || !body) return;
+
+  header.innerHTML = '';
+  body.innerHTML = '';
+
+  if (statsData.length === 0) {
+    body.innerHTML = '<tr><td>No data available</td></tr>';
+    return;
+  }
+
+  const columns = Object.keys(statsData[0]);
+  columns.forEach((col) => {
+    const th = document.createElement('th');
+    th.textContent = col;
+    th.title = getColumnTooltip(col);
+    th.onclick = () => sortBy(col);
+    if (sortColumn === col) th.classList.add(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+    header.appendChild(th);
+  });
+
+  statsData.forEach((row) => {
+    const tr = document.createElement('tr');
+    columns.forEach((col) => {
+      const td = document.createElement('td');
+      td.appendChild(renderCellValue(col, row[col]));
+      tr.appendChild(td);
+    });
+    body.appendChild(tr);
+  });
+}
+
+function sortBy(column) {
+  if (sortColumn === column) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+  else { sortColumn = column; sortDirection = 'desc'; }
+
+  statsData.sort((a, b) => {
+    const av = a[column] ?? 0;
+    const bv = b[column] ?? 0;
+    const an = Number(av);
+    const bn = Number(bv);
+    if (!Number.isNaN(an) && !Number.isNaN(bn)) return sortDirection === 'asc' ? an - bn : bn - an;
+    return sortDirection === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+  });
+
+  renderTable();
+}
+
+function setStatsTableData(data, options = {}) {
+  statsData = Array.isArray(data) ? data : [];
+  statsTableOptions = options;
+  sortColumn = null;
+  sortDirection = 'desc';
+  renderTable();
+  const wrap = document.getElementById('statsTableWrap');
+  if (wrap) wrap.style.display = 'block';
+}
+</script>

@@ -1,0 +1,73 @@
+<div class="driver-stats-view">
+  <div class="driver-header stats-panel">
+    <h2 id="driverTitle">Driver Stats</h2>
+  </div>
+
+  {{ partial "stats_table.html" . }}
+</div>
+
+<style>
+.driver-stats-view { margin-top: 1rem; }
+.driver-header {
+  margin-bottom: .9rem;
+  padding: 1rem;
+  border: 1px solid var(--card-separator-color);
+  border-radius: var(--card-border-radius);
+  background: var(--card-background);
+  box-shadow: var(--shadow-l1);
+}
+.driver-header h2 { margin: 0 0 .3rem 0; }
+.driver-header p { margin: 0; color: var(--card-text-color-secondary); }
+</style>
+
+<script>
+const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
+
+function getDriverFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const driver = params.get('driver');
+  return driver ? driver.trim() : '';
+}
+
+function setDriverTitle(driver) {
+  const title = document.getElementById('driverTitle');
+  if (!title) return;
+  title.textContent = driver ? `${driver} Stats` : 'Driver Stats';
+}
+
+async function loadDriverStats(driver) {
+  if (!driver) {
+    showStatsError('No driver selected. Open this page from a driver link in the stats table.');
+    return;
+  }
+
+  setStatsLoadingVisible(true);
+  clearStatsError();
+  hideStatsTable();
+
+  try {
+    const url = new URL(STATS_ENDPOINT_URL);
+    url.searchParams.set('agg_level', 'SeasonSeries');
+    url.searchParams.set('series', 'All');
+    url.searchParams.set('season', 'All');
+    url.searchParams.set('trackType', 'All');
+    url.searchParams.set('minRaces', '0');
+    url.searchParams.set('driver', driver);
+
+    const response = await fetch(url.toString(), { cache: 'no-store' });
+    const payload = await response.json();
+    if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load driver stats');
+    setStatsTableData(payload.data, { linkDriverColumn: false });
+  } catch (e) {
+    showStatsError(`Error loading stats: ${e.message}`);
+  } finally {
+    setStatsLoadingVisible(false);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const driver = getDriverFromUrl();
+  setDriverTitle(driver);
+  loadDriverStats(driver);
+});
+</script>

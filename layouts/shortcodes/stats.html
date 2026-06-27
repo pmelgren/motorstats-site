@@ -147,17 +147,7 @@
     <a class="stats-glossary-link" href="/glossary/">View Stats Glossary</a>
   </div>
 
-  <div id="statsLoading" class="stats-loading">Loading...</div>
-  <div id="statsError" class="stats-error"></div>
-
-  <div id="statsTableWrap" class="stats-table-wrap stats-panel">
-    <table id="statsTable">
-      <thead>
-        <tr id="statsHeader"></tr>
-      </thead>
-      <tbody id="statsBody"></tbody>
-    </table>
-  </div>
+  {{ partial "stats_table.html" . }}
 
   <div class="stats-disclaimer stats-panel">Due to problems with the data source, data is not complete for 2008, 2009, 2011 and 2013</div>
 </div>
@@ -234,46 +224,6 @@
   }
 }
 
-.stats-loading, .stats-error { display: none; margin-top: .9rem; padding: .7rem .85rem; border-radius: .55rem; }
-.stats-loading { background: var(--body-background); color: var(--card-text-color-secondary); border: 1px dashed var(--card-separator-color); }
-.stats-error { background: rgba(176, 0, 32, .08); color: #b00020; border: 1px solid rgba(176, 0, 32, .28); }
-
-.stats-table-wrap { display: none; overflow-x: auto; margin-top: 1rem; }
-#statsTable { width: 100%; border-collapse: collapse; font-size: 60%; line-height: 1.35; }
-#statsTable th, #statsTable td {
-  padding: .62rem .78rem;
-  border-bottom: 1px solid var(--card-separator-color);
-  text-align: left;
-  white-space: nowrap;
-}
-#statsTable th {
-  cursor: pointer;
-  background: var(--body-background);
-  font-weight: 600;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-#statsTable th.sort-asc::after,
-#statsTable th.sort-desc::after {
-  margin-left: .35rem;
-  color: var(--card-text-color-secondary);
-}
-#statsTable th.sort-asc::after { content: "▲"; }
-#statsTable th.sort-desc::after { content: "▼"; }
-
-#statsTable th:first-child,
-#statsTable td:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 2;
-  box-shadow: 1px 0 0 var(--card-separator-color);
-}
-#statsTable th:first-child { z-index: 3; }
-
-#statsTable tbody td { background: var(--card-background); }
-#statsTable tbody tr:nth-child(even) td { background: var(--body-background); }
-
 @media (min-width: 1024px) {
   .stats-layout-controls { display: block; }
 
@@ -295,28 +245,6 @@
 <script>
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
 
-const COLUMN_TOOLTIPS = {
-  R: 'R: Total Races',
-  Laps: 'Laps: Total Laps Completed ',
-  LL: 'LL: Total Laps Led',
-  SP: 'SP: Average Starting Position',
-  FP: 'FP: Average Finishing Position',
-  PG: 'PG: Average Positions Gained',
-  DNF: 'DNF: Did Not Finish Count',
-  W: 'W: Race Wins',
-  POD: 'POD: Podiums (Top 3 Finishes)',
-  T10: 'T10: Top-10 Finishes',
-  Pts: 'Pts: Championship Points',
-  eqLaps: 'eqLaps: Track-equalized Laps Completed',
-  eqLL: 'eqLL: Track-equalized Laps Led',
-  faPG: 'faPG: Finisher-adjusted Positions Gained',
-  DNFm: 'DNFm: Mechanical DNFs',
-  DNFc: 'DNFc: Contact DNFs'
-};
-
-let statsData = [];
-let sortColumn = null;
-let sortDirection = 'desc';
 const SIDEBAR_STATE_KEY = 'statsSidebarCollapsed';
 let dateRangePicker = null;
 
@@ -353,10 +281,6 @@ function initializeSidebarToggle() {
     const collapsed = localStorage.getItem(SIDEBAR_STATE_KEY) === '1';
     applySidebarState(isDesktopLayout() && collapsed);
   });
-}
-
-function getColumnTooltip(column) {
-  return COLUMN_TOOLTIPS[column] || '';
 }
 
 function getParams() {
@@ -397,12 +321,9 @@ function setParams(series, agg_level, season, team, trackType, minRaces, startDa
 }
 
 async function loadStats(series, agg_level, season, team, trackType, minRaces, startDate, endDate) {
-  const loading = document.getElementById('statsLoading');
-  const error = document.getElementById('statsError');
-  const wrap = document.getElementById('statsTableWrap');
-  loading.style.display = 'block';
-  error.style.display = 'none';
-  wrap.style.display = 'none';
+  setStatsLoadingVisible(true);
+  clearStatsError();
+  hideStatsTable();
 
   try {
     const url = new URL(STATS_ENDPOINT_URL);
@@ -420,63 +341,12 @@ async function loadStats(series, agg_level, season, team, trackType, minRaces, s
     const r = await fetch(url.toString(), { cache: 'no-store' });
     const payload = await r.json();
     if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
-    statsData = payload.data;
-    renderTable();
-    wrap.style.display = 'block';
+    setStatsTableData(payload.data, { linkDriverColumn: agg_level === 'Driver' });
   } catch (e) {
-    error.textContent = `Error loading stats: ${e.message}`;
-    error.style.display = 'block';
+    showStatsError(`Error loading stats: ${e.message}`);
   } finally {
-    loading.style.display = 'none';
+    setStatsLoadingVisible(false);
   }
-}
-
-function renderTable() {
-  const header = document.getElementById('statsHeader');
-  const body = document.getElementById('statsBody');
-  header.innerHTML = '';
-  body.innerHTML = '';
-
-  if (statsData.length === 0) {
-    body.innerHTML = '<tr><td>No data available</td></tr>';
-    return;
-  }
-
-  const columns = Object.keys(statsData[0]);
-  columns.forEach((col) => {
-    const th = document.createElement('th');
-    th.textContent = col;
-    th.title = getColumnTooltip(col);
-    th.onclick = () => sortBy(col);
-    if (sortColumn === col) th.classList.add(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
-    header.appendChild(th);
-  });
-
-  statsData.forEach((row) => {
-    const tr = document.createElement('tr');
-    columns.forEach((col) => {
-      const td = document.createElement('td');
-      td.textContent = row[col] ?? '-';
-      tr.appendChild(td);
-    });
-    body.appendChild(tr);
-  });
-}
-
-function sortBy(column) {
-  if (sortColumn === column) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-  else { sortColumn = column; sortDirection = 'desc'; }
-
-  statsData.sort((a, b) => {
-    const av = a[column] ?? 0;
-    const bv = b[column] ?? 0;
-    const an = Number(av);
-    const bn = Number(bv);
-    if (!Number.isNaN(an) && !Number.isNaN(bn)) return sortDirection === 'asc' ? an - bn : bn - an;
-    return sortDirection === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
-  });
-
-  renderTable();
 }
 
 function syncDateRangeState() {
@@ -498,7 +368,6 @@ function initializeDateRangePicker(startDate, endDate) {
 
 document.getElementById('statsForm').addEventListener('submit', (e) => {
   e.preventDefault();
-  const error = document.getElementById('statsError');
   const series = document.getElementById('series').value;
   const agg_level = document.getElementById('agg_level').value;
   const season = document.getElementById('season').value;
@@ -510,8 +379,7 @@ document.getElementById('statsForm').addEventListener('submit', (e) => {
   const hasDateRange = selectedDates.length === 2;
 
   if (selectedDates.length === 1) {
-    error.textContent = 'Select a complete date range.';
-    error.style.display = 'block';
+    showStatsError('Select a complete date range.');
     return;
   }
 
