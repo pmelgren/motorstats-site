@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>motorStats.io</title><link>http://localhost:1313/</link><description>Recent content on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 24 Jun 2026 16:30:00 -0400</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>Driver</title><link>http://localhost:1313/driver/</link><pubDate>Wed, 24 Jun 2026 16:30:00 -0400</pubDate><guid>http://localhost:1313/driver/</guid><description>&lt;div class="driver-stats-view"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>motorStats.io</title><link>http://localhost:1313/</link><description>Recent content on motorStats.io</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 24 Jun 2026 16:30:00 -0400</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml"/><item><title>Driver Pages</title><link>http://localhost:1313/driver/</link><pubDate>Wed, 24 Jun 2026 16:30:00 -0400</pubDate><guid>http://localhost:1313/driver/</guid><description>&lt;div class="driver-stats-view"&gt;
 &lt;div class="driver-header stats-panel"&gt;
 &lt;h2 id="driverTitle"&gt;Driver Stats&lt;/h2&gt;
 &lt;/div&gt;
@@ -7,6 +7,27 @@
 &lt;button id="driverTabRaceLogs" class="driver-tab-btn" type="button"&gt;Race Logs&lt;/button&gt;
 &lt;/div&gt;
 &lt;div id="driverStatsPanel" class="driver-tab-panel active"&gt;
+&lt;div class="driver-stats-controls stats-panel"&gt;
+&lt;form id="driverStatsForm" class="driver-stats-form"&gt;
+&lt;label&gt;
+Track Type
+&lt;select id="driverTrackType" name="trackType"&gt;
+&lt;option value="All" selected&gt;All&lt;/option&gt;
+&lt;option value="O"&gt;Oval&lt;/option&gt;
+&lt;option value="R"&gt;Road&lt;/option&gt;
+&lt;option value="S"&gt;Street&lt;/option&gt;
+&lt;option value="Indy500"&gt;Indy 500 Only&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
+&lt;label class="driver-stats-date-range"&gt;
+Date Range
+&lt;span class="driver-stats-date-range-inputs"&gt;
+&lt;input id="driverDateRange" name="dateRange" type="text" placeholder="Select date range" autocomplete="off" /&gt;
+&lt;/span&gt;
+&lt;/label&gt;
+&lt;button type="submit"&gt;Load&lt;/button&gt;
+&lt;/form&gt;
+&lt;/div&gt;
 &lt;div id="statsLoading" class="stats-loading"&gt;Loading...&lt;/div&gt;
 &lt;div id="statsError" class="stats-error"&gt;&lt;/div&gt;
 &lt;div id="statsTableWrap" class="stats-table-wrap stats-panel"&gt;
@@ -223,6 +244,46 @@ font-weight: 600;
 }
 .driver-tab-panel { display: none; }
 .driver-tab-panel.active { display: block; }
+.driver-stats-controls {
+margin-bottom: .75rem;
+padding: .85rem;
+}
+.driver-stats-form {
+display: flex;
+gap: .8rem;
+flex-wrap: wrap;
+align-items: end;
+}
+.driver-stats-form label {
+display: flex;
+flex-direction: column;
+gap: .42rem;
+font-size: .9rem;
+color: var(--card-text-color-secondary);
+}
+.driver-stats-form select,
+.driver-stats-form input,
+.driver-stats-form button {
+padding: .52rem .76rem;
+border-radius: .5rem;
+border: 1px solid var(--card-separator-color);
+background: var(--body-background);
+color: var(--card-text-color-main);
+}
+.driver-stats-date-range-inputs {
+display: inline-flex;
+align-items: center;
+gap: .4rem;
+}
+#driverDateRange { min-width: 220px; }
+.driver-stats-form button {
+background: var(--accent-color);
+color: white;
+border-color: var(--accent-color);
+font-weight: 600;
+cursor: pointer;
+}
+.driver-stats-form button:hover { filter: brightness(0.95); }
 .driver-racelog-controls {
 display: inline-flex;
 align-items: center;
@@ -258,10 +319,13 @@ z-index: 1;
 #raceLogTable tbody td { background: var(--card-background); }
 #raceLogTable tbody tr:nth-child(even) td { background: var(--body-background); }
 &lt;/style&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/flatpickr"&gt;&lt;/script&gt;
 &lt;script&gt;
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
 const DRIVER_RACE_LOGS_ENDPOINT_URL = 'https://driver-race-logs-endpoint-ujzabdesxa-uc.a.run.app';
 let raceLogInitialLoadDone = false;
+let driverDateRangePicker = null;
 function getDriverFromUrl() {
 const params = new URLSearchParams(window.location.search);
 const driver = params.get('driver');
@@ -269,9 +333,14 @@ return driver ? driver.trim() : '';
 }
 function getDriverPageStateFromUrl() {
 const params = new URLSearchParams(window.location.search);
+const trackType = params.get('trackType') || 'All';
+const selectedTrackType = ['All', 'O', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
 return {
 tab: params.get('tab') === 'race-logs' ? 'logs' : 'stats',
-season: params.get('season') || ''
+season: params.get('season') || '',
+trackType: selectedTrackType,
+startDate: params.get('startDate') || '',
+endDate: params.get('endDate') || ''
 };
 }
 function setDriverPageParams(tab, season) {
@@ -282,10 +351,31 @@ if (season) url.searchParams.set('season', season);
 else url.searchParams.delete('season');
 window.history.replaceState({}, '', url);
 }
+function setDriverStatsParams(trackType, startDate, endDate) {
+const url = new URL(window.location);
+url.searchParams.set('trackType', trackType || 'All');
+if (startDate &amp;&amp; endDate) {
+url.searchParams.set('startDate', startDate);
+url.searchParams.set('endDate', endDate);
+} else {
+url.searchParams.delete('startDate');
+url.searchParams.delete('endDate');
+}
+window.history.replaceState({}, '', url);
+}
 function setDriverTitle(driver) {
 const title = document.getElementById('driverTitle');
 if (!title) return;
 title.textContent = driver ? `${driver} Stats` : 'Driver Stats';
+document.title = driver ? `${driver} Stats` : 'Driver Pages';
+}
+function initializeDriverDateRangePicker(startDate, endDate) {
+const defaultDate = startDate &amp;&amp; endDate ? [startDate, endDate] : null;
+driverDateRangePicker = flatpickr('#driverDateRange', {
+mode: 'range',
+dateFormat: 'Y-m-d',
+defaultDate
+});
 }
 function setRaceLogLoadingVisible(visible) {
 const loading = document.getElementById('raceLogLoading');
@@ -360,7 +450,7 @@ body.appendChild(tr);
 });
 wrap.style.display = 'block';
 }
-async function loadDriverStats(driver, preferredSeason = '') {
+async function loadDriverStats(driver, preferredSeason = '', trackType = 'All', startDate = '', endDate = '', updateSeasonOptions = false) {
 if (!driver) {
 showStatsError('No driver selected. Open this page from a driver link in the stats table.');
 return;
@@ -373,14 +463,18 @@ const url = new URL(STATS_ENDPOINT_URL);
 url.searchParams.set('agg_level', 'SeasonSeries');
 url.searchParams.set('series', 'All');
 url.searchParams.set('season', 'All');
-url.searchParams.set('trackType', 'All');
+url.searchParams.set('trackType', trackType);
 url.searchParams.set('minRaces', '0');
 url.searchParams.set('driver', driver);
+if (startDate &amp;&amp; endDate) {
+url.searchParams.set('startDate', startDate);
+url.searchParams.set('endDate', endDate);
+}
 const response = await fetch(url.toString(), { cache: 'no-store' });
 const payload = await response.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load driver stats');
 setStatsTableData(payload.data, { linkDriverColumn: false });
-populateRaceLogSeasonOptions(payload.data, preferredSeason);
+if (updateSeasonOptions) populateRaceLogSeasonOptions(payload.data, preferredSeason);
 } catch (e) {
 showStatsError(`Error loading stats: ${e.message}`);
 } finally {
@@ -414,11 +508,31 @@ setRaceLogLoadingVisible(false);
 document.addEventListener('DOMContentLoaded', async () =&gt; {
 const pageState = getDriverPageStateFromUrl();
 const driver = getDriverFromUrl();
+const trackTypeSelect = document.getElementById('driverTrackType');
+const driverStatsForm = document.getElementById('driverStatsForm');
 setDriverTitle(driver);
-await loadDriverStats(driver, pageState.season);
+if (trackTypeSelect) trackTypeSelect.value = pageState.trackType;
+initializeDriverDateRangePicker(pageState.startDate, pageState.endDate);
+await loadDriverStats(driver, pageState.season, pageState.trackType, pageState.startDate, pageState.endDate, true);
 const statsTab = document.getElementById('driverTabStats');
 const raceLogsTab = document.getElementById('driverTabRaceLogs');
 const raceLogSeason = document.getElementById('raceLogSeason');
+if (driverStatsForm) {
+driverStatsForm.addEventListener('submit', (event) =&gt; {
+event.preventDefault();
+const trackType = trackTypeSelect ? trackTypeSelect.value : 'All';
+const selectedDates = driverDateRangePicker ? driverDateRangePicker.selectedDates : [];
+if (selectedDates.length === 1) {
+showStatsError('Select a complete date range.');
+return;
+}
+const hasDateRange = selectedDates.length === 2;
+const startDate = hasDateRange ? driverDateRangePicker.formatDate(selectedDates[0], 'Y-m-d') : '';
+const endDate = hasDateRange ? driverDateRangePicker.formatDate(selectedDates[1], 'Y-m-d') : '';
+setDriverStatsParams(trackType, startDate, endDate);
+loadDriverStats(driver, raceLogSeason ? raceLogSeason.value : '', trackType, startDate, endDate, false);
+});
+}
 if (statsTab) {
 statsTab.addEventListener('click', () =&gt; setActiveDriverTab('stats'));
 }
