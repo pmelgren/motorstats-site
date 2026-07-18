@@ -2,6 +2,11 @@
 &lt;div class="driver-header stats-panel"&gt;
 &lt;h2 id="driverTitle"&gt;Driver Stats&lt;/h2&gt;
 &lt;/div&gt;
+&lt;div class="driver-tabs"&gt;
+&lt;button id="driverTabStats" class="driver-tab-btn active" type="button"&gt;Stats&lt;/button&gt;
+&lt;button id="driverTabRaceLogs" class="driver-tab-btn" type="button"&gt;Race Logs&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id="driverStatsPanel" class="driver-tab-panel active"&gt;
 &lt;div id="statsLoading" class="stats-loading"&gt;Loading...&lt;/div&gt;
 &lt;div id="statsError" class="stats-error"&gt;&lt;/div&gt;
 &lt;div id="statsTableWrap" class="stats-table-wrap stats-panel"&gt;
@@ -159,6 +164,35 @@ if (wrap) wrap.style.display = 'block';
 }
 &lt;/script&gt;
 &lt;/div&gt;
+&lt;div id="driverRaceLogsPanel" class="driver-tab-panel"&gt;
+&lt;div class="driver-racelog-controls stats-panel"&gt;
+&lt;label for="raceLogSeason"&gt;Season&lt;/label&gt;
+&lt;select id="raceLogSeason"&gt;&lt;/select&gt;
+&lt;/div&gt;
+&lt;div id="raceLogLoading" class="stats-loading"&gt;Loading...&lt;/div&gt;
+&lt;div id="raceLogError" class="stats-error"&gt;&lt;/div&gt;
+&lt;div id="raceLogTableWrap" class="stats-table-wrap stats-panel"&gt;
+&lt;table id="raceLogTable"&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Series&lt;/th&gt;
+&lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;Track Type&lt;/th&gt;
+&lt;th&gt;Laps&lt;/th&gt;
+&lt;th&gt;SP&lt;/th&gt;
+&lt;th&gt;FP&lt;/th&gt;
+&lt;th&gt;PG&lt;/th&gt;
+&lt;th&gt;faPG&lt;/th&gt;
+&lt;th&gt;LL&lt;/th&gt;
+&lt;th&gt;Status&lt;/th&gt;
+&lt;th&gt;Pts&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody id="raceLogBody"&gt;&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;style&gt;
 .driver-stats-view { margin-top: 1rem; }
 .driver-header {
@@ -170,21 +204,163 @@ background: var(--card-background);
 box-shadow: var(--shadow-l1);
 }
 .driver-header h2 { margin: 0 0 .3rem 0; }
-.driver-header p { margin: 0; color: var(--card-text-color-secondary); }
+.driver-tabs {
+display: flex;
+gap: .5rem;
+margin-bottom: .8rem;
+}
+.driver-tab-btn {
+border: 1px solid var(--card-separator-color);
+background: var(--body-background);
+color: var(--card-text-color);
+border-radius: .5rem;
+padding: .45rem .8rem;
+cursor: pointer;
+}
+.driver-tab-btn.active {
+background: var(--card-background);
+font-weight: 600;
+}
+.driver-tab-panel { display: none; }
+.driver-tab-panel.active { display: block; }
+.driver-racelog-controls {
+display: inline-flex;
+align-items: center;
+gap: .5rem;
+padding: .7rem .85rem;
+margin-bottom: .6rem;
+}
+.driver-racelog-controls label {
+font-size: .88rem;
+color: var(--card-text-color-secondary);
+}
+.driver-racelog-controls select {
+border: 1px solid var(--card-separator-color);
+border-radius: .4rem;
+background: var(--card-background);
+color: var(--card-text-color);
+padding: .3rem .45rem;
+}
+#raceLogTable { width: 100%; border-collapse: collapse; font-size: 60%; line-height: 1.35; }
+#raceLogTable th, #raceLogTable td {
+padding: .62rem .78rem;
+border-bottom: 1px solid var(--card-separator-color);
+text-align: left;
+white-space: nowrap;
+}
+#raceLogTable th {
+background: var(--body-background);
+font-weight: 600;
+position: sticky;
+top: 0;
+z-index: 1;
+}
+#raceLogTable tbody td { background: var(--card-background); }
+#raceLogTable tbody tr:nth-child(even) td { background: var(--body-background); }
 &lt;/style&gt;
 &lt;script&gt;
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
+const DRIVER_RACE_LOGS_ENDPOINT_URL = 'https://driver-race-logs-endpoint-ujzabdesxa-uc.a.run.app';
+let raceLogInitialLoadDone = false;
 function getDriverFromUrl() {
 const params = new URLSearchParams(window.location.search);
 const driver = params.get('driver');
 return driver ? driver.trim() : '';
+}
+function getDriverPageStateFromUrl() {
+const params = new URLSearchParams(window.location.search);
+return {
+tab: params.get('tab') === 'race-logs' ? 'logs' : 'stats',
+season: params.get('season') || ''
+};
+}
+function setDriverPageParams(tab, season) {
+const url = new URL(window.location);
+if (tab === 'logs') url.searchParams.set('tab', 'race-logs');
+else url.searchParams.delete('tab');
+if (season) url.searchParams.set('season', season);
+else url.searchParams.delete('season');
+window.history.replaceState({}, '', url);
 }
 function setDriverTitle(driver) {
 const title = document.getElementById('driverTitle');
 if (!title) return;
 title.textContent = driver ? `${driver} Stats` : 'Driver Stats';
 }
-async function loadDriverStats(driver) {
+function setRaceLogLoadingVisible(visible) {
+const loading = document.getElementById('raceLogLoading');
+if (loading) loading.style.display = visible ? 'block' : 'none';
+}
+function showRaceLogError(message) {
+const error = document.getElementById('raceLogError');
+if (!error) return;
+error.textContent = message;
+error.style.display = 'block';
+}
+function clearRaceLogError() {
+const error = document.getElementById('raceLogError');
+if (error) error.style.display = 'none';
+}
+function setActiveDriverTab(tab) {
+const statsBtn = document.getElementById('driverTabStats');
+const logsBtn = document.getElementById('driverTabRaceLogs');
+const statsPanel = document.getElementById('driverStatsPanel');
+const logsPanel = document.getElementById('driverRaceLogsPanel');
+if (!statsBtn || !logsBtn || !statsPanel || !logsPanel) return;
+const showStats = tab === 'stats';
+statsBtn.classList.toggle('active', showStats);
+logsBtn.classList.toggle('active', !showStats);
+statsPanel.classList.toggle('active', showStats);
+logsPanel.classList.toggle('active', !showStats);
+const seasonSelect = document.getElementById('raceLogSeason');
+setDriverPageParams(tab, !showStats &amp;&amp; seasonSelect ? seasonSelect.value : '');
+}
+function getDefaultRaceLogSeason(seasons) {
+return seasons.length &gt; 0 ? seasons[0] : String(new Date().getFullYear());
+}
+function populateRaceLogSeasonOptions(data, preferredSeason = '') {
+const select = document.getElementById('raceLogSeason');
+if (!select) return;
+select.innerHTML = '';
+const seasons = [...new Set((Array.isArray(data) ? data : []).map((row) =&gt; String(row.Season)).filter(Boolean))]
+.sort((a, b) =&gt; b.localeCompare(a, undefined, { numeric: true }));
+seasons.forEach((season) =&gt; {
+const option = document.createElement('option');
+option.value = season;
+option.textContent = season;
+select.appendChild(option);
+});
+const defaultSeason = seasons.includes(preferredSeason) ? preferredSeason : getDefaultRaceLogSeason(seasons);
+if (select.options.length === 0) {
+const option = document.createElement('option');
+option.value = defaultSeason;
+option.textContent = defaultSeason;
+select.appendChild(option);
+}
+select.value = defaultSeason;
+}
+function renderRaceLogTable(rows) {
+const body = document.getElementById('raceLogBody');
+const wrap = document.getElementById('raceLogTableWrap');
+if (!body || !wrap) return;
+body.innerHTML = '';
+if (!Array.isArray(rows) || rows.length === 0) {
+body.innerHTML = '&lt;tr&gt;&lt;td colspan="11"&gt;No race logs available&lt;/td&gt;&lt;/tr&gt;';
+wrap.style.display = 'block';
+return;
+}
+rows.forEach((row) =&gt; {
+const tr = document.createElement('tr');
+['Series', 'Date', 'Track Type', 'Laps', 'SP', 'FP', 'PG', 'faPG', 'LL', 'Status', 'Pts'].forEach((col) =&gt; {
+const td = document.createElement('td');
+td.textContent = row[col] ?? '-';
+tr.appendChild(td);
+});
+body.appendChild(tr);
+});
+wrap.style.display = 'block';
+}
+async function loadDriverStats(driver, preferredSeason = '') {
 if (!driver) {
 showStatsError('No driver selected. Open this page from a driver link in the stats table.');
 return;
@@ -204,16 +380,70 @@ const response = await fetch(url.toString(), { cache: 'no-store' });
 const payload = await response.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load driver stats');
 setStatsTableData(payload.data, { linkDriverColumn: false });
+populateRaceLogSeasonOptions(payload.data, preferredSeason);
 } catch (e) {
 showStatsError(`Error loading stats: ${e.message}`);
 } finally {
 setStatsLoadingVisible(false);
 }
 }
-document.addEventListener('DOMContentLoaded', () =&gt; {
+async function loadRaceLogs(driver) {
+const seasonSelect = document.getElementById('raceLogSeason');
+const season = seasonSelect ? seasonSelect.value : String(new Date().getFullYear());
+if (!driver) {
+showRaceLogError('No driver selected. Open this page from a driver link in the stats table.');
+return;
+}
+setRaceLogLoadingVisible(true);
+clearRaceLogError();
+try {
+const url = new URL(DRIVER_RACE_LOGS_ENDPOINT_URL);
+url.searchParams.set('season', season);
+url.searchParams.set('driver', driver);
+const response = await fetch(url.toString(), { cache: 'no-store' });
+const payload = await response.json();
+if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load race logs');
+renderRaceLogTable(payload.data);
+setDriverPageParams('logs', season);
+} catch (e) {
+showRaceLogError(`Error loading race logs: ${e.message}`);
+} finally {
+setRaceLogLoadingVisible(false);
+}
+}
+document.addEventListener('DOMContentLoaded', async () =&gt; {
+const pageState = getDriverPageStateFromUrl();
 const driver = getDriverFromUrl();
 setDriverTitle(driver);
-loadDriverStats(driver);
+await loadDriverStats(driver, pageState.season);
+const statsTab = document.getElementById('driverTabStats');
+const raceLogsTab = document.getElementById('driverTabRaceLogs');
+const raceLogSeason = document.getElementById('raceLogSeason');
+if (statsTab) {
+statsTab.addEventListener('click', () =&gt; setActiveDriverTab('stats'));
+}
+if (raceLogsTab) {
+raceLogsTab.addEventListener('click', () =&gt; {
+setActiveDriverTab('logs');
+if (!raceLogInitialLoadDone) {
+loadRaceLogs(driver);
+raceLogInitialLoadDone = true;
+}
+});
+}
+if (raceLogSeason) {
+raceLogSeason.addEventListener('change', () =&gt; {
+if (document.getElementById('driverRaceLogsPanel')?.classList.contains('active')) loadRaceLogs(driver);
+else setDriverPageParams('stats', raceLogSeason.value);
+});
+}
+if (pageState.tab === 'logs') {
+setActiveDriverTab('logs');
+loadRaceLogs(driver);
+raceLogInitialLoadDone = true;
+} else {
+setActiveDriverTab('stats');
+}
 });
 &lt;/script&gt;</description></item><item><title>We Just Launched a Stats Page</title><link>http://localhost:1313/posts/stats-announcement/</link><pubDate>Tue, 12 May 2026 09:35:00 -0400</pubDate><guid>http://localhost:1313/posts/stats-announcement/</guid><description>&lt;img src="http://localhost:1313/posts/stats-announcement/cover.jpg" alt="Featured image of post We Just Launched a Stats Page" /&gt;&lt;p&gt;If you&amp;rsquo;re tired of our opinions and want to form your own equally bad opinions we have some great news: We just launched the &lt;a class="link" href="http://localhost:1313/stats/" &gt;&lt;strong&gt;Stats Page&lt;/strong&gt;&lt;/a&gt; on motorStats.io!&lt;/p&gt;
 &lt;p&gt;We have stats for every IRL/modern IndyCar race dating back to 1996 (CART/Champ Car era and older Indy 500&amp;rsquo;s are not available yet). These stats can be broken down by team, driver, or engine manufacturer.&lt;/p&gt;
