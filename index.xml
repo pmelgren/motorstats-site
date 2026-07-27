@@ -83,6 +83,7 @@ Laps: 'Laps: Total Laps Completed ',
 LL: 'LL: Total Laps Led',
 SP: 'SP: Average Starting Position',
 FP: 'FP: Average Finishing Position',
+ARP: 'ARP: Average Running Position',
 PG: 'PG: Average Positions Gained',
 DNF: 'DNF: Did Not Finish Count',
 W: 'W: Race Wins',
@@ -91,6 +92,7 @@ T10: 'T10: Top-10 Finishes',
 Pts: 'Pts: Championship Points',
 eqLaps: 'eqLaps: Track-equalized Laps Completed',
 eqLL: 'eqLL: Track-equalized Laps Led',
+eqARP: 'eqARP: Track-equalized Average Running Position',
 faPG: 'faPG: Finisher-adjusted Positions Gained',
 DNFm: 'DNFm: Mechanical DNFs',
 DNFc: 'DNFc: Contact DNFs'
@@ -724,6 +726,7 @@ Laps: 'Laps: Total Laps Completed ',
 LL: 'LL: Total Laps Led',
 SP: 'SP: Average Starting Position',
 FP: 'FP: Average Finishing Position',
+ARP: 'ARP: Average Running Position',
 PG: 'PG: Average Positions Gained',
 DNF: 'DNF: Did Not Finish Count',
 W: 'W: Race Wins',
@@ -732,6 +735,7 @@ T10: 'T10: Top-10 Finishes',
 Pts: 'Pts: Championship Points',
 eqLaps: 'eqLaps: Track-equalized Laps Completed',
 eqLL: 'eqLL: Track-equalized Laps Led',
+eqARP: 'eqARP: Track-equalized Average Running Position',
 faPG: 'faPG: Finisher-adjusted Positions Gained',
 DNFm: 'DNFm: Mechanical DNFs',
 DNFc: 'DNFc: Contact DNFs'
@@ -2740,6 +2744,7 @@ style="width:100%;height:675px;border:0;min-width:320px;"
 &lt;/div&gt;</description></item><item><title>Glossary</title><link>http://localhost:1313/glossary/</link><pubDate>Thu, 05 Feb 2026 00:00:00 -0500</pubDate><guid>http://localhost:1313/glossary/</guid><description>&lt;h2 id="a"&gt;A
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Adjusted Position Movement (adjPMov)&lt;/strong&gt;: A version of Position Movement that adjusts the starting order by removing cars that DNF, so movement reflects on-track passes/strategy rather than places gained from attrition.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Average Running Position (ARP)&lt;/strong&gt;: The average position for all laps run. Any lap not run - for example losing laps due to a DNF or finishing off the lead lap - does not count towards this calculation.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;At Stake&lt;/strong&gt;: A finishing-position battle where the gap between two adjacent finishers is within a “competitive” threshold (e.g., 3 seconds), indicating a plausible on-track fight.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;At Stake %&lt;/strong&gt;: The percentage of finishing positions that are “at stake” (i.e., adjacent finishers are within the competitive gap threshold) across a sample of races.&lt;/li&gt;
 &lt;/ul&gt;
@@ -2759,6 +2764,7 @@ style="width:100%;height:675px;border:0;min-width:320px;"
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;eqLaps&lt;/strong&gt;: Number of Laps Completed normalized to 100 laps per race. So if a car completes 100 out of 200 laps in the Indy 500 their eqLaps would be 50 for that race.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;eqLL&lt;/strong&gt;: Laps Led normalized to 100 laps per race. eqLL of 100 would indicate the driver led every lap in a race.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;eqARP&lt;/strong&gt;: Averge running position, weighted by race so that each race counts equally before the effects of DNFs or finishing off the lead lap.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
