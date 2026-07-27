@@ -8,6 +8,7 @@ draft: false
 ## A
 
 - **Adjusted Position Movement (adjPMov)**: A version of Position Movement that adjusts the starting order by removing cars that DNF, so movement reflects on-track passes/strategy rather than places gained from attrition.
+- **Average Running Position (ARP)**: The average position for all laps run. Any lap not run -  for example losing laps due to a DNF or finishing off the lead lap - does not count towards this calculation.
 - **At Stake**: A finishing-position battle where the gap between two adjacent finishers is within a “competitive” threshold (e.g., 3 seconds), indicating a plausible on-track fight.
 - **At Stake %**: The percentage of finishing positions that are “at stake” (i.e., adjacent finishers are within the competitive gap threshold) across a sample of races.
 
@@ -22,6 +23,7 @@ draft: false
 - **eq (Prefix)**: Track-Equalized metrics attempt to normalize all tracks to make metrics more comparable from track to track by normalizing all tracks to 100 laps with 1-minute average green flag lap times.
     - **eqLaps**: Number of Laps Completed normalized to 100 laps per race. So if a car completes 100 out of 200 laps in the Indy 500 their eqLaps would be 50 for that race.
     - **eqLL**: Laps Led normalized to 100 laps per race. eqLL of 100 would indicate the driver led every lap in a race.
+    - **eqARP**: Averge running position, weighted by race so that each race counts equally before the effects of DNFs or finishing off the lead lap.
 
 ## F
 
