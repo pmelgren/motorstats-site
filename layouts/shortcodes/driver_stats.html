@@ -18,6 +18,7 @@
             <option value="O">Oval</option>
             <option value="R">Road</option>
             <option value="S">Street</option>
+            <option value="RS">Road + Street</option>
             <option value="Indy500">Indy 500 Only</option>
           </select>
         </label>
@@ -193,7 +194,7 @@ function getDriverFromUrl() {
 function getDriverPageStateFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const trackType = params.get('trackType') || 'All';
-  const selectedTrackType = ['All', 'O', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
+  const selectedTrackType = ['All', 'O', 'RS', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
   return {
     tab: params.get('tab') === 'race-logs' ? 'logs' : 'stats',
     season: params.get('season') || '',

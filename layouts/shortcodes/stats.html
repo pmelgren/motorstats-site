@@ -64,6 +64,7 @@
           <option value="O">Oval</option>
           <option value="R">Road</option>
           <option value="S">Street</option>
+          <option value="RS">Road + Street</option>
           <option value="Indy500">Indy 500 Only</option>
         </select>
       </label>
@@ -288,7 +289,7 @@ function getParams() {
   const series = p.get('series') || 'IndyCar';
   const selectedSeries = ['IndyCar', 'IndyNXT', 'All'].includes(series) ? series : 'IndyCar';
   const trackType = p.get('trackType') || 'All';
-  const selectedTrackType = ['All', 'O', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
+  const selectedTrackType = ['All', 'O', 'RS', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
   return {
     series: selectedSeries,
     agg_level: p.get('agg_level') || 'Driver',
