@@ -16,6 +16,7 @@ Track Type
 &lt;option value="O"&gt;Oval&lt;/option&gt;
 &lt;option value="R"&gt;Road&lt;/option&gt;
 &lt;option value="S"&gt;Street&lt;/option&gt;
+&lt;option value="RS"&gt;Road + Street&lt;/option&gt;
 &lt;option value="Indy500"&gt;Indy 500 Only&lt;/option&gt;
 &lt;/select&gt;
 &lt;/label&gt;
@@ -336,7 +337,7 @@ return driver ? driver.trim() : '';
 function getDriverPageStateFromUrl() {
 const params = new URLSearchParams(window.location.search);
 const trackType = params.get('trackType') || 'All';
-const selectedTrackType = ['All', 'O', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
+const selectedTrackType = ['All', 'O', 'RS', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
 return {
 tab: params.get('tab') === 'race-logs' ? 'logs' : 'stats',
 season: params.get('season') || '',
@@ -594,6 +595,7 @@ Track Type
 &lt;option value="O"&gt;Oval&lt;/option&gt;
 &lt;option value="R"&gt;Road&lt;/option&gt;
 &lt;option value="S"&gt;Street&lt;/option&gt;
+&lt;option value="RS"&gt;Road + Street&lt;/option&gt;
 &lt;option value="Indy500"&gt;Indy 500 Only&lt;/option&gt;
 &lt;/select&gt;
 &lt;/label&gt;
@@ -947,7 +949,7 @@ const p = new URLSearchParams(window.location.search);
 const series = p.get('series') || 'IndyCar';
 const selectedSeries = ['IndyCar', 'IndyNXT', 'All'].includes(series) ? series : 'IndyCar';
 const trackType = p.get('trackType') || 'All';
-const selectedTrackType = ['All', 'O', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
+const selectedTrackType = ['All', 'O', 'RS', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
 return {
 series: selectedSeries,
 agg_level: p.get('agg_level') || 'Driver',
