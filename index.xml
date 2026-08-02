@@ -87,6 +87,7 @@ FP: 'FP: Average Finishing Position',
 ARP: 'ARP: Average Running Position',
 PG: 'PG: Average Positions Gained',
 DNF: 'DNF: Did Not Finish Count',
+pDNF: 'pDNF: Average position at the time of DNF',
 W: 'W: Race Wins',
 POD: 'POD: Podiums (Top 3 Finishes)',
 T10: 'T10: Top-10 Finishes',
@@ -203,13 +204,15 @@ if (wrap) wrap.style.display = 'block';
 &lt;th&gt;Date&lt;/th&gt;
 &lt;th&gt;Track Type&lt;/th&gt;
 &lt;th&gt;Laps&lt;/th&gt;
-&lt;th&gt;SP&lt;/th&gt;
-&lt;th&gt;FP&lt;/th&gt;
-&lt;th&gt;PG&lt;/th&gt;
-&lt;th&gt;faPG&lt;/th&gt;
-&lt;th&gt;LL&lt;/th&gt;
+&lt;th title="SP: Starting Position"&gt;SP&lt;/th&gt;
+&lt;th title="FP: Finishing Position"&gt;FP&lt;/th&gt;
+&lt;th title="ARP: Average Running Position"&gt;ARP&lt;/th&gt;
+&lt;th title="PG: Positions Gained"&gt;PG&lt;/th&gt;
+&lt;th title="faPG: Finisher-adjusted Positions Gained"&gt;faPG&lt;/th&gt;
+&lt;th title="LL: Laps Led"&gt;LL&lt;/th&gt;
 &lt;th&gt;Status&lt;/th&gt;
-&lt;th&gt;Pts&lt;/th&gt;
+&lt;th title="pDNF: Position at DNF"&gt;pDNF&lt;/th&gt;
+&lt;th title="Pts: Championship Points"&gt;Pts&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody id="raceLogBody"&gt;&lt;/tbody&gt;
@@ -438,13 +441,13 @@ const wrap = document.getElementById('raceLogTableWrap');
 if (!body || !wrap) return;
 body.innerHTML = '';
 if (!Array.isArray(rows) || rows.length === 0) {
-body.innerHTML = '&lt;tr&gt;&lt;td colspan="11"&gt;No race logs available&lt;/td&gt;&lt;/tr&gt;';
+body.innerHTML = '&lt;tr&gt;&lt;td colspan="13"&gt;No race logs available&lt;/td&gt;&lt;/tr&gt;';
 wrap.style.display = 'block';
 return;
 }
 rows.forEach((row) =&gt; {
 const tr = document.createElement('tr');
-['Series', 'Date', 'Track Type', 'Laps', 'SP', 'FP', 'PG', 'faPG', 'LL', 'Status', 'Pts'].forEach((col) =&gt; {
+['Series', 'Date', 'Track Type', 'Laps', 'SP', 'FP', 'ARP', 'PG', 'faPG', 'LL', 'Status', 'pDNF', 'Pts'].forEach((col) =&gt; {
 const td = document.createElement('td');
 td.textContent = row[col] ?? '-';
 tr.appendChild(td);
@@ -731,6 +734,7 @@ FP: 'FP: Average Finishing Position',
 ARP: 'ARP: Average Running Position',
 PG: 'PG: Average Positions Gained',
 DNF: 'DNF: Did Not Finish Count',
+pDNF: 'pDNF: Average position at the time of DNF',
 W: 'W: Race Wins',
 POD: 'POD: Podiums (Top 3 Finishes)',
 T10: 'T10: Top-10 Finishes',
