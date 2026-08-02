@@ -54,13 +54,15 @@
             <th>Date</th>
             <th>Track Type</th>
             <th>Laps</th>
-            <th>SP</th>
-            <th>FP</th>
-            <th>PG</th>
-            <th>faPG</th>
-            <th>LL</th>
+            <th title="SP: Starting Position">SP</th>
+            <th title="FP: Finishing Position">FP</th>
+            <th title="ARP: Average Running Position">ARP</th>
+            <th title="PG: Positions Gained">PG</th>
+            <th title="faPG: Finisher-adjusted Positions Gained">faPG</th>
+            <th title="LL: Laps Led">LL</th>
             <th>Status</th>
-            <th>Pts</th>
+            <th title="pDNF: Position at DNF">pDNF</th>
+            <th title="Pts: Championship Points">Pts</th>
           </tr>
         </thead>
         <tbody id="raceLogBody"></tbody>
@@ -313,14 +315,14 @@ function renderRaceLogTable(rows) {
 
   body.innerHTML = '';
   if (!Array.isArray(rows) || rows.length === 0) {
-    body.innerHTML = '<tr><td colspan="11">No race logs available</td></tr>';
+    body.innerHTML = '<tr><td colspan="13">No race logs available</td></tr>';
     wrap.style.display = 'block';
     return;
   }
 
   rows.forEach((row) => {
     const tr = document.createElement('tr');
-    ['Series', 'Date', 'Track Type', 'Laps', 'SP', 'FP', 'PG', 'faPG', 'LL', 'Status', 'Pts'].forEach((col) => {
+    ['Series', 'Date', 'Track Type', 'Laps', 'SP', 'FP', 'ARP', 'PG', 'faPG', 'LL', 'Status', 'pDNF', 'Pts'].forEach((col) => {
       const td = document.createElement('td');
       td.textContent = row[col] ?? '-';
       tr.appendChild(td);
