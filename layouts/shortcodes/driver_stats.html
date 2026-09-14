@@ -52,6 +52,7 @@
           <tr>
             <th>Series</th>
             <th>Date</th>
+            <th>Track</th>
             <th>Track Type</th>
             <th>Laps</th>
             <th title="SP: Starting Position">SP</th>
@@ -315,14 +316,14 @@ function renderRaceLogTable(rows) {
 
   body.innerHTML = '';
   if (!Array.isArray(rows) || rows.length === 0) {
-    body.innerHTML = '<tr><td colspan="13">No race logs available</td></tr>';
+    body.innerHTML = '<tr><td colspan="14">No race logs available</td></tr>';
     wrap.style.display = 'block';
     return;
   }
 
   rows.forEach((row) => {
     const tr = document.createElement('tr');
-    ['Series', 'Date', 'Track Type', 'Laps', 'SP', 'FP', 'ARP', 'PG', 'faPG', 'LL', 'Status', 'pDNF', 'Pts'].forEach((col) => {
+    ['Series', 'Date', 'Track', 'Track Type', 'Laps', 'SP', 'FP', 'ARP', 'PG', 'faPG', 'LL', 'Status', 'pDNF', 'Pts'].forEach((col) => {
       const td = document.createElement('td');
       td.textContent = row[col] ?? '-';
       tr.appendChild(td);
@@ -355,7 +356,7 @@ async function loadDriverStats(driver, preferredSeason = '', trackType = 'All', 
       url.searchParams.set('endDate', endDate);
     }
 
-    const response = await fetch(url.toString(), { cache: 'no-store' });
+    const response = await fetch(url.toString());
     const payload = await response.json();
     if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load driver stats');
     setStatsTableData(payload.data, { linkDriverColumn: false });
@@ -384,7 +385,7 @@ async function loadRaceLogs(driver) {
     url.searchParams.set('season', season);
     url.searchParams.set('driver', driver);
 
-    const response = await fetch(url.toString(), { cache: 'no-store' });
+    const response = await fetch(url.toString());
     const payload = await response.json();
     if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load race logs');
     renderRaceLogTable(payload.data);

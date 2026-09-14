@@ -339,7 +339,7 @@ async function loadStats(series, agg_level, season, team, trackType, minRaces, s
       url.searchParams.set('endDate', endDate);
     }
     console.log('Fetching stats:', url.toString());
-    const r = await fetch(url.toString(), { cache: 'no-store' });
+    const r = await fetch(url.toString());
     const payload = await r.json();
     if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
     setStatsTableData(payload.data, { linkDriverColumn: agg_level === 'Driver' });
