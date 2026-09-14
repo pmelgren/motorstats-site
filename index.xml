@@ -202,6 +202,7 @@ if (wrap) wrap.style.display = 'block';
 &lt;tr&gt;
 &lt;th&gt;Series&lt;/th&gt;
 &lt;th&gt;Date&lt;/th&gt;
+&lt;th&gt;Track&lt;/th&gt;
 &lt;th&gt;Track Type&lt;/th&gt;
 &lt;th&gt;Laps&lt;/th&gt;
 &lt;th title="SP: Starting Position"&gt;SP&lt;/th&gt;
@@ -441,13 +442,13 @@ const wrap = document.getElementById('raceLogTableWrap');
 if (!body || !wrap) return;
 body.innerHTML = '';
 if (!Array.isArray(rows) || rows.length === 0) {
-body.innerHTML = '&lt;tr&gt;&lt;td colspan="13"&gt;No race logs available&lt;/td&gt;&lt;/tr&gt;';
+body.innerHTML = '&lt;tr&gt;&lt;td colspan="14"&gt;No race logs available&lt;/td&gt;&lt;/tr&gt;';
 wrap.style.display = 'block';
 return;
 }
 rows.forEach((row) =&gt; {
 const tr = document.createElement('tr');
-['Series', 'Date', 'Track Type', 'Laps', 'SP', 'FP', 'ARP', 'PG', 'faPG', 'LL', 'Status', 'pDNF', 'Pts'].forEach((col) =&gt; {
+['Series', 'Date', 'Track', 'Track Type', 'Laps', 'SP', 'FP', 'ARP', 'PG', 'faPG', 'LL', 'Status', 'pDNF', 'Pts'].forEach((col) =&gt; {
 const td = document.createElement('td');
 td.textContent = row[col] ?? '-';
 tr.appendChild(td);
@@ -476,7 +477,7 @@ if (startDate &amp;&amp; endDate) {
 url.searchParams.set('startDate', startDate);
 url.searchParams.set('endDate', endDate);
 }
-const response = await fetch(url.toString(), { cache: 'no-store' });
+const response = await fetch(url.toString());
 const payload = await response.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load driver stats');
 setStatsTableData(payload.data, { linkDriverColumn: false });
@@ -500,7 +501,7 @@ try {
 const url = new URL(DRIVER_RACE_LOGS_ENDPOINT_URL);
 url.searchParams.set('season', season);
 url.searchParams.set('driver', driver);
-const response = await fetch(url.toString(), { cache: 'no-store' });
+const response = await fetch(url.toString());
 const payload = await response.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load race logs');
 renderRaceLogTable(payload.data);
@@ -1000,7 +1001,7 @@ url.searchParams.set('startDate', startDate);
 url.searchParams.set('endDate', endDate);
 }
 console.log('Fetching stats:', url.toString());
-const r = await fetch(url.toString(), { cache: 'no-store' });
+const r = await fetch(url.toString());
 const payload = await r.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
 setStatsTableData(payload.data, { linkDriverColumn: agg_level === 'Driver' });
@@ -3469,7 +3470,7 @@ style="width:100%;height:525px;border:0;"
 &lt;p&gt;&lt;img src="http://localhost:1313/posts/hybrid-era-reliability/fire3.png"
 width="600"
 height="300"
-srcset="http://localhost:1313/posts/hybrid-era-reliability/fire3_hu_c40f4d620184afe9.png 480w, http://localhost:1313/posts/hybrid-era-reliability/fire3_hu_d591f5597070bede.png 1024w"
+srcset="http://localhost:1313/posts/hybrid-era-reliability/fire3_hu_8d141f45f3df36ef.png 480w, http://localhost:1313/posts/hybrid-era-reliability/fire3_hu_72fc54032e41a0b1.png 1024w"
 loading="lazy"
 alt="An Example of a “Fire” DNF"
 class="gallery-image"
