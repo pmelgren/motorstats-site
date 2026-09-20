@@ -1,0 +1,23 @@
+<style>
+  .compact-table {
+    margin: 0 0 1.5em;
+  }
+
+  .compact-table .table-wrapper {
+    display: block;
+    overflow-x: auto;
+    padding: 0 var(--card-padding);
+    margin: 0;
+  }
+
+  .compact-table table {
+    width: max-content;
+    min-width: 0;
+    margin: 0;
+    table-layout: auto;
+  }
+</style>
+
+<div class="compact-table">
+  {{ .Inner | markdownify }}
+</div>
