@@ -3,7 +3,7 @@ title: Running Position and Future Success
 slug: running-position-correlations
 date: 2026-09-20T00:00:00-05:00
 author: "Pete Melgren"
-draft: true
+draft: false
 description: Correlation Heat Maps Can See The Future!
 image: cover.jpg
 categories:
