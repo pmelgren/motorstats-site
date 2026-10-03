@@ -17,7 +17,6 @@
         Agg Level
         <select id="agg_level" name="agg_level">
           <option value="Driver" selected>Driver</option>
-          <option value="Car">Car</option>
           <option value="Team">Team</option>
           <option value="Engine">Engine</option>
         </select>
@@ -290,9 +289,11 @@ function getParams() {
   const selectedSeries = ['IndyCar', 'IndyNXT', 'All'].includes(series) ? series : 'IndyCar';
   const trackType = p.get('trackType') || 'All';
   const selectedTrackType = ['All', 'O', 'RS', 'R', 'S', 'Indy500'].includes(trackType) ? trackType : 'All';
+  const aggLevel = p.get('agg_level') || 'Driver';
+  const selectedAggLevel = ['Driver', 'Team', 'Engine'].includes(aggLevel) ? aggLevel : 'Driver';
   return {
     series: selectedSeries,
-    agg_level: p.get('agg_level') || 'Driver',
+    agg_level: selectedAggLevel,
     season: p.get('season') || '2026',
     team: p.get('team') || 'All',
     trackType: selectedTrackType,
@@ -342,7 +343,10 @@ async function loadStats(series, agg_level, season, team, trackType, minRaces, s
     const r = await fetch(url.toString());
     const payload = await r.json();
     if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
-    setStatsTableData(payload.data, { linkDriverColumn: agg_level === 'Driver' });
+    setStatsTableData(payload.data, {
+      linkDriverColumn: true,
+      sourceSeries: series
+    });
   } catch (e) {
     showStatsError(`Error loading stats: ${e.message}`);
   } finally {

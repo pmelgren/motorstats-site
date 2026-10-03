@@ -106,14 +106,19 @@ function hideStatsTable() {
   if (wrap) wrap.style.display = 'none';
 }
 
-function buildDriverUrl(driverName) {
-  return '/driver/?driver=' + encodeURIComponent(driverName);
+const ENTRY_LINK_PARAMS = { Driver: 'driver', Team: 'team', Engine: 'engine', Eng: 'engine' };
+
+function buildEntryUrl(column, name) {
+  const query = new URLSearchParams();
+  query.set(ENTRY_LINK_PARAMS[column], String(name));
+  if (statsTableOptions.sourceSeries) query.set('series', statsTableOptions.sourceSeries);
+  return '/entries/?' + query.toString();
 }
 
 function renderCellValue(column, value) {
-  if (statsTableOptions.linkDriverColumn && column === 'Driver' && value) {
+  if (statsTableOptions.linkDriverColumn && ENTRY_LINK_PARAMS[column] && value && value !== '-') {
     const link = document.createElement('a');
-    link.href = buildDriverUrl(String(value));
+    link.href = buildEntryUrl(column, String(value));
     link.textContent = value;
     return link;
   }

@@ -178,7 +178,7 @@ Here are the driver seasons that most underperformed their ARP:
 | Felix Rosenqvist    |     2023 |  17 |  10.2 | 14.5 |   -4.2 |      5 |
 | David Malukas       |     2023 |  17 |  12.2 | 16.4 |   -4.2 |      6 |
 
-Man, Josef really had a bad 2025, talk about an outlier. The rest of the list mostly makes sense with a high number of DNFs[^4], but Conor Daly in 2025 also stands out with just 1 DNF while landing 5th on this list. Looking at his [race logs](https://motorstats.io/driver/?driver=Conor+Daly&tab=race-logs&season=2025), there isn't much explanation other than he must have had a lot of races where he lost positions late.
+Man, Josef really had a bad 2025, talk about an outlier. The rest of the list mostly makes sense with a high number of DNFs[^4], but Conor Daly in 2025 also stands out with just 1 DNF while landing 5th on this list. Looking at his [race logs](https://motorstats.io/entries/?driver=Conor+Daly&tab=race-logs&season=2025), there isn't much explanation other than he must have had a lot of races where he lost positions late.
 
 Now let's look at the opposite side of things - the drivers who outperformed their ARP over a whole season:
 
