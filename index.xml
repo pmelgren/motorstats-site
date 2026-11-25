@@ -1516,7 +1516,7 @@ const STATS_ID_COLUMNS = ['Driver', 'Car', 'Team', 'Eng'];
 const STATS_TABS = {
 Summary: { columns: ['R','FP','QP','W','Poles','PG','eqLaps','LL','eqLL','ARP','eqARP','DNF','Pts'], defaultSort: { column: 'Pts', direction: 'desc' } },
 Standard: { columns: ['R','Laps','SP','FP','ARP','PG','LL','DNF','W','POD','T10','Pts'], defaultSort: { column: 'Pts', direction: 'desc' } },
-Advanced: { columns: ['eqLaps','ARP','eqARP','LL','eqLL','PG','faPG','DNF','pDNF','DNFm','DNFc'], defaultSort: { column: 'eqARP', direction: 'asc' } },
+Advanced: { columns: ['eqLaps','ARP','eqARP','LL','eqLL','PG','faPG','DNF','DNFm','DNFc','nGap','Qual-'], defaultSort: { column: 'eqARP', direction: 'asc' } },
 Qualifying: { columns: ['QP','Poles','F6','F12','vsTeam','nGap','Qual-'], defaultSort: { column: 'QP', direction: 'asc' } }
 };
 const SIDEBAR_STATE_KEY = 'statsSidebarCollapsed';
@@ -3432,6 +3432,12 @@ style="width:100%;height:675px;border:0;min-width:320px;"
 &lt;h2 id="f"&gt;F
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;
+&lt;p&gt;&lt;strong&gt;F12&lt;/strong&gt;: Count of how often a car qualifies in the top 12. This is based on qualifying sessions, not races, and is calculated before grid penalites are applied. Includes ovals.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;F6&lt;/strong&gt;: Count of how often a car qualifies in the top 6. This is based on qualifying sessions, not races, and is calculated before grid penalites are applied. Includes ovals.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;strong&gt;fa (Prefix)&lt;/strong&gt;: Finisher-adjusted metrics adjusts the starting order by removing cars that DNF. These metrics are intended to remove the effects of attrition and simply capture the effect on-track passes/strategy.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;faPG&lt;/strong&gt;: Finisher-adjusted Positions Gained.&lt;/li&gt;
@@ -3455,14 +3461,24 @@ style="width:100%;height:675px;border:0;min-width:320px;"
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Margin of Victory (MoV)&lt;/strong&gt;: The time gap between P1 and P2 at the end of a race.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id="n"&gt;N
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;nGap&lt;/strong&gt;: Normalized Qualifying Gap - The difference between an entry&amp;rsquo;s qualifying time and the pole sitter&amp;rsquo;s time. Adjusted to a 60-second median lap time and session-normalized.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="p"&gt;P
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;PG&lt;/strong&gt;: Positions Gained - The absolute difference between a car’s finishing position and starting position; a simple measure of how much a car improved over the course of a race.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;POD&lt;/strong&gt;: Podium - A top-3 finish in a race.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Poles&lt;/strong&gt;: Total Qualifying sessions in which the entry finished first. Calculated before grid penalties are applied and excludes races in which an entry starts on pole but no qualifying session took place.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Points at Stake&lt;/strong&gt;: For a given Position at Stake, the point value assigned to the higher finishing position in that battle (used to weight battles toward the front of the field).&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Points at Stake %&lt;/strong&gt;: Total Points at Stake divided by total points available across the sample; a weighted measure of how much of the race’s “valuable” finishing order was contested.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Position at Stake&lt;/strong&gt;: See &lt;a class="link" href="#a" &gt;At Stake&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;PtsG&lt;/strong&gt;: Points Gained - Points gained by a car moving up in the order from its starting position to its finishing position. Similar to PG but weighted to reflect the non-linear way in which championship points are awarded.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="q"&gt;Q
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;QP&lt;/strong&gt;: Qualifying Position.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Qual-&lt;/strong&gt;: Qual- measure&amp;rsquo;s an entries&amp;rsquo; performance against the median session-normalized time. 0 is the median and lower numbers represent faster times. -10 represents a qualifying time that is 99% of that session&amp;rsquo;s median time.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="r"&gt;R
 &lt;/h2&gt;&lt;ul&gt;
@@ -3475,6 +3491,10 @@ style="width:100%;height:675px;border:0;min-width:320px;"
 &lt;h2 id="t"&gt;T
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;T10&lt;/strong&gt;: A Top-10 finish in a race.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v"&gt;V
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;vsTeam&lt;/strong&gt;: Win % vs team in qualifying. For teams with more than 2 entries, each entry&amp;rsquo;s vsTeam is the % of teammates that they beat. For example, the middle car in a 3-car team will receive a vsTeam of 50%.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="w"&gt;W
 &lt;/h2&gt;&lt;ul&gt;
