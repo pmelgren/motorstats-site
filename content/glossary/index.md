@@ -27,6 +27,8 @@ draft: false
 
 ## F
 
+- **F12**: Count of how often a car qualifies in the top 12. This is based on qualifying sessions, not races, and is calculated before grid penalites are applied. Includes ovals.
+- **F6**: Count of how often a car qualifies in the top 6. This is based on qualifying sessions, not races, and is calculated before grid penalites are applied. Includes ovals.
 - **fa (Prefix)**: Finisher-adjusted metrics adjusts the starting order by removing cars that DNF. These metrics are intended to remove the effects of attrition and simply capture the effect on-track passes/strategy.
     - **faPG**: Finisher-adjusted Positions Gained.
     - **faPtsG**: Finisher-adjusted Points Gained.
@@ -46,14 +48,24 @@ draft: false
 
 - **Margin of Victory (MoV)**: The time gap between P1 and P2 at the end of a race.
 
+## N
+
+- **nGap**: Normalized Qualifying Gap - The difference between an entry's qualifying time and the pole sitter's time. Adjusted to a 60-second median lap time and session-normalized.
+
 ## P
 
 - **PG**: Positions Gained - The absolute difference between a car’s finishing position and starting position; a simple measure of how much a car improved over the course of a race.
 - **POD**: Podium - A top-3 finish in a race.
+- **Poles**: Total Qualifying sessions in which the entry finished first. Calculated before grid penalties are applied and excludes races in which an entry starts on pole but no qualifying session took place.
 - **Points at Stake**: For a given Position at Stake, the point value assigned to the higher finishing position in that battle (used to weight battles toward the front of the field).
 - **Points at Stake %**: Total Points at Stake divided by total points available across the sample; a weighted measure of how much of the race’s “valuable” finishing order was contested.
 - **Position at Stake**: See [At Stake](#a).
 - **PtsG**: Points Gained - Points gained by a car moving up in the order from its starting position to its finishing position. Similar to PG but weighted to reflect the non-linear way in which championship points are awarded. 
+
+## Q
+
+- **QP**: Qualifying Position.
+- **Qual-**: Qual- measure's an entries' performance against the median session-normalized time. 0 is the median and lower numbers represent faster times. -10 represents a qualifying time that is 99% of that session's median time. 
 
 ## R
 
@@ -66,6 +78,10 @@ draft: false
 ## T
 
 - **T10**: A Top-10 finish in a race.
+
+## V
+
+- **vsTeam**: Win % vs team in qualifying. For teams with more than 2 entries, each entry's vsTeam is the % of teammates that they beat. For example, the middle car in a 3-car team will receive a vsTeam of 50%.
 
 ## W
 
