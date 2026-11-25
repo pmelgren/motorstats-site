@@ -147,6 +147,8 @@
     <a class="stats-glossary-link" href="/glossary/">View Stats Glossary</a>
   </div>
 
+  <div id="statsTabs" class="stats-tabs"></div>
+
   {{ partial "stats_table.html" . }}
 
   <div class="stats-disclaimer stats-panel">Due to problems with the data source, data is not complete for 2008, 2009, 2011 and 2013</div>
@@ -199,6 +201,24 @@
 }
 .stats-form button:hover { filter: brightness(0.95); }
 
+.stats-tabs {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: .8rem;
+}
+.stats-tab-btn {
+  border: 1px solid var(--card-separator-color);
+  background: var(--body-background);
+  color: var(--card-text-color);
+  border-radius: .5rem;
+  padding: .45rem .8rem;
+  cursor: pointer;
+}
+.stats-tab-btn.active {
+  background: var(--card-background);
+  font-weight: 600;
+}
+
 .stats-glossary-link {
   margin-left: auto;
   font-size: 1.1rem;
@@ -244,6 +264,14 @@
 
 <script>
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
+
+const STATS_ID_COLUMNS = ['Driver', 'Car', 'Team', 'Eng'];
+const STATS_TABS = {
+  Summary:  { columns: ['R','FP','QP','W','Poles','PG','eqLaps','LL','eqLL','ARP','eqARP','DNF','Pts'], defaultSort: { column: 'Pts', direction: 'desc' } },
+  Standard: { columns: ['R','Laps','SP','FP','ARP','PG','LL','DNF','W','POD','T10','Pts'], defaultSort: { column: 'Pts', direction: 'desc' } },
+  Advanced: { columns: ['eqLaps','ARP','eqARP','LL','eqLL','PG','faPG','DNF','pDNF','DNFm','DNFc'], defaultSort: { column: 'eqARP', direction: 'asc' } },
+  Qualifying: { columns: ['QP','Poles','F6','F12','vsTeam','nGap','Qual-'], defaultSort: { column: 'QP', direction: 'asc' } }
+};
 
 const SIDEBAR_STATE_KEY = 'statsSidebarCollapsed';
 let dateRangePicker = null;
@@ -322,6 +350,58 @@ function setParams(series, agg_level, season, team, trackType, minRaces, startDa
   window.history.replaceState({}, '', u);
 }
 
+const statsTabKeys = Object.keys(STATS_TABS);
+let activeStatsTab = statsTabKeys[0];
+
+function getActiveStatsTab() {
+  const requested = (new URLSearchParams(window.location.search).get('tab') || '').toLowerCase();
+  return statsTabKeys.find((k) => k.toLowerCase() === requested) || statsTabKeys[0];
+}
+
+function buildVisibleStatsColumns(data, tabConfig) {
+  const idColumns = Object.keys(data[0]).filter((k) => STATS_ID_COLUMNS.includes(k));
+  return idColumns.concat(tabConfig.columns.filter((c) => c in data[0]));
+}
+
+function setStatsTabParam(tab) {
+  const u = new URL(window.location);
+  if (tab === statsTabKeys[0]) u.searchParams.delete('tab');
+  else u.searchParams.set('tab', tab.toLowerCase());
+  window.history.replaceState({}, '', u);
+}
+
+function updateStatsTabButtons() {
+  document.querySelectorAll('#statsTabs .stats-tab-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.tab === activeStatsTab);
+  });
+}
+
+function selectStatsTab(tab) {
+  activeStatsTab = tab;
+  setStatsTabParam(tab);
+  updateStatsTabButtons();
+  const tabConfig = STATS_TABS[tab];
+  const viewOptions = { defaultSort: tabConfig.defaultSort };
+  if (statsData.length > 0) viewOptions.visibleColumns = buildVisibleStatsColumns(statsData, tabConfig);
+  setStatsTableView(viewOptions);
+}
+
+function initializeStatsTabs() {
+  const container = document.getElementById('statsTabs');
+  if (!container) return;
+  statsTabKeys.forEach((tab) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'stats-tab-btn';
+    btn.dataset.tab = tab;
+    btn.textContent = tab;
+    btn.addEventListener('click', () => selectStatsTab(tab));
+    container.appendChild(btn);
+  });
+  activeStatsTab = getActiveStatsTab();
+  updateStatsTabButtons();
+}
+
 async function loadStats(series, agg_level, season, team, trackType, minRaces, startDate, endDate) {
   setStatsLoadingVisible(true);
   clearStatsError();
@@ -343,9 +423,12 @@ async function loadStats(series, agg_level, season, team, trackType, minRaces, s
     const r = await fetch(url.toString());
     const payload = await r.json();
     if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
+    const tabConfig = STATS_TABS[activeStatsTab];
     setStatsTableData(payload.data, {
       linkDriverColumn: true,
-      sourceSeries: series
+      sourceSeries: series,
+      visibleColumns: payload.data.length > 0 ? buildVisibleStatsColumns(payload.data, tabConfig) : undefined,
+      defaultSort: tabConfig.defaultSort
     });
   } catch (e) {
     showStatsError(`Error loading stats: ${e.message}`);
@@ -398,6 +481,7 @@ document.getElementById('statsForm').addEventListener('submit', (e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   initializeSidebarToggle();
+  initializeStatsTabs();
   const { series, agg_level, season, team, trackType, minRaces, startDate, endDate } = getParams();
   const seasonForLoad = startDate && endDate ? 'All' : season;
   document.getElementById('series').value = series;

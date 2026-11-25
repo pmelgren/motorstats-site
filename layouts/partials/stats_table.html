@@ -58,7 +58,9 @@ const COLUMN_TOOLTIPS = {
   Laps: 'Laps: Total Laps Completed ',
   LL: 'LL: Total Laps Led',
   SP: 'SP: Average Starting Position',
+  QP: 'QP: Average Qualifying Position',
   FP: 'FP: Average Finishing Position',
+  Poles: 'Count of Times Ranked First in Qualifying',
   ARP: 'ARP: Average Running Position',
   PG: 'PG: Average Positions Gained',
   DNF: 'DNF: Did Not Finish Count',
@@ -72,7 +74,12 @@ const COLUMN_TOOLTIPS = {
   eqARP: 'eqARP: Track-equalized Average Running Position',
   faPG: 'faPG: Finisher-adjusted Positions Gained',
   DNFm: 'DNFm: Mechanical DNFs',
-  DNFc: 'DNFc: Contact DNFs'
+  DNFc: 'DNFc: Contact DNFs',
+  F6: 'F6: Top 6 Qualifying Performances (Includes Ovals)',
+  F12: 'F12: Top 12 Qualifying Performances (Includes Ovals)',
+  vsTeam: 'vsTeam: Win % vs Teammates in Qualifying',
+  nGap: 'nGap: Average Gap Based on a Normalized 60s Lap Time',
+  'Qual-': 'Qual-: Qualifying Performance, 100 is Median'
 };
 
 let statsData = [];
@@ -107,6 +114,7 @@ function hideStatsTable() {
 }
 
 const ENTRY_LINK_PARAMS = { Driver: 'driver', Team: 'team', Engine: 'engine', Eng: 'engine' };
+const PERCENT_COLUMNS = new Set(['vsTeam']);
 
 function buildEntryUrl(column, name) {
   const query = new URLSearchParams();
@@ -121,6 +129,9 @@ function renderCellValue(column, value) {
     link.href = buildEntryUrl(column, String(value));
     link.textContent = value;
     return link;
+  }
+  if (PERCENT_COLUMNS.has(column) && typeof value === 'number') {
+    return document.createTextNode(value + '%');
   }
   return document.createTextNode(value ?? '-');
 }
@@ -138,7 +149,9 @@ function renderTable() {
     return;
   }
 
-  const columns = Object.keys(statsData[0]);
+  const columns = Array.isArray(statsTableOptions.visibleColumns)
+    ? statsTableOptions.visibleColumns.filter((col) => col in statsData[0])
+    : Object.keys(statsData[0]);
   columns.forEach((col) => {
     const th = document.createElement('th');
     th.textContent = col;
@@ -159,13 +172,22 @@ function renderTable() {
   });
 }
 
-function sortBy(column) {
-  if (sortColumn === column) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-  else { sortColumn = column; sortDirection = 'desc'; }
+function isEmptySortValue(value) {
+  return value === null || value === undefined || value === '' || value === '-';
+}
+
+function applySort(column, direction) {
+  sortColumn = column;
+  sortDirection = direction;
 
   statsData.sort((a, b) => {
-    const av = a[column] ?? 0;
-    const bv = b[column] ?? 0;
+    const av = a[column];
+    const bv = b[column];
+    const aEmpty = isEmptySortValue(av);
+    const bEmpty = isEmptySortValue(bv);
+    if (aEmpty && bEmpty) return 0;
+    if (aEmpty) return 1;
+    if (bEmpty) return -1;
     const an = Number(av);
     const bn = Number(bv);
     if (!Number.isNaN(an) && !Number.isNaN(bn)) return sortDirection === 'asc' ? an - bn : bn - an;
@@ -175,13 +197,41 @@ function sortBy(column) {
   renderTable();
 }
 
-function setStatsTableData(data, options = {}) {
-  statsData = Array.isArray(data) ? data : [];
-  statsTableOptions = options;
+function sortBy(column) {
+  const direction = sortColumn === column ? (sortDirection === 'asc' ? 'desc' : 'asc') : 'desc';
+  applySort(column, direction);
+}
+
+function resetStatsSort() {
   sortColumn = null;
   sortDirection = 'desc';
   renderTable();
+}
+
+function showStatsTable() {
   const wrap = document.getElementById('statsTableWrap');
   if (wrap) wrap.style.display = 'block';
+}
+
+function setStatsTableData(data, options = {}) {
+  statsData = Array.isArray(data) ? data : [];
+  statsTableOptions = options;
+  if (options.defaultSort && statsData.length > 0 && options.defaultSort.column in statsData[0]) {
+    applySort(options.defaultSort.column, options.defaultSort.direction || 'desc');
+  } else {
+    resetStatsSort();
+  }
+  showStatsTable();
+}
+
+function setStatsTableView(viewOptions = {}) {
+  statsTableOptions = Object.assign({}, statsTableOptions, viewOptions);
+  if (statsData.length === 0) return;
+  const defaultSort = statsTableOptions.defaultSort;
+  if (defaultSort && defaultSort.column in statsData[0]) {
+    applySort(defaultSort.column, defaultSort.direction || 'desc');
+  } else {
+    resetStatsSort();
+  }
 }
 </script>
