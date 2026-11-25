@@ -83,7 +83,9 @@ R: 'R: Total Races',
 Laps: 'Laps: Total Laps Completed ',
 LL: 'LL: Total Laps Led',
 SP: 'SP: Average Starting Position',
+QP: 'QP: Average Qualifying Position',
 FP: 'FP: Average Finishing Position',
+Poles: 'Count of Times Ranked First in Qualifying',
 ARP: 'ARP: Average Running Position',
 PG: 'PG: Average Positions Gained',
 DNF: 'DNF: Did Not Finish Count',
@@ -97,7 +99,12 @@ eqLL: 'eqLL: Track-equalized Laps Led',
 eqARP: 'eqARP: Track-equalized Average Running Position',
 faPG: 'faPG: Finisher-adjusted Positions Gained',
 DNFm: 'DNFm: Mechanical DNFs',
-DNFc: 'DNFc: Contact DNFs'
+DNFc: 'DNFc: Contact DNFs',
+F6: 'F6: Top 6 Qualifying Performances (Includes Ovals)',
+F12: 'F12: Top 12 Qualifying Performances (Includes Ovals)',
+vsTeam: 'vsTeam: Win % vs Teammates in Qualifying',
+nGap: 'nGap: Average Gap Based on a Normalized 60s Lap Time',
+'Qual-': 'Qual-: Qualifying Performance, 100 is Median'
 };
 let statsData = [];
 let sortColumn = null;
@@ -125,6 +132,7 @@ const wrap = document.getElementById('statsTableWrap');
 if (wrap) wrap.style.display = 'none';
 }
 const ENTRY_LINK_PARAMS = { Driver: 'driver', Team: 'team', Engine: 'engine', Eng: 'engine' };
+const PERCENT_COLUMNS = new Set(['vsTeam']);
 function buildEntryUrl(column, name) {
 const query = new URLSearchParams();
 query.set(ENTRY_LINK_PARAMS[column], String(name));
@@ -138,6 +146,9 @@ link.href = buildEntryUrl(column, String(value));
 link.textContent = value;
 return link;
 }
+if (PERCENT_COLUMNS.has(column) &amp;&amp; typeof value === 'number') {
+return document.createTextNode(value + '%');
+}
 return document.createTextNode(value ?? '-');
 }
 function renderTable() {
@@ -150,7 +161,9 @@ if (statsData.length === 0) {
 body.innerHTML = '&lt;tr&gt;&lt;td&gt;No data available&lt;/td&gt;&lt;/tr&gt;';
 return;
 }
-const columns = Object.keys(statsData[0]);
+const columns = Array.isArray(statsTableOptions.visibleColumns)
+? statsTableOptions.visibleColumns.filter((col) =&gt; col in statsData[0])
+: Object.keys(statsData[0]);
 columns.forEach((col) =&gt; {
 const th = document.createElement('th');
 th.textContent = col;
@@ -169,12 +182,20 @@ tr.appendChild(td);
 body.appendChild(tr);
 });
 }
-function sortBy(column) {
-if (sortColumn === column) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-else { sortColumn = column; sortDirection = 'desc'; }
+function isEmptySortValue(value) {
+return value === null || value === undefined || value === '' || value === '-';
+}
+function applySort(column, direction) {
+sortColumn = column;
+sortDirection = direction;
 statsData.sort((a, b) =&gt; {
-const av = a[column] ?? 0;
-const bv = b[column] ?? 0;
+const av = a[column];
+const bv = b[column];
+const aEmpty = isEmptySortValue(av);
+const bEmpty = isEmptySortValue(bv);
+if (aEmpty &amp;&amp; bEmpty) return 0;
+if (aEmpty) return 1;
+if (bEmpty) return -1;
 const an = Number(av);
 const bn = Number(bv);
 if (!Number.isNaN(an) &amp;&amp; !Number.isNaN(bn)) return sortDirection === 'asc' ? an - bn : bn - an;
@@ -182,14 +203,38 @@ return sortDirection === 'asc' ? String(av).localeCompare(String(bv)) : String(b
 });
 renderTable();
 }
-function setStatsTableData(data, options = {}) {
-statsData = Array.isArray(data) ? data : [];
-statsTableOptions = options;
+function sortBy(column) {
+const direction = sortColumn === column ? (sortDirection === 'asc' ? 'desc' : 'asc') : 'desc';
+applySort(column, direction);
+}
+function resetStatsSort() {
 sortColumn = null;
 sortDirection = 'desc';
 renderTable();
+}
+function showStatsTable() {
 const wrap = document.getElementById('statsTableWrap');
 if (wrap) wrap.style.display = 'block';
+}
+function setStatsTableData(data, options = {}) {
+statsData = Array.isArray(data) ? data : [];
+statsTableOptions = options;
+if (options.defaultSort &amp;&amp; statsData.length &gt; 0 &amp;&amp; options.defaultSort.column in statsData[0]) {
+applySort(options.defaultSort.column, options.defaultSort.direction || 'desc');
+} else {
+resetStatsSort();
+}
+showStatsTable();
+}
+function setStatsTableView(viewOptions = {}) {
+statsTableOptions = Object.assign({}, statsTableOptions, viewOptions);
+if (statsData.length === 0) return;
+const defaultSort = statsTableOptions.defaultSort;
+if (defaultSort &amp;&amp; defaultSort.column in statsData[0]) {
+applySort(defaultSort.column, defaultSort.direction || 'desc');
+} else {
+resetStatsSort();
+}
 }
 &lt;/script&gt;
 &lt;/div&gt;
@@ -1158,6 +1203,7 @@ Date Range
 &lt;/form&gt;
 &lt;a class="stats-glossary-link" href="http://localhost:1313/glossary/"&gt;View Stats Glossary&lt;/a&gt;
 &lt;/div&gt;
+&lt;div id="statsTabs" class="stats-tabs"&gt;&lt;/div&gt;
 &lt;div id="statsLoading" class="stats-loading"&gt;Loading...&lt;/div&gt;
 &lt;div id="statsError" class="stats-error"&gt;&lt;/div&gt;
 &lt;div id="statsTableWrap" class="stats-table-wrap stats-panel"&gt;
@@ -1212,7 +1258,9 @@ R: 'R: Total Races',
 Laps: 'Laps: Total Laps Completed ',
 LL: 'LL: Total Laps Led',
 SP: 'SP: Average Starting Position',
+QP: 'QP: Average Qualifying Position',
 FP: 'FP: Average Finishing Position',
+Poles: 'Count of Times Ranked First in Qualifying',
 ARP: 'ARP: Average Running Position',
 PG: 'PG: Average Positions Gained',
 DNF: 'DNF: Did Not Finish Count',
@@ -1226,7 +1274,12 @@ eqLL: 'eqLL: Track-equalized Laps Led',
 eqARP: 'eqARP: Track-equalized Average Running Position',
 faPG: 'faPG: Finisher-adjusted Positions Gained',
 DNFm: 'DNFm: Mechanical DNFs',
-DNFc: 'DNFc: Contact DNFs'
+DNFc: 'DNFc: Contact DNFs',
+F6: 'F6: Top 6 Qualifying Performances (Includes Ovals)',
+F12: 'F12: Top 12 Qualifying Performances (Includes Ovals)',
+vsTeam: 'vsTeam: Win % vs Teammates in Qualifying',
+nGap: 'nGap: Average Gap Based on a Normalized 60s Lap Time',
+'Qual-': 'Qual-: Qualifying Performance, 100 is Median'
 };
 let statsData = [];
 let sortColumn = null;
@@ -1254,6 +1307,7 @@ const wrap = document.getElementById('statsTableWrap');
 if (wrap) wrap.style.display = 'none';
 }
 const ENTRY_LINK_PARAMS = { Driver: 'driver', Team: 'team', Engine: 'engine', Eng: 'engine' };
+const PERCENT_COLUMNS = new Set(['vsTeam']);
 function buildEntryUrl(column, name) {
 const query = new URLSearchParams();
 query.set(ENTRY_LINK_PARAMS[column], String(name));
@@ -1267,6 +1321,9 @@ link.href = buildEntryUrl(column, String(value));
 link.textContent = value;
 return link;
 }
+if (PERCENT_COLUMNS.has(column) &amp;&amp; typeof value === 'number') {
+return document.createTextNode(value + '%');
+}
 return document.createTextNode(value ?? '-');
 }
 function renderTable() {
@@ -1279,7 +1336,9 @@ if (statsData.length === 0) {
 body.innerHTML = '&lt;tr&gt;&lt;td&gt;No data available&lt;/td&gt;&lt;/tr&gt;';
 return;
 }
-const columns = Object.keys(statsData[0]);
+const columns = Array.isArray(statsTableOptions.visibleColumns)
+? statsTableOptions.visibleColumns.filter((col) =&gt; col in statsData[0])
+: Object.keys(statsData[0]);
 columns.forEach((col) =&gt; {
 const th = document.createElement('th');
 th.textContent = col;
@@ -1298,12 +1357,20 @@ tr.appendChild(td);
 body.appendChild(tr);
 });
 }
-function sortBy(column) {
-if (sortColumn === column) sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-else { sortColumn = column; sortDirection = 'desc'; }
+function isEmptySortValue(value) {
+return value === null || value === undefined || value === '' || value === '-';
+}
+function applySort(column, direction) {
+sortColumn = column;
+sortDirection = direction;
 statsData.sort((a, b) =&gt; {
-const av = a[column] ?? 0;
-const bv = b[column] ?? 0;
+const av = a[column];
+const bv = b[column];
+const aEmpty = isEmptySortValue(av);
+const bEmpty = isEmptySortValue(bv);
+if (aEmpty &amp;&amp; bEmpty) return 0;
+if (aEmpty) return 1;
+if (bEmpty) return -1;
 const an = Number(av);
 const bn = Number(bv);
 if (!Number.isNaN(an) &amp;&amp; !Number.isNaN(bn)) return sortDirection === 'asc' ? an - bn : bn - an;
@@ -1311,14 +1378,38 @@ return sortDirection === 'asc' ? String(av).localeCompare(String(bv)) : String(b
 });
 renderTable();
 }
-function setStatsTableData(data, options = {}) {
-statsData = Array.isArray(data) ? data : [];
-statsTableOptions = options;
+function sortBy(column) {
+const direction = sortColumn === column ? (sortDirection === 'asc' ? 'desc' : 'asc') : 'desc';
+applySort(column, direction);
+}
+function resetStatsSort() {
 sortColumn = null;
 sortDirection = 'desc';
 renderTable();
+}
+function showStatsTable() {
 const wrap = document.getElementById('statsTableWrap');
 if (wrap) wrap.style.display = 'block';
+}
+function setStatsTableData(data, options = {}) {
+statsData = Array.isArray(data) ? data : [];
+statsTableOptions = options;
+if (options.defaultSort &amp;&amp; statsData.length &gt; 0 &amp;&amp; options.defaultSort.column in statsData[0]) {
+applySort(options.defaultSort.column, options.defaultSort.direction || 'desc');
+} else {
+resetStatsSort();
+}
+showStatsTable();
+}
+function setStatsTableView(viewOptions = {}) {
+statsTableOptions = Object.assign({}, statsTableOptions, viewOptions);
+if (statsData.length === 0) return;
+const defaultSort = statsTableOptions.defaultSort;
+if (defaultSort &amp;&amp; defaultSort.column in statsData[0]) {
+applySort(defaultSort.column, defaultSort.direction || 'desc');
+} else {
+resetStatsSort();
+}
 }
 &lt;/script&gt;
 &lt;div class="stats-disclaimer stats-panel"&gt;Due to problems with the data source, data is not complete for 2008, 2009, 2011 and 2013&lt;/div&gt;
@@ -1367,6 +1458,23 @@ font-weight: 600;
 cursor: pointer;
 }
 .stats-form button:hover { filter: brightness(0.95); }
+.stats-tabs {
+display: flex;
+gap: .5rem;
+margin-bottom: .8rem;
+}
+.stats-tab-btn {
+border: 1px solid var(--card-separator-color);
+background: var(--body-background);
+color: var(--card-text-color);
+border-radius: .5rem;
+padding: .45rem .8rem;
+cursor: pointer;
+}
+.stats-tab-btn.active {
+background: var(--card-background);
+font-weight: 600;
+}
 .stats-glossary-link {
 margin-left: auto;
 font-size: 1.1rem;
@@ -1404,6 +1512,13 @@ flex: 1 1 100%;
 &lt;script src="https://cdn.jsdelivr.net/npm/flatpickr"&gt;&lt;/script&gt;
 &lt;script&gt;
 const STATS_ENDPOINT_URL = 'https://stats-endpoint-standard-ujzabdesxa-uc.a.run.app';
+const STATS_ID_COLUMNS = ['Driver', 'Car', 'Team', 'Eng'];
+const STATS_TABS = {
+Summary: { columns: ['R','FP','QP','W','Poles','PG','eqLaps','LL','eqLL','ARP','eqARP','DNF','Pts'], defaultSort: { column: 'Pts', direction: 'desc' } },
+Standard: { columns: ['R','Laps','SP','FP','ARP','PG','LL','DNF','W','POD','T10','Pts'], defaultSort: { column: 'Pts', direction: 'desc' } },
+Advanced: { columns: ['eqLaps','ARP','eqARP','LL','eqLL','PG','faPG','DNF','pDNF','DNFm','DNFc'], defaultSort: { column: 'eqARP', direction: 'asc' } },
+Qualifying: { columns: ['QP','Poles','F6','F12','vsTeam','nGap','Qual-'], defaultSort: { column: 'QP', direction: 'asc' } }
+};
 const SIDEBAR_STATE_KEY = 'statsSidebarCollapsed';
 let dateRangePicker = null;
 function isDesktopLayout() {
@@ -1471,6 +1586,51 @@ u.searchParams.delete('endDate');
 u.searchParams.delete('indy500');
 window.history.replaceState({}, '', u);
 }
+const statsTabKeys = Object.keys(STATS_TABS);
+let activeStatsTab = statsTabKeys[0];
+function getActiveStatsTab() {
+const requested = (new URLSearchParams(window.location.search).get('tab') || '').toLowerCase();
+return statsTabKeys.find((k) =&gt; k.toLowerCase() === requested) || statsTabKeys[0];
+}
+function buildVisibleStatsColumns(data, tabConfig) {
+const idColumns = Object.keys(data[0]).filter((k) =&gt; STATS_ID_COLUMNS.includes(k));
+return idColumns.concat(tabConfig.columns.filter((c) =&gt; c in data[0]));
+}
+function setStatsTabParam(tab) {
+const u = new URL(window.location);
+if (tab === statsTabKeys[0]) u.searchParams.delete('tab');
+else u.searchParams.set('tab', tab.toLowerCase());
+window.history.replaceState({}, '', u);
+}
+function updateStatsTabButtons() {
+document.querySelectorAll('#statsTabs .stats-tab-btn').forEach((btn) =&gt; {
+btn.classList.toggle('active', btn.dataset.tab === activeStatsTab);
+});
+}
+function selectStatsTab(tab) {
+activeStatsTab = tab;
+setStatsTabParam(tab);
+updateStatsTabButtons();
+const tabConfig = STATS_TABS[tab];
+const viewOptions = { defaultSort: tabConfig.defaultSort };
+if (statsData.length &gt; 0) viewOptions.visibleColumns = buildVisibleStatsColumns(statsData, tabConfig);
+setStatsTableView(viewOptions);
+}
+function initializeStatsTabs() {
+const container = document.getElementById('statsTabs');
+if (!container) return;
+statsTabKeys.forEach((tab) =&gt; {
+const btn = document.createElement('button');
+btn.type = 'button';
+btn.className = 'stats-tab-btn';
+btn.dataset.tab = tab;
+btn.textContent = tab;
+btn.addEventListener('click', () =&gt; selectStatsTab(tab));
+container.appendChild(btn);
+});
+activeStatsTab = getActiveStatsTab();
+updateStatsTabButtons();
+}
 async function loadStats(series, agg_level, season, team, trackType, minRaces, startDate, endDate) {
 setStatsLoadingVisible(true);
 clearStatsError();
@@ -1491,9 +1651,12 @@ console.log('Fetching stats:', url.toString());
 const r = await fetch(url.toString());
 const payload = await r.json();
 if (!payload.success || !Array.isArray(payload.data)) throw new Error(payload.error || 'Failed to load stats');
+const tabConfig = STATS_TABS[activeStatsTab];
 setStatsTableData(payload.data, {
 linkDriverColumn: true,
-sourceSeries: series
+sourceSeries: series,
+visibleColumns: payload.data.length &gt; 0 ? buildVisibleStatsColumns(payload.data, tabConfig) : undefined,
+defaultSort: tabConfig.defaultSort
 });
 } catch (e) {
 showStatsError(`Error loading stats: ${e.message}`);
@@ -1539,6 +1702,7 @@ loadStats(series, agg_level, seasonForQuery, team, trackType, minRaces, startDat
 });
 document.addEventListener('DOMContentLoaded', () =&gt; {
 initializeSidebarToggle();
+initializeStatsTabs();
 const { series, agg_level, season, team, trackType, minRaces, startDate, endDate } = getParams();
 const seasonForLoad = startDate &amp;&amp; endDate ? 'All' : season;
 document.getElementById('series').value = series;
